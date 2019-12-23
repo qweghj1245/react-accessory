@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Flex } from '../../assets/css/global.style';
 
 export const Wrapper = styled(Flex)`
@@ -23,7 +24,8 @@ export const ListWrapper = styled.div`
   margin-left: 150px;
 `;
 
-export const ListContent = styled.div`
+export const ListContent = styled(Link)`
+  text-decoration: none;
   font-size: 16px;
   margin-right: ${props => props.mr}px;
   cursor: pointer;

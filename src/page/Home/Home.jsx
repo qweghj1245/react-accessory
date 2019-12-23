@@ -86,8 +86,8 @@ const Home = () => {
           <Slider {...settings}>
             {
               [carsouel1, carsouel1, carsouel1].map(image => (
-                <div>
-                  <BannerImage src={image} />
+                <div key={image}>
+                  <BannerImage src={image}/>
                 </div>
               ))
             }
@@ -97,7 +97,7 @@ const Home = () => {
         <PopularProductWrap>
           {
             products.map(item => (
-              <Card>
+              <Card key={item.title}>
                 <CardImage url={item.image}></CardImage>
                 <CardTitle>{item.title}</CardTitle>
                 <CardPrice>NT${item.price}</CardPrice>
@@ -113,7 +113,7 @@ const Home = () => {
           <TypeCardWrapper>
             {
               productTypes.map(item => (
-                <TypeCard>
+                <TypeCard key={item.title}>
                   <CardImage url={item.image} height={268} />
                   <TypeCardTitle>{item.title}</TypeCardTitle>
                   <TypeCardBall src={item.ball} width={item.ballSize} top={item.top} left={item.left} />

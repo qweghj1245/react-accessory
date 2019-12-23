@@ -17,6 +17,14 @@ export const Icon = styled.img`
   cursor: pointer;
 `;
 
+export const Title = styled.div`
+  font-size: 30px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+  margin-bottom: ${props => props.mb}px;
+`;
+
 // func
 export const size = (width, height) => `
   width: ${width};

@@ -5,8 +5,9 @@ import { AppWrapper } from './App.style';
 import { Switch, Route } from 'react-router-dom';
 
 //page
-import Home from './page/Home/Home';
-
+import routes from './router';
+// import Home from './page/Home/Home';
+// import Products from './page/Products/ProductsWrapper';
 //component
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
@@ -16,7 +17,15 @@ function App() {
     <AppWrapper>
       <Navbar />
       <Switch>
-        <Route exact path='/' component={Home} />
+        {
+          routes.map((route, i) => (
+            <Route
+              key={i}
+              path={route.path}
+              exact={route.exact}
+              render={props => <route.component routes={route.children} {...props} config={route} />} />
+          ))
+        }
       </Switch>
       <Footer />
     </AppWrapper>
