@@ -12,7 +12,6 @@ const routes = [
     path: '/products',
     component: Products,
     name: '全部商品',
-    headerTitle: '全部商品',
   },
 ];
 

@@ -8,7 +8,7 @@ import { Title } from '../../assets/css/global.style';
 const BaseWrapper = (WrapComponent) => {
   class BaseComponent extends React.Component {
     render() {
-      const { config: { name, path, children }, title } = this.props;
+      const { config: { name, path, children } } = this.props;
       return (
         <Wrapper>
           <Breadcrumbs aria-label="breadcrumb" children={children}>
@@ -17,8 +17,8 @@ const BaseWrapper = (WrapComponent) => {
             </LinkHandle>
             <LinkHandle href={path}>{name}</LinkHandle>
           </Breadcrumbs>
-          <Title mb={50} width={120}>{title}</Title>
-          <WrapComponent {...this.props}/>
+          <Title mb={50} width={120}>{name}</Title>
+          <WrapComponent {...this.props} />
         </Wrapper>
       );
     }

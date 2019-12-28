@@ -7,7 +7,7 @@ import product1 from '../../assets/img/Base/pic_product_10.png';
 import product2 from '../../assets/img/Base/pic_product_7.png';
 import product3 from '../../assets/img/Base/pic_product_14.png';
 
-const Products = () => {
+const Products = (props) => {
   const [products] = useState([
     {
       image: product1,
@@ -30,11 +30,18 @@ const Products = () => {
       price: 3450,
     },
   ])
+
+  let [isLoading, setIsLoading] = useState(true);
+
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 2000);
+  
   return (
     <Wrapper>
       <ProductsWrapper>
         {
-          products.map(product => <Card key={product.title} item={product} />)
+          products.map(product => <Card key={product.title} item={product} isLoading={isLoading}/>)
         }
 
       </ProductsWrapper>
