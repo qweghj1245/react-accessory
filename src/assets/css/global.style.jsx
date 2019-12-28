@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+// css
+
+export const absoluteCss = css`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 // components
 export const Flex = styled.div`
@@ -23,6 +32,17 @@ export const Title = styled.div`
   color: #333333;
   text-align: center;
   margin-bottom: ${props => props.mb}px;
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    ${absoluteCss}
+    width: ${props => props.width}px;
+    top: 60%;
+    height: 18px;
+    background: #EAE8E6;
+    z-index: -1;
+  }
 `;
 
 // func

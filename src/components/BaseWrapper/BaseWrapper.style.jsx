@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   width: 953px;
   margin: 0 auto;
   margin-top: 50px;
-  margin-bottom: 10px;
 `;
 
 export const LinkHandle = styled(Link)`

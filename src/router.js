@@ -1,5 +1,5 @@
 import Home from './page/Home/Home';
-import Products from './page/Products/ProductsWrapper';
+import Products from './page/Products/Products';
 
 const routes = [
   {
@@ -12,6 +12,7 @@ const routes = [
     path: '/products',
     component: Products,
     name: '全部商品',
+    headerTitle: '全部商品',
   },
 ];
 

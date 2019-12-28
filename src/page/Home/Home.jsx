@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import {
-  HomeWrapper, BannerImage, Recommend, PopularProductWrap, Card, CardImage, CardTitle,
-  CardPrice, IntroWrapper, Image, TypeCardWrapper, TypeCard, TypeCardTitle, TypeCardBall,
-  AbsoluteWrap, ShareWrapper, ShareTitle, ShareMsg, ShareContent, FlexWrap, SlideWrapper,
+  HomeWrapper, BannerImage, Recommend, PopularProductWrap, IntroWrapper, Image, TypeCardWrapper, TypeCard, TypeCardTitle, TypeCardBall,
+  AbsoluteWrap, ShareWrapper, ShareTitle, ShareMsg, ShareContent, FlexWrap, SlideWrapper, Opi
 } from './Home.style';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import GoTopButton from '../../components/GoTopButton/GoTopButton.jsx';
 import BaseButton from '../../components/BaseButton/BaseButton.jsx';
+import Card from '../../components/Card/Card';
+import { CardImage } from '../../components/Card/Card.style';
 
 import carsouel1 from '../../assets/img/Base/home_banner_1.png';
 import product1 from '../../assets/img/Base/pic_product_10.png';
@@ -97,11 +99,7 @@ const Home = () => {
         <PopularProductWrap>
           {
             products.map(item => (
-              <Card key={item.title}>
-                <CardImage url={item.image}></CardImage>
-                <CardTitle>{item.title}</CardTitle>
-                <CardPrice>NT${item.price}</CardPrice>
-              </Card>
+              <Card key={item.title} item={item} />
             ))
           }
         </PopularProductWrap>
@@ -126,9 +124,10 @@ const Home = () => {
           <Image src={shareImage} width={223} />
           <ShareContent>
             <ShareTitle>分享購物體驗</ShareTitle>
-            <ShareMsg>上傳照片並標記@OPI的Instagram，與大家分享你的購物心得或創意風格，即可參加 當月抽獎活動並獲得單筆折扣或小禮物！</ShareMsg>
+            <ShareMsg>上傳照片並標記<Opi>@OPI</Opi>的Instagram，與大家分享你的購物心得或創意風格，即可參加 當月抽獎活動並獲得單筆折扣或小禮物！</ShareMsg>
             <BaseButton>參加活動</BaseButton>
           </ShareContent>
+          <GoTopButton right={10}/>
         </ShareWrapper>
       </AbsoluteWrap>
     </HomeWrapper>

@@ -23,7 +23,7 @@ function App() {
               key={i}
               path={route.path}
               exact={route.exact}
-              render={props => <route.component routes={route.children} {...props} config={route} />} />
+              render={props => <route.component routes={route.children} title={route.headerTitle} {...props} config={route} />} />
           ))
         }
       </Switch>

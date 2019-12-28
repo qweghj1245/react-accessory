@@ -47,28 +47,6 @@ export const PopularProductWrap = styled.div`
   width: 100%;
 `;
 
-export const Card = styled.div`
-  text-align: center;
-  cursor: pointer;
-`;
-
-export const CardImage = styled.div`
-  ${(props) => backgroundImage(props.url)}
-  height: ${props => props.height ? props.height : 304}px;
-`;
-
-export const CardTitle = styled.div`
-  font-size: 14px;
-  margin-top: 10px;
-  color: #999999;
-`;
-
-export const CardPrice = styled.div`
-  font-size: 14px;
-  margin-top: 5px;
-  color: #72665A;
-`;
-
 export const AbsoluteWrap = styled.div`
   width: 100%;
 `;
@@ -112,6 +90,7 @@ export const TypeCardBall = styled.img`
 
 export const ShareWrapper = styled(Flex)`
   padding: 120px 0 130px 0;
+  position: relative;
 `;
 
 export const ShareContent = styled.div`
@@ -126,4 +105,10 @@ export const ShareTitle = styled.div`
 
 export const ShareMsg = styled.div`
   ${Text(16, 'normal', 23)}
+`;
+
+export const Opi = styled.span`
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
 `;
