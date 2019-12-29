@@ -9,7 +9,7 @@ const Card = (props) => {
     <div>
       {
         !isLoading ? (
-          <CardWrapper key={item.title}>
+          <CardWrapper>
             <CardImage url={item.image}></CardImage>
             <CardTitle>{item.title}</CardTitle>
             <CardPrice>NT${item.price}</CardPrice>

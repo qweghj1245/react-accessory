@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Wrapper, ProductsWrapper, Pagination, Page } from './Products.style';
 import Card from '../Card/Card';
 import GoTopButton from '../GoTopButton/GoTopButton';
@@ -33,17 +33,18 @@ const Products = (props) => {
 
   let [isLoading, setIsLoading] = useState(true);
 
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 2000);
-  
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <Wrapper>
       <ProductsWrapper>
         {
           products.map(product => <Card key={product.title} item={product} isLoading={isLoading}/>)
         }
-
       </ProductsWrapper>
       <Pagination>
         {

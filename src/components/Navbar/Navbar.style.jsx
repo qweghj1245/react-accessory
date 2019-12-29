@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Flex } from '../../assets/css/global.style';
 
 export const Wrapper = styled(Flex)`
@@ -24,13 +23,30 @@ export const ListWrapper = styled.div`
   margin-left: 150px;
 `;
 
-export const ListContent = styled(Link)`
+export const ListContent = styled.div`
   text-decoration: none;
   font-size: 16px;
   margin-right: ${props => props.mr}px;
   cursor: pointer;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  display: block;
+  &:hover {
+    & > div > div {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 `;
 
 export const FeatureIcons = styled.div`
   display: flex;
+`;
+
+export const IconWrap = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;  
+  height: 40px;
 `;

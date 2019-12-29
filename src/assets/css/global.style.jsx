@@ -24,6 +24,7 @@ export const Icon = styled.img`
   width: ${props => props.width ? props.width : '24'}px;
   margin-right: ${props => props.mr}px;
   cursor: pointer;
+  position: relative;
 `;
 
 export const Title = styled.div`
