@@ -16,6 +16,10 @@ export const Flex = styled.div`
   justify-content: center;
 `;
 
+export const Grid = styled.div`
+  display: grid;
+`;
+
 export const ImageWrapper = styled.img`
   width: ${props => props.width}px;
 `;

@@ -7,7 +7,7 @@ import product1 from '../../assets/img/Base/pic_product_10.png';
 import product2 from '../../assets/img/Base/pic_product_7.png';
 import product3 from '../../assets/img/Base/pic_product_14.png';
 
-const Products = (props) => {
+const Products = ({ history }) => {
   const [products] = useState([
     {
       image: product1,
@@ -43,7 +43,7 @@ const Products = (props) => {
     <Wrapper>
       <ProductsWrapper>
         {
-          products.map(product => <Card key={product.title} item={product} isLoading={isLoading}/>)
+          products.map(product => <Card key={product.title} item={product} isLoading={isLoading} goProduct={() => history.push('/product/sss')}/>)
         }
       </ProductsWrapper>
       <Pagination>
