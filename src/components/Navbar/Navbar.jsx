@@ -15,6 +15,18 @@ const Navbar = ({ history }) => {
   const [productDropdownList] = useState(['紙製品', '手機配件', '包包提袋', '其他']);
   const [personDropdownList] = useState(['我的訂單', '修改資料', '會員登入']);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const goRouter = (item) => {
+    console.log(item);
+    setShowDropdown(false)
+    switch (item) {
+      case '會員登入':
+        return history.push('/login');
+      default:
+        return;
+    }
+  }
+
   return (
     <Wrapper>
       <Link to='/'>
@@ -34,7 +46,7 @@ const Navbar = ({ history }) => {
         <Icon src={favorite} mr={25} />
         <IconWrap>
           <Icon src={profile} onClick={() => setShowDropdown(!showDropdown)} />
-          <PersonDropdown list={personDropdownList} showDropdown={showDropdown}/>
+          <PersonDropdown list={personDropdownList} showDropdown={showDropdown} goRouter={goRouter}/>
         </IconWrap>
       </FeatureIcons>
     </Wrapper>

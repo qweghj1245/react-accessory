@@ -43,4 +43,5 @@ export const DropdownItem = styled.div`
   line-height: normal;
   padding: 8px;
   border-bottom: ${props => props.noBorder ? 0 : 'solid 1px #999999'};
+  cursor: pointer;
 `;

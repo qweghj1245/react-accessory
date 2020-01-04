@@ -10,6 +10,10 @@ export const absoluteCss = css`
 `;
 
 // components
+export const BaseWrapper = styled.div`
+  position: relative;
+`;
+
 export const Flex = styled.div`
   display: flex;
   align-items: center;
@@ -43,8 +47,8 @@ export const Title = styled.div`
     display: block;
     ${absoluteCss}
     width: ${props => props.width}px;
-    top: 60%;
-    height: 18px;
+    top: ${props => props.top ? props.top : 60}%;
+    height: ${props => props.height ? props.height : 18}px;
     background: #EAE8E6;
     z-index: -1;
   }

@@ -32,7 +32,8 @@ export const ButtonWrapper = styled.div`
   display: inline-block;
   border-radius: 20px;
   cursor: pointer;
-  margin-right: ${props => props.mr ? props.mr :null}px;
+  margin-right: ${props => props.mr ? props.mr : null}px;
+  margin-bottom: ${props => props.mb ? props.mb : null}px;
   &:hover {
     background: ${props => convertColor(props.color).hoverBg};
     color: ${props => convertColor(props.color).hoverTxt};
