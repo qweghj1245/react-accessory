@@ -12,7 +12,7 @@ const MemberRelated = () => {
   const checkPasswordModel = useRef(null);
   return (
     <Wrapper>
-      <Title mb={30} width={60} top={77}>註冊</Title>
+      <Title mb={30} width={60}>註冊</Title>
       <FormInput label='用戶名稱' placeholder='王小明' model={nameModel} />
       <FormInput label='EMAIL' placeholder='abc123@gmail.com' mb='20' model={emailModel} />
       <FormInput label='密碼' placeholder='請輸入6碼-12碼英數字' mb='20' model={passwordModel} />

@@ -47,7 +47,7 @@ export const Title = styled.div`
     display: block;
     ${absoluteCss}
     width: ${props => props.width}px;
-    top: ${props => props.top ? props.top : 60}%;
+    top: 77%;
     height: ${props => props.height ? props.height : 18}px;
     background: #EAE8E6;
     z-index: -1;

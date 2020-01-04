@@ -24,7 +24,7 @@ const MemberRelated = () => {
 
   return (
     <Wrapper>
-      <Title mb={30} width={60} top={77}>登入</Title>
+      <Title mb={30} width={60}>登入</Title>
       <FormInput label='EMAIL' placeholder='請輸入會員EMAIL' model={emailModel} />
       <FormInput label='密碼' placeholder='請輸入會員密碼' mb='20' model={passwordModel} />
       <Texture>忘記密碼？</Texture>

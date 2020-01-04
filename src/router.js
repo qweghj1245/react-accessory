@@ -2,6 +2,7 @@ import Home from './page/Home/Home';
 import Products from './page/Products/Products';
 import Product from './page/Product/Product';
 import MemberRelated from './page/MemberRelated/MemberRelated';
+import Profile from './page/Profile/Profile';
 
 const routes = [
   {
@@ -28,6 +29,12 @@ const routes = [
     component: MemberRelated,
     name: '登入',
     breadcrumb: '登入',
+  },
+  {
+    path: '/profile',
+    component: Profile,
+    name: '會員資料',
+    breadcrumb: '會員資料',
   },
 ];
 
