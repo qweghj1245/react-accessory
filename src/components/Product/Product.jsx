@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Wrapper, ImageGroup, FlexWrapper, Title, Price, Msg, Group, NormalText } from './Product.style';
-import { ImageWrapper, Flex, Icon } from '../../assets/css/global.style';
+import { ImageWrapper, Flex } from '../../assets/css/global.style';
 import ColorCircle from '../ColorCircle/ColorCircle';
 import BaseSelect from '../BaseSelect/BaseSelect';
 import AddCount from '../AddCount/AddCount';
 import BaseButton from '../BaseButton/BaseButton';
+import CollectButton from '../CollectButton/CollectButton.jsx';
 
 import image1 from '../../assets/img/Products/pic_product_1.png';
 import image2 from '../../assets/img/Products/pic_product_1_2.png';
 import image3 from '../../assets/img/Products/pic_product_1_3.png';
 import image4 from '../../assets/img/Products/pic_product_1_4.png';
-import heartEmpty from '../../assets/img/Icon/Icon_heart_empty.svg';
-import heartFull from '../../assets/img/Icon/Icon_heart_full.svg';
 
 const Product = () => {
-  const [isCollect, setIsCollect] = useState(false);
   const options = [
     {
       label: '我是選項u',
@@ -60,7 +58,7 @@ const Product = () => {
         </Group>
         <Group>
           <BaseButton color='light-brown' padding='8px 53px' mr='30'>加入購物車</BaseButton>
-          <Icon src={isCollect ? heartFull : heartEmpty} width={29} onClick={() => setIsCollect(!isCollect)}/>
+          <CollectButton />
         </Group>
       </Wrapper>
     </FlexWrapper>
