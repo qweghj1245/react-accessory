@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Wrapper, LabelText, ReInput } from './FormInput.style';
 
-const FormInput = ({ label, placeholder, mb, model }) => {
+const FormInput = ({ label, placeholder, model, ...otherStyle }) => {
   return (
-    <Wrapper mb={mb}>
+    <Wrapper {...otherStyle}>
       <LabelText>{label}</LabelText>
-      <ReInput placeholder={placeholder} ref={model} />
+      <ReInput placeholder={placeholder} ref={model} {...otherStyle}/>
     </Wrapper>
   )
 }

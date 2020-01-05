@@ -25,7 +25,7 @@ const Profile = (props) => {
           <TextContent>100 台北市中正區八德路一段1號</TextContent>
         </GroupItem>
       </Group>
-      <BaseButton padding='8px 48px' color='light-brown'>修改資料或密碼</BaseButton>
+      <BaseButton padding='8px 48px' color='light-brown' onClick={props.edit}>修改資料或密碼</BaseButton>
     </Wrapper>
   )
 }

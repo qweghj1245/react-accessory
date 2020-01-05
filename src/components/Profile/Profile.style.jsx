@@ -12,6 +12,7 @@ export const Head = styled.div`
   border-radius: 50%;
   ${size('100px', '100px')};
   margin-bottom: 50px;
+  position: relative;
 `;
 
 export const Group = styled(Flex)`

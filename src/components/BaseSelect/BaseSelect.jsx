@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { SelectWrapper, Inputs, Dropdown, DropdownItem } from './BaseSelect.style';
+import { SelectWrapper, Inputs, Dropdown, DropdownItem, Triangle } from './BaseSelect.style';
 import { Icon } from '../../assets/css/global.style';
 
 import Arrowdown from '../../assets/img/Icon/Icon_arrowdown.svg';
 
-const BaseSelect = ({ defaultV, options, placeholder='請選擇選項...' }) => {
+const BaseSelect = ({ triangle, defaultV, options, placeholder = '請選擇選項...', ...otherStyle }) => {
   const [isShow, setIsShow] = useState(false);
   const [realValue, setRealValue] = useState('');
 
@@ -15,10 +15,12 @@ const BaseSelect = ({ defaultV, options, placeholder='請選擇選項...' }) => 
   }
 
   return (
-    <SelectWrapper>
-      <Inputs realValue={realValue} onClick={() => setIsShow(!isShow)}>
+    <SelectWrapper {...otherStyle}>
+      <Inputs {...otherStyle} realValue={realValue} onClick={() => setIsShow(!isShow)}>
         {realValue ? realValue : (defaultV ? defaultV : placeholder)}
-        <Icon src={Arrowdown} width={10} />
+        {
+          triangle ? <Triangle isShow={isShow} /> : <Icon src={Arrowdown} width={10} />
+        }
       </Inputs>
       <Dropdown isShow={isShow}>
         {
