@@ -30,6 +30,7 @@ export const ImageWrapper = styled.img`
 
 export const Icon = styled.img`
   width: ${props => props.width ? props.width : '24'}px;
+  height: ${props => props.height}px;
   margin-right: ${props => props.mr}px;
   cursor: pointer;
   position: relative;

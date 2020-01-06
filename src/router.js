@@ -3,6 +3,7 @@ import Products from './page/Products/Products';
 import Product from './page/Product/Product';
 import MemberRelated from './page/MemberRelated/MemberRelated';
 import Profile from './page/Profile/Profile';
+import Payment from './page/Payment/Payment';
 
 const routes = [
   {
@@ -35,6 +36,12 @@ const routes = [
     component: Profile,
     name: '會員資料',
     breadcrumb: '會員資料',
+  },
+  {
+    path: '/payment',
+    component: Payment,
+    name: '結帳',
+    breadcrumb: '結帳',
   },
 ];
 
