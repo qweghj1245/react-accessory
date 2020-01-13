@@ -5,5 +5,8 @@ export const Wrapper = styled.div`
   margin-top: 66px;
 `;
 
-
+export const Left = styled.div`
+  position: relative;
+  border-top: solid 1px #EAEAEA;
+`;
 
