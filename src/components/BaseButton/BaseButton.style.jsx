@@ -15,6 +15,13 @@ const convertColor = (color) => {
         hoverBg: '#72665A',
         hoverTxt: '#FFFFFF',
       };
+    case 'brown-yellow':
+      return {
+        bg: '#ECDDC3',
+        color: '#72665A',
+        hoverBg: '#72665A',
+        hoverTxt: '#FFFFFF',
+      };
     default:
       return {
         bg: 'rgba(114, 102, 90, .8)',
@@ -30,7 +37,7 @@ export const ButtonWrapper = styled.div`
   color: ${props => convertColor(props.color).color};
   background: ${props => convertColor(props.color).bg};
   display: inline-block;
-  border-radius: 20px;
+  border-radius: 24px;
   cursor: pointer;
   margin-right: ${props => props.mr ? props.mr : null}px;
   margin-bottom: ${props => props.mb ? props.mb : null}px;

@@ -27,7 +27,7 @@ const Step = () => {
         </Dropdown>
       </Group>
       <Group>
-        <StepWrapper>
+        <StepWrapper mr='0'>
           <Icon src={Check} width='27' />
         </StepWrapper>
         <Dropdown left='1%'>

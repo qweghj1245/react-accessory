@@ -5,6 +5,7 @@ export const SelectWrapper = styled.div`
   position: relative;
   margin-top: ${props => props.mt}px;
   margin-right: ${props => props.mr}px;
+  margin-bottom: ${props => props.mb}px;
 `;
 
 export const Inputs = styled(Flex)`
@@ -16,6 +17,7 @@ export const Inputs = styled(Flex)`
   cursor: pointer;
   color: ${props => !props.realValue && !props.defaultV ? '#999999' : '#333333'};
   white-space: nowrap;
+  background: #FFFFFF;
 `;
 
 export const Dropdown = styled.div`
