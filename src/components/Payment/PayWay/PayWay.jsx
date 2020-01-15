@@ -21,13 +21,13 @@ const transport = [
     value: 'Fedex',
   }
 ]
-const Payment = () => {
+const Payment = ({ coupon }) => {
   return (
     <Wrapper>
       <Texture>選擇付款方式</Texture>
       <Between>
         <SubText mr color='greyLight'>折扣碼</SubText>
-        <UseCoupon>使用折扣碼</UseCoupon>
+        <UseCoupon onClick={coupon}>使用折扣碼</UseCoupon>
       </Between>
       <BaseSelect triangle placeholder='配送國家' options={country} width='206px' height='40px' border='#999999' mb='15' />
       <BaseSelect triangle placeholder='付款方式' options={pay} width='206px' height='40px' border='#999999' mb='15' />

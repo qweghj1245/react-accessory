@@ -1,11 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Wrapper, Left, Right, Flexer } from './Payment.style';
 
 import Step from '../../components/Payment/Step/Step';
 import Card from '../../components/Payment/Card/Card';
 import PayWay from '../../components/Payment/PayWay/PayWay';
 import BaseButton from '../../components/BaseButton/BaseButton.jsx';
+import ModalCoupon from '../../components/Payment/ModalCoupon/ModalCoupon';
 
 import product from '../../assets/img/Products/img_3_003.png';
 import product2 from '../../assets/img/Products/pic_product_1_2.png';
@@ -27,6 +28,11 @@ const Payment = () => {
       imgUrl: product2,
     },
   ];
+
+  const [modal, setModal] = useState('');
+  const closeModal = () => {
+    setModal('');
+  }
   return (
     <Wrapper>
       <Step />
@@ -37,10 +43,11 @@ const Payment = () => {
           }
         </Left>
         <Right>
-          <PayWay />
+          <PayWay coupon={() => setModal('coupon')} />
           <BaseButton color='brown-yellow' padding='12px 60px'>下一步</BaseButton>
         </Right>
       </Flexer>
+      <ModalCoupon show={modal === 'coupon'} use={() => closeModal()} close={() => closeModal()}/>
     </Wrapper>
   )
 }

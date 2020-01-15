@@ -37,12 +37,13 @@ export const Icon = styled.img`
 `;
 
 export const Title = styled.div`
-  font-size: 30px;
+  font-size: ${props => props.fz ? props.fz : 30}px;
   font-weight: bold;
   color: #333333;
   text-align: center;
   margin-bottom: ${props => props.mb}px;
   position: relative;
+  z-index: 3;
   &:before {
     content: '';
     display: block;
