@@ -2,13 +2,12 @@ import React from 'react';
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import OrderSlider from '../OrderSlider/OrderSlider';
 
 import FormInput from '../../FormInput/FormInput';
 import BaseSelect from '../../BaseSelect/BaseSelect';
-import { Slider, SlideNotice, SlideTitle, NoticeFlex, Content, FormGroup, Address, FlexStart } from './OrderInfo.style';
-import { Icon } from '../../../assets/css/global.style';
+import { SlideTitle, Content, FormGroup, Address, FlexStart } from './OrderInfo.style';
 
-import arrow from '../../../assets/img/Icon/Icon material-keyboard-arrow-up.svg';
 
 const useStyles = makeStyles({
   root: {
@@ -46,13 +45,7 @@ const OrderInfo = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Slider>
-        <SlideTitle>訂單資訊</SlideTitle>
-        <NoticeFlex>
-          <SlideNotice>點此展開</SlideNotice>
-          <Icon src={arrow} width='10' />
-        </NoticeFlex>
-      </Slider>
+      <OrderSlider />
       <Content>
         <SlideTitle mb='5'>聯絡資訊</SlideTitle>
         <FormGroup>

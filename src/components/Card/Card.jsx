@@ -4,13 +4,13 @@ import { Skeleton } from '@material-ui/lab';
 import { CardWrapper, CardImage, CardTitle, CardPrice } from './Card.style';
 
 const Card = (props) => {
-  const { item, isLoading } = props;
+  const { item, isLoading, ...styles } = props;
   return (
     <div>
       {
         !isLoading ? (
           <CardWrapper onClick={props.goProduct}>
-            <CardImage url={item.image}></CardImage>
+            <CardImage url={item.image} {...styles}></CardImage>
             <CardTitle>{item.title}</CardTitle>
             <CardPrice>NT${item.price}</CardPrice>
           </CardWrapper>) : (

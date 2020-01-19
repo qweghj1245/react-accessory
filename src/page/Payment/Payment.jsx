@@ -8,6 +8,8 @@ import PayWay from '../../components/Payment/PayWay/PayWay';
 import BaseButton from '../../components/BaseButton/BaseButton.jsx';
 import ModalCoupon from '../../components/Payment/ModalCoupon/ModalCoupon';
 import OrderInfo from '../../components/Payment/OrderInfo/OrderInfo';
+import OrderDone from '../../components/Payment/OrderDone/OrderDone';
+import CheckoutInfo from '../../components/Payment/CheckoutInfo/CheckoutInfo';
 
 import product from '../../assets/img/Products/img_3_003.png';
 import product2 from '../../assets/img/Products/pic_product_1_2.png';
@@ -75,11 +77,21 @@ const Payment = () => {
           {
             stage === 'info' ? <OrderInfo /> : null
           }
+          {
+            stage === 'done' ? <OrderDone /> : null
+          }
         </Left>
         <Right>
-          <PayWay coupon={() => setModal('coupon')} />
-          <BaseButton color='brown-yellow' padding='12px 60px' mb='20' onClick={nextStage}>下一步</BaseButton>
-          <LastStep onClick={lastStage}>{stage === 'info' ? '回上一步驟' : ''}</LastStep>
+          {
+            stage !== 'done' ?
+              <React.Fragment>
+                <PayWay coupon={() => setModal('coupon')} />
+                <BaseButton color='brown-yellow' padding='12px 60px' mb='20' onClick={nextStage}>下一步</BaseButton>
+                <LastStep onClick={lastStage}>{stage === 'info' ? '回上一步驟' : ''}</LastStep>
+              </React.Fragment>
+              :
+              <CheckoutInfo />
+          }
         </Right>
       </Flexer>
       <ModalCoupon show={modal === 'coupon'} use={() => closeModal()} close={() => closeModal()} />
