@@ -23,7 +23,7 @@ export const FlexBetween = styled(Flex)`
   margin-top: 76px;
 `;
 
-export const Color = styled.div`
+export const Circle = styled.div`
   ${size('20px', '20px')};
   border-radius: 50%;
   background: ${props => {

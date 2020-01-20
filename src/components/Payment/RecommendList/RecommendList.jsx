@@ -36,7 +36,7 @@ const RecommendList = () => {
       <Title>推薦商品</Title>
       <CardWrap>
         {
-          cardList.map(item => <Card item={item} height='142'/>)
+          cardList.map(item => <Card key={item.price} item={item} height='142'/>)
         }
       </CardWrap>
     </Wrapper>

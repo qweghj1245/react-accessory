@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex, Text } from '../../../assets/css/global.style';
+import { Flex, Text, size, BaseWrapper } from '../../../assets/css/global.style';
 
 export const Slider = styled(Flex)`
   width: 547px;
@@ -22,4 +22,43 @@ export const SlideNotice = styled.div`
   ${Text(14, 'normal', 0)};
   color: #999999;
   margin-right: 4px;
+`;
+
+export const Card = styled.div`
+  display: flex;
+  padding: 30px 0;
+  padding-right: 31px;
+`;
+
+export const Circle = styled.div`
+  ${size('20px', '20px')};
+  border-radius: 50%;
+  background: ${props => {
+    switch (props.color) {
+      case 'red':
+        return '#CC6F6F';
+      case 'blue':
+        return '#143F82';
+      default:
+        return '#FFFFFF';
+    }
+  }};
+  margin-bottom: 10px;
+`;
+
+export const Texture = styled.div`
+  ${Text(14, 'normal', 0)};
+  color: #666666;
+  margin-bottom: ${props => props.mb ? props.mb : 10}px;
+`;
+
+export const Wrapper = styled(BaseWrapper)`
+  margin-left: 70px;
+  margin-right: auto;
+`;
+
+export const WrapperDivide = styled(BaseWrapper)`
+  border-bottom: solid 1px rgba(51, 51, 51, .1);
+  height: 0;
+  overflow: hidden;
 `;

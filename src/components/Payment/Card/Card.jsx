@@ -2,7 +2,7 @@ import React from 'react';
 
 import BaseSelect from '../../BaseSelect/BaseSelect';
 
-import { Wrapper, Flexer, Color, Texture, FlexBetween } from './Card.style';
+import { Wrapper, Flexer, Circle, Texture, FlexBetween } from './Card.style';
 import { ImageWrapper, Icon, Flex } from '../../../assets/css/global.style';
 
 import heart from '../../../assets/img/Icon/Icon_cart_heartempty_small.svg';
@@ -32,7 +32,7 @@ const Payment = ({ product }) => {
       <Flex>
         <ImageWrapper src={product.imgUrl} width='120' />
         <Flexer>
-          <Color color='red' />
+          <Circle color='red' />
           <Texture mb='30'>{product.title}</Texture>
           <Texture>{`NT$${product.price}`}</Texture>
         </Flexer>
