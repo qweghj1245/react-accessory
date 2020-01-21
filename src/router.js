@@ -4,7 +4,7 @@ import Product from './page/Product/Product';
 import MemberRelated from './page/MemberRelated/MemberRelated';
 import Profile from './page/Profile/Profile';
 import Payment from './page/Payment/Payment';
-
+import Order from './page/Order/Order';
 const routes = [
   {
     path: '/',
@@ -42,6 +42,12 @@ const routes = [
     component: Payment,
     name: '結帳',
     breadcrumb: '結帳',
+  },
+  {
+    path: '/order',
+    component: Order,
+    name: '我的訂單',
+    breadcrumb: '我的訂單',
   },
 ];
 

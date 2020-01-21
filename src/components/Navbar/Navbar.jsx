@@ -22,6 +22,8 @@ const Navbar = ({ history }) => {
     switch (item) {
       case '會員登入':
         return history.push('/login');
+      case '我的訂單':
+        return history.push('/order');
       default:
         return;
     }
