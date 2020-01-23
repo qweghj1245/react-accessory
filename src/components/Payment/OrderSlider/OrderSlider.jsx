@@ -26,11 +26,11 @@ const products = [
 ];
 
 const OrderSlider = ({ children }) => {
+  let slideState = 0;
   const [listWrap, setListWrap] = useState(null);
-  const [slideState, setSlideState] = useState('auto');
 
   const slideToggle = () => {
-    slideState === 'auto' ? setSlideState(0) : setSlideState('auto');
+    slideState = slideState === 'auto' ? 0 : 'auto';
     gsap.to(listWrap, {
       duration: 1,
       ease: 'power4',
