@@ -40,7 +40,7 @@ const Navbar = ({ history }) => {
           <HeaderDropdown list={productDropdownList} />
         </ListContent>
         <ListContent mr={150} onClick={() => history.push('/about')}>關於我們</ListContent>
-        <ListContent>購物須知</ListContent>
+        <ListContent onClick={() => history.push('/shopping_notes')}>購物須知</ListContent>
       </ListWrapper>
       <FeatureIcons>
         <Icon src={search} mr={25} />

@@ -8,6 +8,7 @@ import Order from './page/Order/Order';
 import OrderId from './page/OrderId/OrderId';
 import Collection from './page/Collection/Collection';
 import About from './page/About/About';
+import ShoppingNotes from './page/ShoppingNotes/ShoppingNotes';
 const routes = [
   {
     path: '/',
@@ -71,6 +72,12 @@ const routes = [
     component: About,
     name: '關於我們',
     breadcrumb: '關於我們',
+  },
+  {
+    path: '/shopping_notes',
+    component: ShoppingNotes,
+    name: '購物須知',
+    breadcrumb: '購物須知',
   },
 ];
 
