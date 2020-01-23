@@ -21,7 +21,7 @@ const cardList = [
   {
     image: product3,
     title: '好朋友的陪伴掛報',
-    price: 350,
+    price: 150,
   },
   {
     image: product4,

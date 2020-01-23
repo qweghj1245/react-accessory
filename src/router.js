@@ -5,6 +5,7 @@ import MemberRelated from './page/MemberRelated/MemberRelated';
 import Profile from './page/Profile/Profile';
 import Payment from './page/Payment/Payment';
 import Order from './page/Order/Order';
+import OrderId from './page/OrderId/OrderId';
 const routes = [
   {
     path: '/',
@@ -48,6 +49,14 @@ const routes = [
     component: Order,
     name: '我的訂單',
     breadcrumb: '我的訂單',
+    exact: true,
+  },
+  {
+    path: '/order/:id',
+    component: OrderId,
+    name: '',
+    breadcrumb: '',
+    exact: true,
   },
 ];
 

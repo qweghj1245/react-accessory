@@ -48,3 +48,11 @@ export const BottomTexture = styled.div`
   ${Text(14, 'normal', 0)};
   color: #999999;
 `;
+
+export const BackOrderList = styled.div`
+  ${Text(12, 'normal', 0)};
+  color: #999999;
+  text-decoration: underline;
+  text-align: center;
+  cursor: pointer; 
+`;

@@ -19,13 +19,13 @@ const products = [
   {
     image: product2,
     title: 'like it!手機殼',
-    price: 1203,
+    price: 43,
     count: 11,
     color: 'blue',
   },
 ];
 
-const OrderSlider = () => {
+const OrderSlider = ({ children }) => {
   const [listWrap, setListWrap] = useState(null);
   const [slideState, setSlideState] = useState('auto');
 
@@ -59,6 +59,7 @@ const OrderSlider = () => {
               <Texture mb='0'>數量：{item.count}</Texture>
             </Card>)
         }
+        {children}
       </WrapperDivide>
     </React.Fragment>
   )

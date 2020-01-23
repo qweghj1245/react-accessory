@@ -27,6 +27,7 @@ export const SlideNotice = styled.div`
 export const Card = styled.div`
   display: flex;
   padding: 30px 0;
+  border-bottom: solid 1px rgba(51, 51, 51, .1);
   padding-right: 31px;
 `;
 
@@ -58,7 +59,6 @@ export const Wrapper = styled(BaseWrapper)`
 `;
 
 export const WrapperDivide = styled(BaseWrapper)`
-  border-bottom: solid 1px rgba(51, 51, 51, .1);
   height: 0;
   overflow: hidden;
 `;

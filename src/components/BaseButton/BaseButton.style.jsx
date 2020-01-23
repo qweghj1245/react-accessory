@@ -32,8 +32,10 @@ const convertColor = (color) => {
 }
 
 export const ButtonWrapper = styled.div`
+  width: ${props => props.width}px;
+  height: ${props => props.height}px;
   padding: ${props => props.padding ? props.padding : '8px 28px'};
-  font-size: 16px;
+  font-size: ${props => props.fz ? props.fz : 16}px;
   color: ${props => convertColor(props.color).color};
   background: ${props => convertColor(props.color).bg};
   display: inline-block;
