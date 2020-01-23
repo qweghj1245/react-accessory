@@ -16,8 +16,33 @@ export const BaseWrapper = styled.div`
 
 export const Flex = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: ${props => {
+    switch (props.align) {
+      case 'center':
+        return 'center';
+      case 'start':
+        return 'flex-start';
+      case 'end':
+        return 'flex-end';
+      default:
+        return 'center';
+    }
+  }};
+  justify-content: ${props => {
+    switch (props.justify) {
+      case 'center':
+        return 'center';
+      case 'start':
+        return 'flex-start';
+      case 'end':
+        return 'flex-end';
+      default:
+        return 'center';
+    }
+  }};
+  flex-direction: ${props => props.dir};
+  margin-right: ${props => props.mr}px;
+  margin-bottom: ${props => props.mb}px;
 `;
 
 export const Grid = styled.div`
@@ -26,6 +51,8 @@ export const Grid = styled.div`
 
 export const ImageWrapper = styled.img`
   width: ${props => props.width}px;
+  margin-bottom: ${props => props.mb}px;
+  margin-right: ${props => props.mr}px;
 `;
 
 export const Icon = styled.img`

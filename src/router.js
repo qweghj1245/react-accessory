@@ -7,6 +7,7 @@ import Payment from './page/Payment/Payment';
 import Order from './page/Order/Order';
 import OrderId from './page/OrderId/OrderId';
 import Collection from './page/Collection/Collection';
+import About from './page/About/About';
 const routes = [
   {
     path: '/',
@@ -64,6 +65,12 @@ const routes = [
     component: Collection,
     name: '收藏清單',
     breadcrumb: '收藏清單',
+  },
+  {
+    path: '/about',
+    component: About,
+    name: '關於我們',
+    breadcrumb: '關於我們',
   },
 ];
 

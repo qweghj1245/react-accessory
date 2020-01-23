@@ -39,7 +39,7 @@ const Navbar = ({ history }) => {
           <div onClick={() => history.push('/products')}>全部商品</div>
           <HeaderDropdown list={productDropdownList} />
         </ListContent>
-        <ListContent mr={150}>關於我們</ListContent>
+        <ListContent mr={150} onClick={() => history.push('/about')}>關於我們</ListContent>
         <ListContent>購物須知</ListContent>
       </ListWrapper>
       <FeatureIcons>
