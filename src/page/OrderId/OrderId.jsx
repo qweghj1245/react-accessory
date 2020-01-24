@@ -20,4 +20,4 @@ const OrderId = ({ history }) => {
   )
 }
 
-export default BaseWrappered(OrderId);
+export default BaseWrappered(OrderId, { id: '123123' });

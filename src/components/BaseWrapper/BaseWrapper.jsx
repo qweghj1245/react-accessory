@@ -4,22 +4,31 @@ import { Breadcrumbs } from '@material-ui/core';
 import { Wrapper, LinkHandle } from './BaseWrapper.style';
 import { Title } from '../../assets/css/global.style';
 
-const BaseWrapper = (WrapComponent) => {
+const BaseWrapper = (WrapComponent, others) => {
   class BaseComponent extends React.Component {
     render() {
-      const { config: { breadcrumb, children, name } } = this.props;
-      // const originPath = this.props.config.path.replace(':id', '');
+      const { config: { breadcrumb, name, path, newPath }, match } = this.props;
       return (
         <Wrapper>
-          <Breadcrumbs aria-label="breadcrumb" children={children}>
+          <Breadcrumbs aria-label="breadcrumb">
             <LinkHandle href="/">
               首頁
             </LinkHandle>
-
-            {/* 等api來，拉出type跟id跟name */}
-            {/* <LinkHandle onClick={() => history.push(`${originPath}ddd`)}>{breadcrumb}</LinkHandle>
-            <LinkHandle href={path}>{breadcrumb}</LinkHandle>
-            <LinkHandle href={path}>{breadcrumb}</LinkHandle> */}
+            <LinkHandle href={newPath ? newPath : path}>
+              {breadcrumb}
+            </LinkHandle>
+            {
+              others&&others.type ?
+                <LinkHandle href="/">
+                  {others.type}
+                </LinkHandle> : null
+            }
+            {
+              others ?
+                <LinkHandle href={match.url}>
+                  {others.id}
+                </LinkHandle> : null
+            }
           </Breadcrumbs>
           {
             name ? <Title mb={50} width={120}>{breadcrumb}</Title> : null

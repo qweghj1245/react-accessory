@@ -44,11 +44,11 @@ const Navbar = ({ history }) => {
       </ListWrapper>
       <FeatureIcons>
         <Icon src={search} mr={25} />
-        <Icon src={cart} mr={25} />
-        <Icon src={favorite} mr={25} />
+        <Icon src={cart} mr={25} onClick={() => history.push('/payment')} />
+        <Icon src={favorite} mr={25} onClick={() => history.push('/collection')} />
         <IconWrap>
           <Icon src={profile} onClick={() => setShowDropdown(!showDropdown)} />
-          <PersonDropdown list={personDropdownList} showDropdown={showDropdown} goRouter={goRouter}/>
+          <PersonDropdown list={personDropdownList} showDropdown={showDropdown} goRouter={goRouter} />
         </IconWrap>
       </FeatureIcons>
     </Wrapper>

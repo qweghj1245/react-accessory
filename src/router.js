@@ -25,6 +25,7 @@ const routes = [
   },
   {
     path: '/product/:id',
+    newPath: '/products',
     component: Product,
     name: '',
     breadcrumb: '全部商品',
@@ -56,9 +57,10 @@ const routes = [
   },
   {
     path: '/order/:id',
+    newPath: '/order',
     component: OrderId,
     name: '',
-    breadcrumb: '',
+    breadcrumb: '我的訂單',
     exact: true,
   },
   {

@@ -67,4 +67,4 @@ const Product = () => {
   )
 }
 
-export default BaseWrapper(Product);
+export default BaseWrapper(Product, { type: '手機配件', id: '1231323' });
