@@ -2,7 +2,7 @@
 import React from 'react';
 import { AppWrapper } from './App.style';
 //plugin
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 //page
 import routes from './router';
@@ -12,10 +12,12 @@ import routes from './router';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 
-function App() {
+const App = ({ location }) => {
   return (
-    <AppWrapper>
-      <Navbar />
+    <AppWrapper location={location}>
+      {
+        location.pathname.indexOf('backstage') > -1 ? null : <Navbar />
+      }
       <Switch>
         {
           routes.map((route, i) => (
@@ -27,9 +29,11 @@ function App() {
           ))
         }
       </Switch>
-      <Footer />
+      {
+        location.pathname.indexOf('backstage') > -1 ? null : <Footer />
+      }
     </AppWrapper>
   );
 }
 
-export default App;
+export default withRouter(App);

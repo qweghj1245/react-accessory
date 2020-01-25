@@ -6,7 +6,7 @@ const PersonDropdown = ({ list, showDropdown, goRouter }) => {
     <Wrapper showDropdown={showDropdown}>
       <Dropdown>
         {
-          list.map(item => <DropdownItem key={item} noBorder={item === '會員登入'} onClick={() => goRouter(item)}>{item}</DropdownItem>)
+          list.map(item => <DropdownItem key={item} noBorder={item === '進入後台'} onClick={() => goRouter(item)}>{item}</DropdownItem>)
         }
       </Dropdown>
     </Wrapper>

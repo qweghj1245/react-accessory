@@ -13,7 +13,7 @@ import profile from '../../assets/img/Icon/Icon_navbar_profile.svg';
 
 const Navbar = ({ history }) => {
   const [productDropdownList] = useState(['紙製品', '手機配件', '包包提袋', '其他']);
-  const [personDropdownList] = useState(['我的訂單', '修改資料', '會員登入']);
+  const [personDropdownList] = useState(['我的訂單', '修改資料', '會員登入', '進入後台']);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const goRouter = (item) => {
@@ -24,6 +24,8 @@ const Navbar = ({ history }) => {
         return history.push('/login');
       case '我的訂單':
         return history.push('/order');
+      case '進入後台':
+          return history.push('/backstage/total_view');
       default:
         return;
     }

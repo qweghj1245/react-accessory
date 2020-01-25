@@ -9,6 +9,8 @@ import OrderId from './page/OrderId/OrderId';
 import Collection from './page/Collection/Collection';
 import About from './page/About/About';
 import ShoppingNotes from './page/ShoppingNotes/ShoppingNotes';
+import BackStage from './page/BackStage/BackStage';
+import TotalView from './page/BackStage/TotalView/TotalView';
 const routes = [
   {
     path: '/',
@@ -80,6 +82,19 @@ const routes = [
     component: ShoppingNotes,
     name: '購物須知',
     breadcrumb: '購物須知',
+  },
+  {
+    path: '/backstage/total_view',
+    component: BackStage,
+    name: '後台',
+    breadcrumb: '後台',
+    children: [
+      {
+        path: '/backstage/total_view',
+        component: TotalView,
+        name: '總覽',
+      }
+    ],
   },
 ];
 

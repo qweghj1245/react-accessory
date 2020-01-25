@@ -36,6 +36,8 @@ export const Flex = styled.div`
         return 'flex-start';
       case 'end':
         return 'flex-end';
+      case 'between':
+        return 'space-between';
       default:
         return 'center';
     }
@@ -43,6 +45,7 @@ export const Flex = styled.div`
   flex-direction: ${props => props.dir};
   margin-right: ${props => props.mr}px;
   margin-bottom: ${props => props.mb}px;
+  margin-top: ${props => props.mt}px;
 `;
 
 export const Grid = styled.div`
