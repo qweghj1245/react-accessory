@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BaseWrapper, size, Text, Flex } from '../../../assets/css/global.style';
 
 export const Wrapper = styled(BaseWrapper)`
-  ${size('calc(100vw - 250px)', '100%')};
+  ${size('calc(100vw - 250px)', 'auto')};
 `;
 
 export const HeadBar = styled(Flex)`

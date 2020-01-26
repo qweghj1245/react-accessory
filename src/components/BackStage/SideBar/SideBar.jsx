@@ -13,20 +13,19 @@ import icon5 from '../../../assets/img/Backstage/Icon_material-local-offer.svg';
 import icon6 from '../../../assets/img/Backstage/Icon_material-add-to-queue.svg';
 
 const SideBar = ({ history, location, height }) => {
-  
   const activeMenu = (path) => {
     return path === location.pathname;
   };
 
   return (
-    <Wrapper dir='column' justify='start' height={height}>
+    <Wrapper dir='column' justify='start'>
       <Image src={logo} width='60' mb='11' onClick={() => history.push('/')}/>
       <LogoTitle>OPI</LogoTitle>
       <MenuItem active={activeMenu('/backstage/total_view')} onClick={() => history.push('/backstage/total_view')}>
         <Icon width='12' mr='6' src={icon}/>
         <MenuText>總覽</MenuText>
       </MenuItem>
-      <MenuItem>
+      <MenuItem active={activeMenu('/backstage/order')} onClick={() => history.push('/backstage/order')}>
         <Icon width='12' mr='6' src={icon2}/>
         <MenuText>訂單</MenuText>
       </MenuItem>

@@ -21,6 +21,6 @@ export const ChartWrapper = styled(Grid)`
 `;
 
 export const BottomWrapper = styled(Grid)`
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(223px, 1fr));
   grid-gap: 40px;
 `;

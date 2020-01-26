@@ -11,6 +11,7 @@ import About from './page/About/About';
 import ShoppingNotes from './page/ShoppingNotes/ShoppingNotes';
 import BackStage from './page/BackStage/BackStage';
 import TotalView from './page/BackStage/TotalView/TotalView';
+import BackstageOrder from './page/BackStage/Order/Order';
 const routes = [
   {
     path: '/',
@@ -84,7 +85,7 @@ const routes = [
     breadcrumb: '購物須知',
   },
   {
-    path: '/backstage/total_view',
+    path: '/backstage',
     component: BackStage,
     name: '後台',
     breadcrumb: '後台',
@@ -93,6 +94,11 @@ const routes = [
         path: '/backstage/total_view',
         component: TotalView,
         name: '總覽',
+      },
+      {
+        path: '/backstage/order',
+        component: BackstageOrder,
+        name: '訂單',
       }
     ],
   },

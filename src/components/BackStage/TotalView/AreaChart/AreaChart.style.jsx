@@ -3,6 +3,7 @@ import { Text, size, Flex } from '../../../../assets/css/global.style';
 
 export const Wrapper = styled.div`
   background: #FFFFFF;
+  height: 274px;
 `;
 
 export const Title = styled(Flex)`

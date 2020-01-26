@@ -6,10 +6,13 @@ export const Image = styled(ImageWrapper)`
 `;
 
 export const Wrapper = styled(Flex)`
-  ${props => size('250px', props.height)};
+  ${props => size('250px', '100%')};
   min-width: 150px;
   background: #333333;
   padding-top: 50px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
 `;
 
 export const LogoTitle = styled.div`
