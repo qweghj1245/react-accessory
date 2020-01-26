@@ -5,6 +5,8 @@ import { Grid } from '../../../assets/css/global.style';
 export const Wrapper = styled.div`
   background: #F1F1F1;
   padding: 0 54px 50px 50px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
 `;
 
 export const TotalWrapper = styled(Grid)`

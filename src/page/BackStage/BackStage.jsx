@@ -12,7 +12,7 @@ const BackStage = ({ location, routes }) => {
     <Flex justify='start' align='start' style={{ position: 'relative', height: '100vh' }}>
       <SideBar />
       <Wrapper>
-        <StageContent />
+        <StageContent name={route.name} />
         <MoveRight>
           <Children name={route.name} />
         </MoveRight>
