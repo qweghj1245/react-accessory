@@ -6,7 +6,13 @@ import { Flex } from '../../assets/css/global.style';
 import { MoveRight, Wrapper } from './BackStage.style';
 
 const BackStage = ({ location, routes }) => {
-  const route = routes.find(item => item.path === location.pathname);
+  let route;
+  let pathSplit = location.pathname.split('/').filter(item => !!item);
+  if (pathSplit.length === 3) {
+    route = routes.find(item => item.path === location.pathname.replace(pathSplit[2], ':id'));
+  } else {
+    route = routes.find(item => item.path === location.pathname);
+  }
   const Children = route.component;
   return (
     <Flex justify='start' align='start' style={{ position: 'relative', height: '100vh' }}>

@@ -13,6 +13,10 @@ export const LineWrapper = styled(Grid)`
   padding-bottom: 17px;
   border-bottom: solid 1px #F1F1F1;
   padding-top: ${props => props.pt}px;
+  cursor: pointer;
+  &:hover {
+    background: ${props => props.head ? '' : '#CCCCCC'};
+  }
 `;
 
 export const HeadText = styled.div`
@@ -23,11 +27,4 @@ export const HeadText = styled.div`
 export const BodyText = styled.div`
   ${Text(12, 100, 0)};
   color: #333333;
-`;
-
-export const StatusText = styled.div`
-  ${Text(12, 100, 0)};
-  ${size('56px', '18px')};
-  background: #FFC333;
-  text-align: center;
 `;

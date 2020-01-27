@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import Checkbox from '../../Checkbox/Checkbox';
-import { Wrapper, LineWrapper, HeadText, BodyText, StatusText } from './BaseTable.style';
+import { Wrapper, LineWrapper, HeadText, BodyText } from './BaseTable.style';
+import { Flex } from '../../../../assets/css/global.style';
+import Tag from '../../Tag/Tag';
 
 const headGroup = ['訂單號碼', '訂單日期', '訂單狀態', '付款狀態', '運送狀態', '訂購人', '合計'];
-const BaseTable = () => {
+const BaseTable = ({ history }) => {
   const [tBody] = useState([
     {
       id: '123123',
@@ -15,23 +18,26 @@ const BaseTable = () => {
       total: 'NT$100',
     },
   ]);
+
   return (
     <Wrapper>
-      <LineWrapper>
+      <LineWrapper head>
         <Checkbox />
         {
-          headGroup.map(item => <HeadText>{item}</HeadText>)
+          headGroup.map(item => <HeadText key={item}>{item}</HeadText>)
         }
       </LineWrapper>
       {
         tBody.map(item =>
-          <LineWrapper key={item.id} pt='17'>
-            <Checkbox />
+          <LineWrapper key={item.id} pt='17' onClick={() => history.push('/backstage/order/aaa')}>
+            <Flex onClick={e => e.stopPropagation()}>
+              <Checkbox />
+            </Flex>
             <BodyText>{item.id}</BodyText>
             <BodyText>{item.createdAt}</BodyText>
-            <StatusText>{item.orderStatus}</StatusText>
-            <StatusText>{item.payStatus}</StatusText>
-            <StatusText>{item.transportStatus}</StatusText>
+            <Tag>{item.orderStatus}</Tag>
+            <Tag>{item.payStatus}</Tag>
+            <Tag>{item.transportStatus}</Tag>
             <BodyText>{item.orderUser}</BodyText>
             <BodyText>{item.total}</BodyText>
           </LineWrapper>)
@@ -40,4 +46,4 @@ const BaseTable = () => {
   )
 }
 
-export default BaseTable;
+export default withRouter(BaseTable);

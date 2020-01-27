@@ -12,6 +12,7 @@ import ShoppingNotes from './page/ShoppingNotes/ShoppingNotes';
 import BackStage from './page/BackStage/BackStage';
 import TotalView from './page/BackStage/TotalView/TotalView';
 import BackstageOrder from './page/BackStage/Order/Order';
+import BackstageOrderId from './page/BackStage/OrderId/OrderId';
 const routes = [
   {
     path: '/',
@@ -98,6 +99,11 @@ const routes = [
       {
         path: '/backstage/order',
         component: BackstageOrder,
+        name: '訂單',
+      },
+      {
+        path: '/backstage/order/:id',
+        component: BackstageOrderId,
         name: '訂單',
       }
     ],
