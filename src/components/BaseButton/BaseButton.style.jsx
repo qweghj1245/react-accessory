@@ -29,6 +29,20 @@ const convertColor = (color) => {
         hoverBg: '#333333',
         hoverTxt: '#FFFFFF',
       };
+    case 'light-grey-text-black':
+      return {
+        bg: '#F1F1F1',
+        color: '#333333',
+        hoverBg: '#999999',
+        hoverTxt: '#FFFFFF',
+      };
+    case 'light-grey-text-red':
+      return {
+        bg: '#F1F1F1',
+        color: '#AE1E1E',
+        hoverBg: '#AE1E1E',
+        hoverTxt: '#FFFFFF',
+      };
     default:
       return {
         bg: 'rgba(114, 102, 90, .8)',

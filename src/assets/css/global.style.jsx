@@ -12,6 +12,10 @@ export const absoluteCss = css`
 // components
 export const BaseWrapper = styled.div`
   position: relative;
+  margin-right: ${props => props.mr}px;
+  margin-left: ${props => props.ml}px;
+  margin-bottom: ${props => props.mb}px;
+  margin-top: ${props => props.mt}px;
 `;
 
 export const Flex = styled.div`
@@ -44,6 +48,7 @@ export const Flex = styled.div`
   }};
   flex-direction: ${props => props.dir};
   margin-right: ${props => props.mr}px;
+  margin-left: ${props => props.ml}px;
   margin-bottom: ${props => props.mb}px;
   margin-top: ${props => props.mt}px;
 `;

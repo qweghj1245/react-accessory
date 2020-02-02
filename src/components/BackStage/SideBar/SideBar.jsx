@@ -29,7 +29,7 @@ const SideBar = ({ history, location, height }) => {
         <Icon width='12' mr='6' src={icon2}/>
         <MenuText>訂單</MenuText>
       </MenuItem>
-      <MenuItem>
+      <MenuItem active={activeMenu('products')} onClick={() => history.push('/backstage/products')}>
         <Icon width='12' mr='6' src={icon3}/>
         <MenuText>商品</MenuText>
       </MenuItem>

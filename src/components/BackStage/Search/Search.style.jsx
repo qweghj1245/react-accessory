@@ -20,7 +20,7 @@ export const Input = styled.input`
 
 export const SearchIcon = styled(Icon)`
   position: absolute;
-  right: 29.5px;
+  right: ${props => props.right ? props.right : '29.5'}px;
   top: 50%;
   transform: translateY(-50%);
   width: 12px;
