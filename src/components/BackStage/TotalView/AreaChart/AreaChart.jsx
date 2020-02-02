@@ -19,7 +19,7 @@ const AreaCharts = ({ title, data }) => {
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#0288D1" stopOpacity={0.8} />
+              <stop offset="5%" stopColor="#0288D1" stopOpacity={0.3} />
               <stop offset="95%" stopColor="#0288D1" stopOpacity={0} />
             </linearGradient>
           </defs>
@@ -27,7 +27,7 @@ const AreaCharts = ({ title, data }) => {
           <YAxis tick={{ fontSize: 10 }} />
           <CartesianGrid strokeDasharray="3" />
           <Tooltip />
-          <Area type="monotone" dataKey="uv" stroke="#0288D1" fillOpacity={1} fill="url(#colorUv)" />
+          <Area type="monotone" dataKey="uv" stroke="#86C4E6" fillOpacity={1} fill="url(#colorUv)" />
         </AreaChart>
       </ResponsiveContainer>
     </Wrapper>
