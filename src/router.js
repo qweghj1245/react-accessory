@@ -14,6 +14,7 @@ import TotalView from './page/BackStage/TotalView/TotalView';
 import BackstageOrder from './page/BackStage/Order/Order';
 import BackstageOrderId from './page/BackStage/OrderId/OrderId';
 import BackstageProducts from './page/BackStage/Products/Products';
+import BackstageUser from './page/BackStage/User/User';
 const routes = [
   {
     path: '/',
@@ -111,6 +112,11 @@ const routes = [
         path: '/backstage/products',
         component: BackstageProducts,
         name: '商品',
+      },
+      {
+        path: '/backstage/user',
+        component: BackstageUser,
+        name: '會員',
       }
     ],
   },

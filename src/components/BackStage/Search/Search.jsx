@@ -4,11 +4,11 @@ import { Wrapper, Input, SearchIcon } from './Search.style';
 
 import searchIcon from '../../../assets/img/Icon/Icon_map-search.svg';
 
-const Search = ({ placeholder, right, ...styleProps }) => {
+const Search = ({ placeholder, ml, right, ...styleProps }) => {
   return (
-    <Wrapper>
+    <Wrapper ml={ml}>
       <Input {...styleProps} placeholder={placeholder ? placeholder : '搜尋'} />
-      <SearchIcon src={searchIcon} right={right}/>
+      <SearchIcon src={searchIcon} right={right} />
     </Wrapper>
   )
 }

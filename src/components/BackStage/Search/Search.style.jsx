@@ -3,6 +3,7 @@ import { Icon } from '../../../assets/css/global.style';
 
 export const Wrapper = styled.div`
   position: relative;
+  margin-left: ${props => props.ml ? props.ml : 0}px;
 `;
 
 export const Input = styled.input`
