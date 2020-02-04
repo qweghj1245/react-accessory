@@ -37,7 +37,7 @@ const SideBar = ({ history, location, height }) => {
         <Icon width='12' mr='6' src={icon4}/>
         <MenuText>會員</MenuText>
       </MenuItem>
-      <MenuItem>
+      <MenuItem active={activeMenu('discount')} onClick={() => history.push('/backstage/discount')}>
         <Icon width='12' mr='6' src={icon5}/>
         <MenuText>折扣</MenuText>
       </MenuItem>

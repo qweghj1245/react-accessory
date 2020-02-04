@@ -15,6 +15,7 @@ import BackstageOrder from './page/BackStage/Order/Order';
 import BackstageOrderId from './page/BackStage/OrderId/OrderId';
 import BackstageProducts from './page/BackStage/Products/Products';
 import BackstageUser from './page/BackStage/User/User';
+import BackstageDiscount from './page/BackStage/Discount/Discount';
 const routes = [
   {
     path: '/',
@@ -117,6 +118,11 @@ const routes = [
         path: '/backstage/user',
         component: BackstageUser,
         name: '會員',
+      },
+      {
+        path: '/backstage/discount',
+        component: BackstageDiscount,
+        name: '折扣',
       }
     ],
   },
