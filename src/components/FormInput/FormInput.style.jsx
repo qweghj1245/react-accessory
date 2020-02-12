@@ -9,6 +9,12 @@ export const Wrapper = styled(BaseWrapper)`
 export const LabelText = styled.div`
   ${Text(14, 'normal', 4)};
   color: #666666;
+  margin-right: ${props => props.mr}px;
+`;
+
+export const Error = styled.div`
+  ${Text(12, 'normal', 4)};
+  color: #ef0f0f;
 `;
 
 export const ReInput = styled.input`
@@ -18,5 +24,8 @@ export const ReInput = styled.input`
   font-size: 14px;
   &::-webkit-input-placeholder {
     color: #999999;
+  }
+  &:focus {
+    outline: 0;
   }
 `;

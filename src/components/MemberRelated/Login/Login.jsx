@@ -15,7 +15,7 @@ const MemberRelated = () => {
     console.log(id_token);
   }
   const responseFailure = () => {
-    console.log('Failed');
+    // console.log('Failed');
   }
 
   const login = () => {
