@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { withRouter } from 'react-router-dom';
 import PositionText from '../../../components/BackStage/PositionText/PositionText';
 import { Wrapper, Select, AddButton, Texture } from './Products.style';
 import { Flex, BaseWrapper, Icon } from '../../../assets/css/global.style';
@@ -14,7 +14,7 @@ const test = [
     value: '1',
   },
 ];
-const Shop = () => {
+const Products = ({ history }) => {
   return (
     <Wrapper>
       <PositionText title='商品' />
@@ -27,7 +27,7 @@ const Shop = () => {
             <Select triangle placeholder='批次變更商品' options={test} width='112px' height='28px' border='#999999' />
           </BaseWrapper>
           <AddButton>
-            <Texture>新增</Texture>
+            <Texture onClick={() => history.push('/backstage/products/add')}>新增</Texture>
             <Icon src={IconAdd} width='8' />
           </AddButton>
         </Flex>
@@ -38,4 +38,4 @@ const Shop = () => {
   )
 }
 
-export default Shop;
+export default withRouter(Products);

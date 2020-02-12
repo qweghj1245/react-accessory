@@ -14,6 +14,7 @@ import TotalView from './page/BackStage/TotalView/TotalView';
 import BackstageOrder from './page/BackStage/Order/Order';
 import BackstageOrderId from './page/BackStage/OrderId/OrderId';
 import BackstageProducts from './page/BackStage/Products/Products';
+import BackstageProductsAdd from './page/BackStage/ProductsAdd/ProductsAdd';
 import BackstageUser from './page/BackStage/User/User';
 import BackstageDiscount from './page/BackStage/Discount/Discount';
 import BackstageBulletin from './page/BackStage/Bulletin/Bulletin';
@@ -113,6 +114,11 @@ const routes = [
       {
         path: '/backstage/products',
         component: BackstageProducts,
+        name: '商品',
+      },
+      {
+        path: '/backstage/products/add',
+        component: BackstageProductsAdd,
         name: '商品',
       },
       {

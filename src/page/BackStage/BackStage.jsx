@@ -9,7 +9,9 @@ const BackStage = ({ location, routes }) => {
   let route;
   let pathSplit = location.pathname.split('/').filter(item => !!item);
   if (pathSplit.length === 3) {
-    route = routes.find(item => item.path === location.pathname.replace(pathSplit[2], ':id'));
+    route = 
+      routes.find(item => item.path === location.pathname.replace(pathSplit[2], ':id'))||
+      routes.find(item => item.path === location.pathname.replace(pathSplit[2], 'add'));
   } else {
     route = routes.find(item => item.path === location.pathname);
   }
