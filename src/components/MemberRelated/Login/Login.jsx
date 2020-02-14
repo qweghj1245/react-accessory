@@ -1,4 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from "react-alert";
 import GoogleLogin from 'react-google-login';
 import FormInput from '../../FormInput/FormInput';
 import BaseButton from '../../BaseButton/BaseButton';
@@ -6,21 +8,41 @@ import BaseButton from '../../BaseButton/BaseButton';
 import { Wrapper, Texture, TextureBlack } from './Login.style';
 import { Title } from '../../../assets/css/global.style';
 
+import { loginStart, googleStart } from '../../../redux/user/user.action';
+
 const MemberRelated = () => {
+  const alert = useAlert();
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user.loginUser);
+  const loginError = useSelector(state => state.user.loginError);
   const emailModel = useRef(null);
   const passwordModel = useRef(null);
 
   const responseSuccess = (googleUser) => {
     const id_token = googleUser.getAuthResponse().id_token;
-    console.log(id_token);
+    dispatch(googleStart(id_token));
   }
   const responseFailure = () => {
-    // console.log('Failed');
+    alert.error('登入失敗');
   }
 
   const login = () => {
-    console.log(emailModel.current.value, passwordModel.current.value);
+    dispatch(loginStart({
+      email: emailModel.current.value,
+      password: passwordModel.current.value,
+    }));
   }
+
+  useEffect(() => {
+    if (loginError) {
+      alert.error(loginError);
+    }
+    if (user) {
+      emailModel.current.value = '';
+      passwordModel.current.value = '';
+      alert.success('登入成功！');
+    }
+  }, [loginError, user, alert]);
 
   return (
     <Wrapper>

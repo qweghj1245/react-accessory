@@ -10,7 +10,7 @@ const MemberRelated = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const createUser = useSelector(state => state.user.createUser);
-  const errorMessage = useSelector(state => state.user.errorMessage);
+  const createError = useSelector(state => state.user.createError);
   const nameModel = useRef(null);
   const emailModel = useRef(null);
   const passwordModel = useRef(null);
@@ -48,8 +48,8 @@ const MemberRelated = () => {
   }
 
   useEffect(() => {
-    if (errorMessage) {
-      alert.error(errorMessage);
+    if (createError) {
+      alert.error(createError);
     }
     if (createUser) {
       nameModel.current.value = '';
@@ -58,7 +58,7 @@ const MemberRelated = () => {
       checkPasswordModel.current.value = '';
       alert.success('註冊成功！');
     }
-  }, [createUser, errorMessage, alert]);
+  }, [createUser, createError, alert]);
   return (
     <Wrapper>
       <Title mb={30} width={60}>註冊</Title>

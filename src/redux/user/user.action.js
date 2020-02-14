@@ -5,6 +5,9 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  GOOGLE_START,
+  GOOGLE_SUCCESS,
+  GOOGLE_FAILURE,
 } from './user.const';
 
 export const createUserStart = (userConfig) => ({
@@ -34,5 +37,20 @@ export const loginSuccess = (userResponse) => ({
 
 export const loginFailure = (error) => ({
   type: LOGIN_FAILURE,
+  payload: error,
+});
+
+export const googleStart = (token) => ({
+  type: GOOGLE_START,
+  payload: token,
+});
+
+export const googleSuccess = (userResponse) => ({
+  type: GOOGLE_SUCCESS,
+  payload: userResponse,
+});
+
+export const googleFailure = (error) => ({
+  type: GOOGLE_FAILURE,
   payload: error,
 });
