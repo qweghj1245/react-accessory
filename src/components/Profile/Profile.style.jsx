@@ -4,6 +4,7 @@ import { Flex, size, Text } from '../../assets/css/global.style';
 export const Wrapper = styled(Flex)`
   flex-direction: column;
   margin-bottom: 134px;
+  height: calc(100vh - 450px);
 `;
 
 export const Head = styled.div`

@@ -37,6 +37,7 @@ const userReducer = (state = INITAIL_STATE, action) => {
       return {
         ...state,
         createUser: action.payload.user,
+        loginUser: action.payload.user,
       }
     case CREATE_USER_FAILURE:
       return {

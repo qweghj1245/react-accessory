@@ -32,6 +32,8 @@ const Navbar = ({ history }) => {
         return logout();
       case '我的訂單':
         return history.push('/order');
+      case '修改資料':
+        return history.push('/profile');
       case '進入後台':
         return history.push('/backstage/total_view');
       default:
@@ -54,7 +56,6 @@ const Navbar = ({ history }) => {
     } else {
       setPersonDropdownList([
         '我的訂單',
-        '修改資料',
         '會員登入',
         '進入後台'
       ]);
