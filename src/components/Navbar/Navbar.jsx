@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import { selectLoginUser, selectCreateUser } from '../../redux/user/user.selector';
 import { Wrapper, Logo, ListWrapper, ListContent, FeatureIcons, IconWrap } from './Navbar.style';
 import { Icon } from '../../assets/css/global.style';
 import HeaderDropdown from '../HeaderDropdown/HeaderDropdown';
@@ -19,8 +20,8 @@ const Navbar = ({ history }) => {
   const [productDropdownList] = useState(['紙製品', '手機配件', '包包提袋', '其他']);
   const [personDropdownList, setPersonDropdownList] = useState(['我的訂單', '修改資料', '會員登入', '進入後台']);
   const [showDropdown, setShowDropdown] = useState(false);
-  const loginUser = useSelector(state => state.user.loginUser);
-  const createUser = useSelector(state => state.user.createUser);
+  const loginUser = useSelector(selectLoginUser);
+  const createUser = useSelector(selectCreateUser);
 
   const goRouter = (item) => {
     setShowDropdown(false)

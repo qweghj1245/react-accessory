@@ -1,7 +1,10 @@
 //init
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { useAlert } from "react-alert";
+import { getLocal } from './lib/localStorage';
+import { selectCreateUser, selectLoginUser } from './redux/user/user.selector';
 import { AppWrapper } from './App.style';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserStart } from './redux/user/user.action';
 //plugin
 import { Switch, Route, withRouter } from 'react-router-dom';
@@ -13,9 +16,17 @@ import Footer from './components/Footer/Footer.jsx';
 
 const App = ({ location }) => {
   const dispatch = useDispatch();
+  const alert = useAlert();
+  const loginUser = useSelector(selectLoginUser);
+  const createUser = useSelector(selectCreateUser);
+  const removeAlert = useCallback(() => alert.removeAll(), [alert]);
+
   useEffect(() => {
-    dispatch(getUserStart());
-  }, [dispatch]);
+    if (getLocal('Authorization')&&!loginUser&&!createUser) {
+      dispatch(getUserStart());
+    }
+    removeAlert();
+  }, [dispatch, removeAlert, loginUser, createUser]);
 
   return (
     <AppWrapper location={location}>

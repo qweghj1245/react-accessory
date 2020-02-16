@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { selectCreateUser, selectCreateError } from '../../../redux/user/user.selector';
 import FormInput from '../../FormInput/FormInput';
 import BaseButton from '../../BaseButton/BaseButton';
 import { Wrapper } from './Register.style';
@@ -10,8 +11,8 @@ import { createUserStart } from '../../../redux/user/user.action';
 const MemberRelated = ({ history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const createUser = useSelector(state => state.user.createUser);
-  const createError = useSelector(state => state.user.createError);
+  const createUser = useSelector(selectCreateUser);
+  const createError = useSelector(selectCreateError);
   const nameModel = useRef(null);
   const emailModel = useRef(null);
   const passwordModel = useRef(null);
@@ -25,11 +26,10 @@ const MemberRelated = ({ history }) => {
 
   const register = () => {
     let key = {};
-    if (!nameModel.current.value || 
-      !emailModel.current.value || 
-      !passwordModel.current.value || 
-      !checkPasswordModel.current.value) 
-    {
+    if (!nameModel.current.value ||
+      !emailModel.current.value ||
+      !passwordModel.current.value ||
+      !checkPasswordModel.current.value) {
       key['name'] = !nameModel.current.value ? '必填' : '';
       key['emial'] = !emailModel.current.value ? '必填' : '';
       key['password'] = !passwordModel.current.value ? '必填' : '';

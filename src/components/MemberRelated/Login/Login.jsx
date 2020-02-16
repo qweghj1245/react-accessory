@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { useAlert } from "react-alert";
+import { selectLoginError } from '../../../redux/user/user.selector';
 import GoogleLogin from 'react-google-login';
 import FormInput from '../../FormInput/FormInput';
 import BaseButton from '../../BaseButton/BaseButton';
@@ -14,16 +15,13 @@ import { loginStart, googleStart } from '../../../redux/user/user.action';
 const MemberRelated = ({ history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const loginUser = useSelector(state => state.user.loginUser);
-  const createUser = useSelector(state => state.user.createUser);
-  const loginError = useSelector(state => state.user.loginError);
+  const loginError = useSelector(selectLoginError);
   const emailModel = useRef(null);
   const passwordModel = useRef(null);
 
   const responseSuccess = (googleUser) => {
     const id_token = googleUser.getAuthResponse().id_token;
     dispatch(googleStart(id_token));
-    alert.info('等待登入中...');
   }
   const responseFailure = () => {
     alert.error('登入失敗');
@@ -41,14 +39,7 @@ const MemberRelated = ({ history }) => {
     if (loginError) {
       alert.error(loginError);
     }
-    alert.removeAll();
-    if (loginUser&&!createUser) {
-      emailModel.current.value = '';
-      passwordModel.current.value = '';
-      alert.success('登入成功！');
-      history.push('/');
-    }
-  }, [loginError, loginUser, createUser, alert, history]);
+  }, [loginError, alert]);
 
   return (
     <Wrapper>
