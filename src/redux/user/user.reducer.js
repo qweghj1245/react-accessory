@@ -8,13 +8,22 @@ import {
   GOOGLE_START,
   GOOGLE_SUCCESS,
   GOOGLE_FAILURE,
+  GET_USER_START,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
+  LOG_OUT_START,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURE,
 } from './user.const';
 
 const INITAIL_STATE = {
-  createUser: null,
   loginUser: null,
+  createUser: null,
+  logoutUser: null,
   createError: null,
   loginError: null,
+  logoutError: null,
+  userError: null,
 }
 
 const userReducer = (state = INITAIL_STATE, action) => {
@@ -64,9 +73,40 @@ const userReducer = (state = INITAIL_STATE, action) => {
         ...state,
         loginError: action.payload,
       }
+    case GET_USER_START:
+      return {
+        ...state,
+      }
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        loginUser: action.payload,
+      }
+    case GET_USER_FAILURE:
+      return {
+        ...state,
+        userError: action.payload,
+      }
+    case LOG_OUT_START:
+      return {
+        ...state,
+      }
+    case LOG_OUT_SUCCESS:
+      return {
+        ...state,
+        loginUser: action.payload,
+        createUser: action.payload,
+        logoutUser: 'done',
+      }
+    case LOG_OUT_FAILURE:
+      return {
+        ...state,
+        logoutError: action.payload,
+        logoutUser: 'fail',
+      }
     default:
       return state;
-  }
-};
+      }
+  };
 
-export default userReducer;
+  export default userReducer;

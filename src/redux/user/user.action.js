@@ -8,6 +8,12 @@ import {
   GOOGLE_START,
   GOOGLE_SUCCESS,
   GOOGLE_FAILURE,
+  GET_USER_START,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
+  LOG_OUT_START,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURE,
 } from './user.const';
 
 export const createUserStart = (userConfig) => ({
@@ -52,5 +58,33 @@ export const googleSuccess = (userResponse) => ({
 
 export const googleFailure = (error) => ({
   type: GOOGLE_FAILURE,
+  payload: error,
+});
+
+export const getUserStart = () => ({
+  type: GET_USER_START,
+});
+
+export const getUserSuccess = (userResponse) => ({
+  type: GET_USER_SUCCESS,
+  payload: userResponse,
+});
+
+export const getUserFailure = (error) => ({
+  type: GET_USER_FAILURE,
+  payload: error,
+});
+
+export const logoutStart = () => ({
+  type: LOG_OUT_START,
+});
+
+export const logoutSuccess = (response) => ({
+  type: LOG_OUT_SUCCESS,
+  payload: response,
+});
+
+export const logoutFailure = (error) => ({
+  type: LOG_OUT_FAILURE,
   payload: error,
 });

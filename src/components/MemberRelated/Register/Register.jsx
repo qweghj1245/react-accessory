@@ -1,12 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import FormInput from '../../FormInput/FormInput';
 import BaseButton from '../../BaseButton/BaseButton';
 import { Wrapper } from './Register.style';
 import { Title } from '../../../assets/css/global.style';
 import { useAlert } from "react-alert";
 import { createUserStart } from '../../../redux/user/user.action';
-const MemberRelated = () => {
+const MemberRelated = ({ history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const createUser = useSelector(state => state.user.createUser);
@@ -44,6 +45,7 @@ const MemberRelated = () => {
         password: passwordModel.current.value,
         passwordConfirm: checkPasswordModel.current.value,
       }));
+      alert.info('等待註冊中...');
     }
   }
 
@@ -52,13 +54,11 @@ const MemberRelated = () => {
       alert.error(createError);
     }
     if (createUser) {
-      nameModel.current.value = '';
-      emailModel.current.value = '';
-      passwordModel.current.value = '';
-      checkPasswordModel.current.value = '';
+      alert.removeAll();
       alert.success('註冊成功！');
+      history.push('/');
     }
-  }, [createUser, createError, alert]);
+  }, [createUser, createError, alert, history]);
   return (
     <Wrapper>
       <Title mb={30} width={60}>註冊</Title>
@@ -71,4 +71,4 @@ const MemberRelated = () => {
   )
 }
 
-export default MemberRelated;
+export default withRouter(MemberRelated);

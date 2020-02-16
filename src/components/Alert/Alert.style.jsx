@@ -7,6 +7,8 @@ export const Wrapper = styled.div`
         return '#fc4646';
       case 'success':
         return 'green';
+      case 'info':
+        return 'white';
       default:
         return 'white';
     }
@@ -17,6 +19,8 @@ export const Wrapper = styled.div`
         return '#fec7c7';
       case 'success':
         return '#b5f2ca';
+      case 'info':
+        return '#333333';
       default:
         return 'white';
     }

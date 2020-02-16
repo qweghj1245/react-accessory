@@ -1,18 +1,23 @@
 //init
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppWrapper } from './App.style';
+import { useDispatch } from 'react-redux';
+import { getUserStart } from './redux/user/user.action';
 //plugin
 import { Switch, Route, withRouter } from 'react-router-dom';
-
 //page
 import routes from './router';
-// import Home from './page/Home/Home';
-// import Products from './page/Products/ProductsWrapper';
 //component
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 
 const App = ({ location }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserStart());
+  }, [dispatch]);
+
   return (
     <AppWrapper location={location}>
       {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Wrapper, Logo, ListWrapper, ListContent, FeatureIcons, IconWrap } from './Navbar.style';
 import { Icon } from '../../assets/css/global.style';
@@ -11,25 +12,53 @@ import favorite from '../../assets/img/Icon/Icon_navbar_favorite.svg';
 import search from '../../assets/img/Icon/Icon_navbar_search.svg';
 import profile from '../../assets/img/Icon/Icon_navbar_profile.svg';
 
+import { logoutStart } from '../../redux/user/user.action';
+
 const Navbar = ({ history }) => {
+  const dispatch = useDispatch();
   const [productDropdownList] = useState(['紙製品', '手機配件', '包包提袋', '其他']);
-  const [personDropdownList] = useState(['我的訂單', '修改資料', '會員登入', '進入後台']);
+  const [personDropdownList, setPersonDropdownList] = useState(['我的訂單', '修改資料', '會員登入', '進入後台']);
   const [showDropdown, setShowDropdown] = useState(false);
+  const loginUser = useSelector(state => state.user.loginUser);
+  const createUser = useSelector(state => state.user.createUser);
 
   const goRouter = (item) => {
-    console.log(item);
     setShowDropdown(false)
     switch (item) {
       case '會員登入':
         return history.push('/login');
+      case '會員登出':
+        return logout();
       case '我的訂單':
         return history.push('/order');
       case '進入後台':
-          return history.push('/backstage/total_view');
+        return history.push('/backstage/total_view');
       default:
         return;
     }
   }
+
+  const logout = () => {
+    dispatch(logoutStart());
+  }
+
+  useEffect(() => {
+    if (loginUser || createUser) {
+      setPersonDropdownList([
+        '我的訂單',
+        '修改資料',
+        '會員登出',
+        '進入後台'
+      ]);
+    } else {
+      setPersonDropdownList([
+        '我的訂單',
+        '修改資料',
+        '會員登入',
+        '進入後台'
+      ]);
+    }
+  }, [loginUser, createUser]);
 
   return (
     <Wrapper>
