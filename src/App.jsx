@@ -13,7 +13,6 @@ import Footer from './components/Footer/Footer.jsx';
 
 const App = ({ location }) => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getUserStart());
   }, [dispatch]);

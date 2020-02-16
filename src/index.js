@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 
 const options = {
   position: positions.TOP_CENTER,
-  timeout: 4000,
+  timeout: 2000,
 }
 
 ReactDOM.render(
