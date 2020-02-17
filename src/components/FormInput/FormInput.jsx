@@ -6,9 +6,10 @@ import { Wrapper, LabelText, ReInput, Error } from './FormInput.style';
 const FormInput = ({ label, placeholder, model, error, type, defaultValue, inputVal, ...otherStyle }) => {
   const [val, setVal] = useState(defaultValue);
   const changeValue = (e) => {
-    console.log(e.target.value);
     setVal(e.target.value);
-    inputVal(e.target.value);
+    if (inputVal) {
+      inputVal(e.target.value);
+    }
   }
   return (
     <Wrapper {...otherStyle}>

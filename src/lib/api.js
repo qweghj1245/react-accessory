@@ -18,6 +18,7 @@ baseRequest.defaults.headers.common['Authorization'] = getLocal('Authorization')
 export const createUser = data => baseRequest.post('/user', data);
 export const getUser = () => baseRequest.get('/user');
 export const patchUser = data => baseRequest.patch('/user', data);
+export const changePassword = data => baseRequest.post('/user/changePassword', data);
 
 //login
 export const loginUser = data => baseRequest.post('/user/login', data);

@@ -17,6 +17,9 @@ import {
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  CHANGE_PASSWORD_START,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILURE,
 } from './user.const';
 
 export const createUserStart = (userConfig) => ({
@@ -104,5 +107,20 @@ export const updateSuccess = (userResponse) => ({
 
 export const updateFailure = (error) => ({
   type: UPDATE_USER_FAILURE,
+  payload: error,
+});
+
+export const changePasswordStart = (passwordConfig) => ({
+  type: CHANGE_PASSWORD_START,
+  payload: passwordConfig,
+});
+
+export const changePasswordSuccess = (userResponse) => ({
+  type: CHANGE_PASSWORD_SUCCESS,
+  payload: userResponse,
+});
+
+export const changePasswordFailure = (error) => ({
+  type: CHANGE_PASSWORD_FAILURE,
   payload: error,
 });

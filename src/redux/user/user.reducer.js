@@ -17,12 +17,16 @@ import {
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  CHANGE_PASSWORD_START,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILURE,
 } from './user.const';
 
 const INITAIL_STATE = {
   loginUser: null,
   createUser: null,
   logoutUser: null,
+  updateStatus: '', // user, password
   createError: null,
   loginError: null,
   logoutError: null,
@@ -112,16 +116,36 @@ const userReducer = (state = INITAIL_STATE, action) => {
     case UPDATE_USER_START:
       return {
         ...state,
+        updateStatus: '',
       }
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
         loginUser: action.payload,
+        updateStatus: 'user',
       }
     case UPDATE_USER_FAILURE:
       return {
         ...state,
         updateError: action.payload,
+        updateStatus: 'error',
+      }
+    case CHANGE_PASSWORD_START:
+      return {
+        ...state,
+        updateStatus: '',
+      }
+    case CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loginUser: action.payload,
+        updateStatus: 'password',
+      }
+    case CHANGE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        updateError: action.payload,
+        updateStatus: 'error',
       }
     default:
       return state;

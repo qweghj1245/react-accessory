@@ -1,6 +1,14 @@
-import { createUser, loginUser, googleSign, getUser, logoutUser, patchUser } from '../../lib/api';
+import { createUser, loginUser, googleSign, getUser, logoutUser, patchUser, changePassword } from '../../lib/api';
 import { takeLatest, put, all, call } from 'redux-saga/effects';
-import { CREATE_USER_START, LOGIN_START, GOOGLE_START, GET_USER_START, LOG_OUT_START, UPDATE_USER_START } from './user.const';
+import { 
+  CREATE_USER_START, 
+  LOGIN_START, 
+  GOOGLE_START, 
+  GET_USER_START, 
+  LOG_OUT_START, 
+  UPDATE_USER_START, 
+  CHANGE_PASSWORD_START,
+} from './user.const';
 import {
   createUserSuccess,
   createUserFailure,
@@ -14,6 +22,8 @@ import {
   logoutFailure,
   updateSuccess,
   updateFailure,
+  changePasswordSuccess,
+  changePasswordFailure,
 } from './user.action';
 import { saveLocal, removeLocal, getLocal } from '../../lib/localStorage';
 function* registerUser(payload) {
@@ -79,7 +89,15 @@ function* updateUser(payload) {
   }
 }
 
-
+function* changePasswordUser(payload) {
+  try {
+    const user = yield call(() => changePassword(payload.payload));
+    yield put(changePasswordSuccess(user.data.user));
+    yield saveLocal('Authorization', user.data.token);
+  } catch (error) {
+    yield put(changePasswordFailure(error.response.data.message));
+  }
+}
 
 function* registerUserStart() {
   yield takeLatest(CREATE_USER_START, registerUser);
@@ -105,6 +123,10 @@ function* updateStart() {
   yield takeLatest(UPDATE_USER_START, updateUser);
 }
 
+function* changePasswordStart() {
+  yield takeLatest(CHANGE_PASSWORD_START, changePasswordUser);
+}
+
 export function* userSagas() {
   yield all([
     call(registerUserStart),
@@ -112,5 +134,6 @@ export function* userSagas() {
     call(googleStart),
     call(getUserStart),
     call(logoutStart),
-    call(updateStart)]);
+    call(updateStart),
+    call(changePasswordStart)]);
 }
