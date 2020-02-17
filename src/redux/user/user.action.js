@@ -14,6 +14,9 @@ import {
   LOG_OUT_START,
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE,
 } from './user.const';
 
 export const createUserStart = (userConfig) => ({
@@ -86,5 +89,20 @@ export const logoutSuccess = (response) => ({
 
 export const logoutFailure = (error) => ({
   type: LOG_OUT_FAILURE,
+  payload: error,
+});
+
+export const updateStart = (userConfig) => ({
+  type: UPDATE_USER_START,
+  payload: userConfig,
+});
+
+export const updateSuccess = (userResponse) => ({
+  type: UPDATE_USER_SUCCESS,
+  payload: userResponse,
+});
+
+export const updateFailure = (error) => ({
+  type: UPDATE_USER_FAILURE,
   payload: error,
 });

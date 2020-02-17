@@ -11,7 +11,7 @@ const ProfileEditHoc = BaseWrapper(ProfileEditContent);
 const Profile = (props) => {
   const [isEdit, setIsEdit] = useState(false);
   const user = useSelector(selectLoginUser);
-  return isEdit ? <ProfileEditHoc {...props} edit={() => setIsEdit(!isEdit)} /> : <ProfileHoc user={user} {...props} edit={() => setIsEdit(!isEdit)} />
+  return isEdit ? <ProfileEditHoc user={user} {...props} edit={() => setIsEdit(!isEdit)} /> : <ProfileHoc user={user} {...props} edit={() => setIsEdit(!isEdit)} />
 }
 
 export default Profile;

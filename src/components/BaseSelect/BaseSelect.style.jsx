@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex, size, absolute } from '../../assets/css/global.style';
+import { size, absolute } from '../../assets/css/global.style';
 
 export const SelectWrapper = styled.div`
   position: relative;
@@ -8,11 +8,13 @@ export const SelectWrapper = styled.div`
   margin-bottom: ${props => props.mb}px;
 `;
 
-export const Inputs = styled(Flex)`
+export const Inputs = styled.div`
   ${props => props.width || props.height ? size(props.width, props.height) : size('150px', '45px')};
   border: solid 1px ${props => props.border ? props.border : '#666666'};
   padding: 13px 15px 12px 10px;
   font-size: 14px;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   cursor: pointer;
   color: ${props => !props.realValue && !props.defaultV ? '#999999' : '#333333'};
@@ -21,14 +23,19 @@ export const Inputs = styled(Flex)`
 `;
 
 export const Dropdown = styled.div`
+  height: 200px;
+  overflow-y: auto;
   ${absolute('100%', 0)};
-  width: 100%;
+  width: calc(100% + 1px);
   border: solid 1px #666666;
   border-top: 0;
   transform-origin: top;
   transform: ${props => props.isShow ? 'rotateX(0deg)' : 'rotateX(-90deg)'};
   transition: transform .2s linear;
   z-index: 10;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const DropdownItem = styled.div`
@@ -37,9 +44,6 @@ export const DropdownItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   background: #FFFFFF;
-  &:hover {
-    background: #EAE8E6;
-  }
 `;
 
 export const Triangle = styled.div`

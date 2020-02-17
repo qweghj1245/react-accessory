@@ -4,7 +4,7 @@ import { Icon } from '../../assets/css/global.style';
 
 import Arrowdown from '../../assets/img/Icon/Icon_arrowdown.svg';
 
-const BaseSelect = ({ triangle, defaultV, options, placeholder = '請選擇選項...', ...otherStyle }) => {
+const BaseSelect = ({ change, triangle, defaultV, options, placeholder = '請選擇選項...', ...otherStyle }) => {
   const [isShow, setIsShow] = useState(false);
   const [realValue, setRealValue] = useState('');
 
@@ -12,11 +12,12 @@ const BaseSelect = ({ triangle, defaultV, options, placeholder = '請選擇選�
     const label = options.find(item => item.value === value).label;
     setRealValue(label);
     setIsShow(false);
+    change(label);
   }
 
   return (
     <SelectWrapper {...otherStyle}>
-      <Inputs {...otherStyle} realValue={realValue} onClick={() => setIsShow(!isShow)}>
+      <Inputs {...otherStyle} defaultV={defaultV} realValue={realValue} onClick={() => setIsShow(!isShow)}>
         {realValue ? realValue : (defaultV ? defaultV : placeholder)}
         {
           triangle ? <Triangle isShow={isShow} /> : <Icon src={Arrowdown} width={10} />

@@ -43,6 +43,7 @@ const Navbar = ({ history }) => {
 
   const logout = () => {
     dispatch(logoutStart());
+    history.push('/');
   }
 
   useEffect(() => {

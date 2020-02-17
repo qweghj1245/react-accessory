@@ -14,6 +14,9 @@ import {
   LOG_OUT_START,
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE,
 } from './user.const';
 
 const INITAIL_STATE = {
@@ -24,6 +27,7 @@ const INITAIL_STATE = {
   loginError: null,
   logoutError: null,
   userError: null,
+  updateError: null,
 }
 
 const userReducer = (state = INITAIL_STATE, action) => {
@@ -105,9 +109,23 @@ const userReducer = (state = INITAIL_STATE, action) => {
         logoutError: action.payload,
         logoutUser: 'fail',
       }
+    case UPDATE_USER_START:
+      return {
+        ...state,
+      }
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        loginUser: action.payload,
+      }
+    case UPDATE_USER_FAILURE:
+      return {
+        ...state,
+        updateError: action.payload,
+      }
     default:
       return state;
-      }
-  };
+  }
+};
 
-  export default userReducer;
+export default userReducer;

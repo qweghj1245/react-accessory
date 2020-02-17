@@ -1,6 +1,6 @@
-import { createUser, loginUser, googleSign, getUser, logoutUser } from '../../lib/api';
+import { createUser, loginUser, googleSign, getUser, logoutUser, patchUser } from '../../lib/api';
 import { takeLatest, put, all, call } from 'redux-saga/effects';
-import { CREATE_USER_START, LOGIN_START, GOOGLE_START, GET_USER_START, LOG_OUT_START } from './user.const';
+import { CREATE_USER_START, LOGIN_START, GOOGLE_START, GET_USER_START, LOG_OUT_START, UPDATE_USER_START } from './user.const';
 import {
   createUserSuccess,
   createUserFailure,
@@ -12,6 +12,8 @@ import {
   getUserFailure,
   logoutSuccess,
   logoutFailure,
+  updateSuccess,
+  updateFailure,
 } from './user.action';
 import { saveLocal, removeLocal, getLocal } from '../../lib/localStorage';
 function* registerUser(payload) {
@@ -68,6 +70,15 @@ function* logout() {
   }
 }
 
+function* updateUser(payload) {
+  try {
+    const newUser = yield call(() => patchUser(payload.payload));
+    yield put(updateSuccess(newUser.data));
+  } catch (error) {
+    yield put(updateFailure(error.response.data.message));
+  }
+}
+
 
 
 function* registerUserStart() {
@@ -90,6 +101,16 @@ function* logoutStart() {
   yield takeLatest(LOG_OUT_START, logout);
 }
 
+function* updateStart() {
+  yield takeLatest(UPDATE_USER_START, updateUser);
+}
+
 export function* userSagas() {
-  yield all([call(registerUserStart), call(loginStart), call(googleStart), call(getUserStart), call(logoutStart)]);
+  yield all([
+    call(registerUserStart),
+    call(loginStart),
+    call(googleStart),
+    call(getUserStart),
+    call(logoutStart),
+    call(updateStart)]);
 }
