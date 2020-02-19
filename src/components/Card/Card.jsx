@@ -10,8 +10,8 @@ const Card = (props) => {
       {
         !isLoading ? (
           <CardWrapper onClick={props.goProduct}>
-            <CardImage url={item.image} {...styles}></CardImage>
-            <CardTitle>{item.title}</CardTitle>
+            <CardImage url={item.photos[0]} {...styles}></CardImage>
+            <CardTitle>{item.name}</CardTitle>
             <CardPrice>NT${item.price}</CardPrice>
           </CardWrapper>) : (
             <CardWrapper>

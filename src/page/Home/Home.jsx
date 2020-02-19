@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   HomeWrapper, BannerImage, Recommend, PopularProductWrap, IntroWrapper, Image, TypeCardWrapper, TypeCard, TypeCardTitle, TypeCardBall,
   AbsoluteWrap, ShareWrapper, ShareTitle, ShareMsg, ShareContent, FlexWrap, SlideWrapper, Opi
 } from './Home.style';
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import GoTopButton from '../../components/GoTopButton/GoTopButton.jsx';
 import BaseButton from '../../components/BaseButton/BaseButton.jsx';
 import Card from '../../components/Card/Card';
 import { CardImage } from '../../components/Card/Card.style';
-
 import carsouel1 from '../../assets/img/Base/home_banner_1.png';
-import product1 from '../../assets/img/Base/pic_product_10.png';
-import product2 from '../../assets/img/Base/pic_product_7.png';
-import product3 from '../../assets/img/Base/pic_product_14.png';
 import introBackground from '../../assets/img/Base/background_home_gray.svg';
 import introImage1 from '../../assets/img/Base/home_pic_group2.svg';
 import introImage2 from '../../assets/img/Base/home_pic_group.svg';
@@ -27,8 +22,12 @@ import blueBall from '../../assets/img/Base/pic_home_blueball.svg';
 import greyBall from '../../assets/img/Base/home_pic_grayball.svg';
 import pinkBall from '../../assets/img/Base/pic_home_pinkball.svg';
 import shareImage from '../../assets/img/Base/pic_home_event.jpg';
-
+import { getProductsStart } from '../../redux/product/product.action';
+import { selectHomeProducts } from '../../redux/product/product.selector';
 const Home = () => {
+  const dispatch = useDispatch();
+  const products =  useSelector(selectHomeProducts);
+  const isLoading =  useSelector(state => state.product.isLoading);
   const settings = {
     dots: true,
     infinite: true,
@@ -36,24 +35,6 @@ const Home = () => {
     autoplay: true,
     autoplaySpeed: 5000,
   };
-
-  const [products] = useState([
-    {
-      image: product1,
-      title: '黑白動物2020年曆',
-      price: 450,
-    },
-    {
-      image: product2,
-      title: '戲水假期透明手機殼',
-      price: 490,
-    },
-    {
-      image: product3,
-      title: 'like it!掛報',
-      price: 350,
-    },
-  ])
   const [productTypes] = useState([
     {
       image: productType1,
@@ -81,6 +62,12 @@ const Home = () => {
     },
   ])
 
+  useEffect(() => {
+    if (!products.length) {
+      dispatch(getProductsStart());
+    }
+  }, [dispatch, products]);
+
   return (
     <HomeWrapper>
       <FlexWrap>
@@ -99,7 +86,7 @@ const Home = () => {
         <PopularProductWrap>
           {
             products.map(item => (
-              <Card key={item.title} item={item} />
+              <Card key={item._id} item={item} isLoading={isLoading} />
             ))
           }
         </PopularProductWrap>

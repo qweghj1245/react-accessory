@@ -25,3 +25,9 @@ export const changePassword = data => baseRequest.post('/user/changePassword', d
 export const loginUser = data => baseRequest.post('/user/login', data);
 export const googleSign = data => baseRequest.post('/user/googleSignIn', data);
 export const logoutUser = (headerConfig) => baseRequest.post('/user/logout', null, headerConfig);
+
+//product
+export const getProducts = data => baseRequest.get('/product', data);
+
+//use script
+export const createProducts = data => baseRequest.post('/product/createProdcuts', data);
