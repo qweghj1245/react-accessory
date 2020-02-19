@@ -18,6 +18,12 @@ export const Head = styled.div`
   ${size('100px', '100px')};
   margin-bottom: 36px;
   position: relative;
+  & > input {
+    width: 125px;
+    height: 100px;
+    opacity: 0;
+    cursor: pointer;
+  }
 `;
 
 export const HeadSetting = styled(Icon)`

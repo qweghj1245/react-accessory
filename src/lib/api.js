@@ -8,11 +8,12 @@ const baseRequest = axios.create({
 
 baseRequest.defaults.headers.common['Authorization'] = getLocal('Authorization');
 
-// let headerConfig = {
-//   headers: {
-//     Authorization: getLocal('Authorization'),
-//   }
-// };
+//aws s3
+export const putImage = (url, file) => axios.put(url, file, {
+  headers: {
+    'Content-Type': file.type,
+  },
+});
 
 // user
 export const createUser = data => baseRequest.post('/user', data);

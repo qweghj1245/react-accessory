@@ -9,6 +9,8 @@ import BaseSelect from '../BaseSelect/BaseSelect';
 import { city } from '../../lib/city';
 import setting from '../../assets/img/Icon/Icon_member_settings.svg';
 import { selectLoginUser } from "../../redux/user/user.selector";
+import { uploadImage } from '../../lib/aws';
+import { putImage } from '../../lib/api';
 const Profile = ({ user }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -25,6 +27,7 @@ const Profile = ({ user }) => {
     area: user.area || '',
     areaList: [],
   });
+  const file = useRef(null);
   const loginUser = useSelector(selectLoginUser);
   const status = useSelector(state => state.user.updateStatus);
 
@@ -74,8 +77,18 @@ const Profile = ({ user }) => {
       area: e,
     });
   }
+  const setHeadImage = (e) => {
+    file.current = e.target.files;
+    if (file.current.length) {
+      uploadImage(user._id, (config) => {
+        putImage(config.url, file.current[0]).then(() => {
+          callUpdate(`${process.env.REACT_APP_IMAGE_BUCKET_URL}${config.key}`);
+        });
+      });
+    }
+  }
 
-  const callUpdate = () => {
+  const callUpdate = (url) => {
     dispatch(updateStart({
       name: username.current,
       phoneNumber: phoneNumber.current,
@@ -83,10 +96,15 @@ const Profile = ({ user }) => {
       address: address.current,
       county: place.county,
       area: place.area,
+      photo: url,
     }));
   }
 
   const callChange = () => {
+    if (!oldPassword.current) return alert.error('請輸入舊密碼');
+    if (!password.current) return alert.error('請輸入新密碼');
+    if (!passwordConfirm.current) return alert.error('請確認新密碼');
+    if (password.current!==passwordConfirm.current) return alert.error('密碼不一致');
     dispatch(changePasswordStart({
       oldPassword: oldPassword.current,
       password: password.current,
@@ -100,14 +118,15 @@ const Profile = ({ user }) => {
     } else if (status === 'password') {
       alert.success('更新成功！');
     } else if (status === 'error') {
-      alert.error('更新失敗！'); 
+      alert.error('更新失敗！');
     }
   }, [loginUser, alert, status]);
 
   return (
     <Wrapper>
-      <Head url={user.photo || ''}>
-        <HeadSetting src={setting} width='22' />
+      <Head url={user.photo}>
+        <HeadSetting src={setting} />
+        <input type="file" accept="image/*" onChange={setHeadImage} />
       </Head>
       <Wrap>
         <Texture>修改資料</Texture>
