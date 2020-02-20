@@ -1,42 +1,43 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Breadcrumbs } from '@material-ui/core';
-
 import { Wrapper, LinkHandle } from './BaseWrapper.style';
 import { Title } from '../../assets/css/global.style';
+import { productType } from '../../lib/productType';
+const BaseWrapper = (WrapComponent, types) => {
+  const BaseComponent = (props) => {
+    const product = useSelector(state => state.product.product);
+    const breadcrumbs = useSelector(state => state.product.breadcrumb);
 
-const BaseWrapper = (WrapComponent, others) => {
-  class BaseComponent extends React.Component {
-    render() {
-      const { config: { breadcrumb, name, path, newPath }, match } = this.props;
-      return (
-        <Wrapper>
-          <Breadcrumbs aria-label="breadcrumb">
-            <LinkHandle href="/">
-              首頁
+    const { config: { breadcrumb, name, path, newPath } } = props;
+    return (
+      <Wrapper>
+        <Breadcrumbs aria-label="breadcrumb">
+          <LinkHandle href="/">
+            首頁
             </LinkHandle>
-            <LinkHandle href={newPath ? newPath : path}>
-              {breadcrumb}
-            </LinkHandle>
-            {
-              others&&others.type ?
-                <LinkHandle href="/">
-                  {others.type}
-                </LinkHandle> : null
-            }
-            {
-              others ?
-                <LinkHandle href={match.url}>
-                  {others.id}
-                </LinkHandle> : null
-            }
-          </Breadcrumbs>
+          <LinkHandle href={newPath ? newPath : path}>
+            {breadcrumb}
+          </LinkHandle>
           {
-            name ? <Title mb={50} width={120}>{breadcrumb}</Title> : null
+            types ?
+              <LinkHandle>
+                {productType[product.classification].name}
+              </LinkHandle> : null
           }
-          <WrapComponent {...this.props} />
-        </Wrapper>
-      );
-    }
+          {
+            types ?
+              <LinkHandle>
+                {breadcrumbs}
+              </LinkHandle> : null
+          }
+        </Breadcrumbs>
+        {
+          name ? <Title mb={50} width={120}>{breadcrumb}</Title> : null
+        }
+        <WrapComponent {...props} />
+      </Wrapper>
+    );
   }
   return BaseComponent;
 }

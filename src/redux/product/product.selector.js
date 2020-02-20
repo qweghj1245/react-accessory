@@ -11,3 +11,8 @@ export const selectHomeProducts = createSelector(
   [selectProducts],
   product => product.filter(item => item.classification==='home'),
 );
+
+export const selectAProduct = createSelector(
+  [selectProduct],
+  product => product.product,
+);

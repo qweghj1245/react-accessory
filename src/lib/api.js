@@ -27,7 +27,6 @@ export const googleSign = data => baseRequest.post('/user/googleSignIn', data);
 export const logoutUser = (headerConfig) => baseRequest.post('/user/logout', null, headerConfig);
 
 //product
-export const getProducts = data => baseRequest.get('/product', data);
-
-//use script
 export const createProducts = data => baseRequest.post('/product/createProdcuts', data);
+export const getProducts = () => baseRequest.get('/product');
+export const getProduct = id => baseRequest.get(`/product/getProductById/${id}`);

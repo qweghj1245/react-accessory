@@ -10,7 +10,7 @@ export const Side = styled.div`
 `;
 
 export const Center = styled.div`
-  ${size('58px', '41.5px')};
+  ${size('58px', '41.25px')};
   text-align: center;
   line-height: 40px;
   font-size: 12px;

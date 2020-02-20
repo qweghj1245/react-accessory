@@ -4,7 +4,7 @@ import { Link } from '@material-ui/core';
 export const Wrapper = styled.div`
   width: 953px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 69px;
 `;
 
 export const LinkHandle = styled(Link)`

@@ -23,7 +23,7 @@ const Products = ({ history }) => {
           products
             .filter(product => product.classification!=='home')
             .map(product => 
-              <Card key={product._id} item={product} isLoading={isLoading} goProduct={() => history.push('/product/sss')}/>)
+              <Card key={product._id} item={product} isLoading={isLoading} goProduct={() => history.push(`/product/${product._id}`)}/>)
         }
       </ProductsWrapper>
       <GoTopButton right={-13.2}/>

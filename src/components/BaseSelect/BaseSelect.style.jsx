@@ -33,6 +33,7 @@ export const Dropdown = styled.div`
   transform: ${props => props.isShow ? 'rotateX(0deg)' : 'rotateX(-90deg)'};
   transition: transform .2s linear;
   z-index: 10;
+  background: white;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -44,6 +45,9 @@ export const DropdownItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   background: #FFFFFF;
+  &:hover {
+    background: #EEE;
+  }
 `;
 
 export const Triangle = styled.div`
