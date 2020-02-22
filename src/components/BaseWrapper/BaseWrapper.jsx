@@ -15,36 +15,39 @@ const BaseWrapper = (WrapComponent, types) => {
     const { config: { breadcrumb, name, path, newPath, enName } } = props;
     return (
       <Wrapper>
-        <Breadcrumbs aria-label="breadcrumb">
-          <LinkHandle href="/">
-            首頁
-            </LinkHandle>
-          {
-            filterType && enName === 'products' ?
-              <LinkHandle>
-                {productType[filterType].name}
-              </LinkHandle> :
-              <LinkHandle href={newPath ? newPath : path}>
-                {breadcrumb}
-              </LinkHandle>
-          }
-          {
-            isLoading && enName === 'product' ? <Skeleton width={50} height={20} /> :
-              types ?
-                <LinkHandle>
-                  {productType[product.classification].name}
-                </LinkHandle> : null
-          }
-          {
-            isLoading && enName === 'product' ? <Skeleton width={50} height={20} /> :
-              types ?
-                <LinkHandle>
-                  {breadcrumbs}
-                </LinkHandle> : null
-          }
-        </Breadcrumbs>
         {
-          filterType && enName === 'products' ? <Title mb={50} width={120}>{productType[filterType].name}</Title> :
+          product || enName !== 'product' ?
+            <Breadcrumbs aria-label="breadcrumb">
+              <LinkHandle href="/">
+                首頁
+            </LinkHandle>
+              {
+                filterType && enName === 'products' ?
+                  <LinkHandle>
+                    {productType[filterType].name}
+                  </LinkHandle> :
+                  <LinkHandle href={newPath ? newPath : path}>
+                    {breadcrumb}
+                  </LinkHandle>
+              }
+              {
+                isLoading && enName === 'product' ? <Skeleton width={50} height={20} /> :
+                  types ?
+                    <LinkHandle>
+                      {productType[product.classification].name}
+                    </LinkHandle> : null
+              }
+              {
+                isLoading && enName === 'product' ? <Skeleton width={50} height={20} /> :
+                  types ?
+                    <LinkHandle>
+                      {breadcrumbs}
+                    </LinkHandle> : null
+              }
+            </Breadcrumbs> : null
+        }
+        {
+          !product && enName === 'product' ? null : filterType && enName === 'products' ? <Title mb={50} width={120}>{productType[filterType].name}</Title> :
             name ? <Title mb={50} width={120}>{breadcrumb}</Title> : null
         }
         <WrapComponent {...props} />
