@@ -30,3 +30,4 @@ export const logoutUser = (headerConfig) => baseRequest.post('/user/logout', nul
 export const createProducts = data => baseRequest.post('/product/createProdcuts', data);
 export const getProducts = () => baseRequest.get('/product');
 export const getProduct = id => baseRequest.get(`/product/getProductById/${id}`);
+export const collectProduct = data => baseRequest.post('/product/collectProduct', data);

@@ -1,14 +1,17 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
-import { getProducts, getProduct } from '../../lib/api';
+import { getProducts, getProduct, collectProduct } from '../../lib/api';
 import {
   GET_PRODUCTS_START,
   GET_PRODUCT_START,
+  COLLECT_START,
 } from './product.const';
-import { 
+import {
   getProductsSuccess,
   getProductsFailure,
   getProductSuccess,
   getProductFailure,
+  collectSuccess,
+  collectFailure,
 } from './product.action';
 
 function* getAllProducts() {
@@ -29,6 +32,15 @@ function* getOneProduct(payload) {
   }
 }
 
+function* collectOneProduct(payload) {
+  try {
+    const product = yield call(() => collectProduct(payload.payload));
+    yield put(collectSuccess(product.data));
+  } catch (error) {
+    yield put(collectFailure(error));
+  }
+}
+
 function* getProductsStart() {
   yield takeLatest(GET_PRODUCTS_START, getAllProducts);
 }
@@ -37,9 +49,14 @@ function* getProductStart() {
   yield takeLatest(GET_PRODUCT_START, getOneProduct);
 }
 
+function* collectProductStart() {
+  yield takeLatest(COLLECT_START, collectOneProduct);
+}
+
 export function* productSagas() {
   yield all([
     call(getProductsStart),
     call(getProductStart),
+    call(collectProductStart),
   ]);
 };

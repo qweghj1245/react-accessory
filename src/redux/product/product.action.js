@@ -6,6 +6,9 @@ import {
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_FAILURE,
   FILTER_PRODUCTS_START,
+  COLLECT_START,
+  COLLECT_SUCCESS,
+  COLLECT_FAILURE,
 } from './product.const';
 
 export const getProductsStart = () => ({
@@ -40,4 +43,19 @@ export const getProductFailure = (error) => ({
 export const filterProductsStart = (type) => ({
   type: FILTER_PRODUCTS_START,
   payload: type,
+});
+
+export const collectStart = (config) => ({
+  type: COLLECT_START,
+  payload: config,
+});
+
+export const collectSuccess = (response) => ({
+  type: COLLECT_SUCCESS,
+  payload: response,
+});
+
+export const collectFailure = (error) => ({
+  type: COLLECT_FAILURE,
+  payload: error,
 });

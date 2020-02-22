@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Icon } from '../../assets/css/global.style';
 
 import heartEmpty from '../../assets/img/Icon/Icon_heart_empty.svg';
 import heartFull from '../../assets/img/Icon/Icon_heart_full.svg';
 
-const CollectButton = () => {
+const CollectButton = ({ collect, product, user }) => {
   const [isCollect, setIsCollect] = useState(false);
 
-  return <Icon src={isCollect ? heartFull : heartEmpty} width={29} onClick={() => setIsCollect(!isCollect)}></Icon>
+  const collecProduct = () => {
+    setIsCollect(!isCollect);
+    collect(!isCollect);
+  }
+
+  useEffect(() => {
+    if (user) {
+      setIsCollect(product.collector.includes(user._id));
+    }
+  }, [product, user]);
+
+  return <Icon src={isCollect ? heartFull : heartEmpty} width={29} onClick={collecProduct}></Icon>
 }
 
 export default CollectButton;

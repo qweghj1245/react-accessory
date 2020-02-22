@@ -9,12 +9,13 @@ import BaseButton from '../../components/BaseButton/BaseButton';
 import CollectButton from '../../components/CollectButton/CollectButton.jsx';
 import BaseWrapper from '../../components/BaseWrapper/BaseWrapper.jsx';
 import Skeleton from '../../components/Product/Skeleton/Skeleton';
-import { getProductStart } from '../../redux/product/product.action';
+import { getProductStart, collectStart } from '../../redux/product/product.action';
 import { selectAProduct } from '../../redux/product/product.selector';
 
 const Product = ({ history }) => {
   const dispatch = useDispatch();
   const product = useSelector(selectAProduct);
+  const user = useSelector(state => state.user.loginUser);
   const isLoading = useSelector(state => state.product.isLoading);
   const optionModel = useRef(null);
 
@@ -32,6 +33,13 @@ const Product = ({ history }) => {
       if (idx !== sizeArr.length - 1) str += ' × ';
     });
     return str;
+  }
+
+  const setCollect = (status) => {
+    dispatch(collectStart({
+      id: product._id,
+      isCollected: status,
+    }));
   }
 
   useEffect(() => {
@@ -92,7 +100,7 @@ const Product = ({ history }) => {
               </Group>
               <Group>
                 <BaseButton color='light-brown' padding='8px 53px' mr='30'>加入購物車</BaseButton>
-                <CollectButton />
+                <CollectButton product={product} user={user} collect={setCollect} />
               </Group>
             </Wrapper>
           </FlexWrapper>
