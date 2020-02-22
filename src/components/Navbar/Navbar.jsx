@@ -14,10 +14,28 @@ import search from '../../assets/img/Icon/Icon_navbar_search.svg';
 import profile from '../../assets/img/Icon/Icon_navbar_profile.svg';
 
 import { logoutStart } from '../../redux/user/user.action';
+import { filterProductsStart } from '../../redux/product/product.action';
 
 const Navbar = ({ history }) => {
   const dispatch = useDispatch();
-  const [productDropdownList] = useState(['紙製品', '手機配件', '包包提袋', '其他']);
+  const [productDropdownList] = useState([
+    {
+      label: '紙製品',
+      value: 'paper',
+    },
+    {
+      label: '手機配件',
+      value: 'phoneAcc',
+    },
+    {
+      label: '包包提袋',
+      value: 'bag',
+    },
+    {
+      label: '其他',
+      value: 'others',
+    },
+  ]);
   const [personDropdownList, setPersonDropdownList] = useState(['我的訂單', '修改資料', '會員登入', '進入後台']);
   const [showDropdown, setShowDropdown] = useState(false);
   const loginUser = useSelector(selectLoginUser);
@@ -46,6 +64,16 @@ const Navbar = ({ history }) => {
     history.push('/');
   }
 
+  const setFilterType = type => {
+    history.push('/products');
+    dispatch(filterProductsStart(type));
+  }
+
+  const getAllProducts = () => {
+    dispatch(filterProductsStart(''));
+    history.push('/products');
+  }
+
   useEffect(() => {
     if (loginUser || createUser) {
       setPersonDropdownList([
@@ -70,8 +98,8 @@ const Navbar = ({ history }) => {
       </Link>
       <ListWrapper>
         <ListContent mr={150}>
-          <div onClick={() => history.push('/products')}>全部商品</div>
-          <HeaderDropdown list={productDropdownList} />
+          <div onClick={getAllProducts}>全部商品</div>
+          <HeaderDropdown list={productDropdownList} setValue={setFilterType} />
         </ListContent>
         <ListContent mr={150} onClick={() => history.push('/about')}>關於我們</ListContent>
         <ListContent onClick={() => history.push('/shopping_notes')}>購物須知</ListContent>

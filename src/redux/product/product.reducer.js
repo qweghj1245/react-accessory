@@ -5,10 +5,12 @@ import {
   GET_PRODUCT_START,
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_FAILURE,
+  FILTER_PRODUCTS_START,
 } from './product.const';
 
 const INITAIL_STATE = {
   products: [],
+  filterType: '',
   product: null,
   breadcrumb: '',
   getProductsError: null,
@@ -50,6 +52,11 @@ const productReducer = (state = INITAIL_STATE, action) => {
       return {
         ...state,
         getProductError: action.payload,
+      }
+    case FILTER_PRODUCTS_START:
+      return {
+        ...state,
+        filterType: action.payload,
       }
     default:
       return state;

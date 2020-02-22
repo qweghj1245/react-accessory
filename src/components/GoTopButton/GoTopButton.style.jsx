@@ -9,7 +9,7 @@ export const TopButton = styled.div`
   text-align: center;
   line-height: 40px;
   position: absolute;
-  right: ${props => props.right ? props.right : 0}%;
+  right: 0;
   bottom: 0;
   cursor: pointer;
 `;

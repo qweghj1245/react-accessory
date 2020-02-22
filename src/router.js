@@ -29,14 +29,18 @@ const routes = [
   {
     path: '/products',
     component: Products,
+    exact: true,
     name: '全部商品',
+    enName: 'products',
     breadcrumb: '全部商品',
   },
   {
     path: '/product/:id',
     newPath: '/products',
+    exact: true,
     component: Product,
-    name: 'product',
+    name: '',
+    enName: 'product',
     breadcrumb: '全部商品',
   },
   {

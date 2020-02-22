@@ -5,6 +5,7 @@ import {
   GET_PRODUCT_START,
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_FAILURE,
+  FILTER_PRODUCTS_START,
 } from './product.const';
 
 export const getProductsStart = () => ({
@@ -34,4 +35,9 @@ export const getProductSuccess = (response) => ({
 export const getProductFailure = (error) => ({
   type: GET_PRODUCT_FAILURE,
   payload: error,
+});
+
+export const filterProductsStart = (type) => ({
+  type: FILTER_PRODUCTS_START,
+  payload: type,
 });

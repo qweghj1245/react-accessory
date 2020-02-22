@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import BaseWrapper from '../../components/BaseWrapper/BaseWrapper.jsx';
 import { Wrapper, ProductsWrapper } from './Products.style';
@@ -11,22 +11,31 @@ const Products = ({ history }) => {
   const dispatch = useDispatch();
   const products =  useSelector(selectProducts);
   const isLoading =  useSelector(state => state.product.isLoading);
+  const filterType =  useSelector(state => state.product.filterType);
+
+  const filterProducts = () => {
+    return filterType ? products.filter(item => item.classification === filterType) : products;
+  };
+
+  const sameFilterType = useCallback(() => filterType, [filterType]);
 
   useEffect(() => {
-    dispatch(getProductsStart());
-  }, [dispatch]);
+    if (!sameFilterType()) {
+      dispatch(getProductsStart());
+    }
+  }, [dispatch, sameFilterType]);
 
   return (
     <Wrapper>
       <ProductsWrapper>
         {
-          products
+          filterProducts()
             .filter(product => product.classification!=='home')
             .map(product => 
               <Card key={product._id} item={product} isLoading={isLoading} goProduct={() => history.push(`/product/${product._id}`)}/>)
         }
       </ProductsWrapper>
-      <GoTopButton right={-13.2}/>
+      <GoTopButton />
     </Wrapper>
   );
 }
