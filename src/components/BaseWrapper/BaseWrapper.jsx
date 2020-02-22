@@ -1,4 +1,5 @@
 import React from 'react';
+import { Skeleton } from '@material-ui/lab';
 import { useSelector } from 'react-redux';
 import { Breadcrumbs } from '@material-ui/core';
 import { Wrapper, LinkHandle } from './BaseWrapper.style';
@@ -8,8 +9,10 @@ const BaseWrapper = (WrapComponent, types) => {
   const BaseComponent = (props) => {
     const product = useSelector(state => state.product.product);
     const breadcrumbs = useSelector(state => state.product.breadcrumb);
+    const isLoading = useSelector(state => state.product.isLoading);
 
     const { config: { breadcrumb, name, path, newPath } } = props;
+    console.log(props);
     return (
       <Wrapper>
         <Breadcrumbs aria-label="breadcrumb">
@@ -20,16 +23,18 @@ const BaseWrapper = (WrapComponent, types) => {
             {breadcrumb}
           </LinkHandle>
           {
-            types ?
-              <LinkHandle>
-                {productType[product.classification].name}
-              </LinkHandle> : null
+            isLoading&&name==='product' ? <Skeleton width={50} height={20} /> :
+              types ?
+                <LinkHandle>
+                  {productType[product.classification].name}
+                </LinkHandle> : null
           }
           {
-            types ?
-              <LinkHandle>
-                {breadcrumbs}
-              </LinkHandle> : null
+            isLoading&&name==='product' ? <Skeleton width={50} height={20} /> :
+              types ?
+                <LinkHandle>
+                  {breadcrumbs}
+                </LinkHandle> : null
           }
         </Breadcrumbs>
         {

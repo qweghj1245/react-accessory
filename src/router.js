@@ -36,7 +36,7 @@ const routes = [
     path: '/product/:id',
     newPath: '/products',
     component: Product,
-    name: '',
+    name: 'product',
     breadcrumb: '全部商品',
   },
   {
