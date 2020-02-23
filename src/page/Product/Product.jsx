@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { Wrapper, ImageGroup, FlexWrapper, Title, Price, Msg, Group, NormalText, Image } from './Product.style';
@@ -22,6 +22,7 @@ const Product = ({ history }) => {
   const user = useSelector(state => state.user.loginUser);
   const optionModel = useRef(null);
   const totalCount = useRef(1);
+  const [colorModel, setColorModel] = useState(product.colors[0]);
 
   const sizeString = (sizeArr) => {
     if (!sizeArr.length) return '';
@@ -51,6 +52,7 @@ const Product = ({ history }) => {
       product: product._id,
       size: product.options.length ? optionModel.current : null,
       purchaseQuantity: totalCount.current,
+      color: colorModel,
     }));
     alert.success('加入購物車成功！');
   }
@@ -63,7 +65,6 @@ const Product = ({ history }) => {
     window.scrollTo(0, 0);
     dispatch(getProductStart(history.location.pathname.split('/')[2]));
   }, [dispatch, history]);
-
 
   if (!product) return <Skeleton />;
   return (
@@ -99,7 +100,12 @@ const Product = ({ history }) => {
                     <Flex>
                       {
                         product.colors.map((color, idx) =>
-                          <ColorCircle key={color} bg={color} mr={idx === product.colors.length - 1 ? null : 20} isActive />)
+                          <ColorCircle 
+                            key={color} 
+                            bg={color} 
+                            mr={idx === product.colors.length - 1 ? null : 20} 
+                            isActive={colorModel === color} 
+                            onClick={() => setColorModel(color)}/>)
                       }
                     </Flex>
                   </Group> : null

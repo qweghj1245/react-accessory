@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Wrapper, Left, Right, Flexer, LastStep } from './Payment.style';
-
 import Step from '../../components/Payment/Step/Step';
 import Card from '../../components/Payment/Card/Card';
 import PayWay from '../../components/Payment/PayWay/PayWay';
@@ -10,27 +10,27 @@ import ModalCoupon from '../../components/Payment/ModalCoupon/ModalCoupon';
 import OrderInfo from '../../components/Payment/OrderInfo/OrderInfo';
 import OrderDone from '../../components/Payment/OrderDone/OrderDone';
 import CheckoutInfo from '../../components/Payment/CheckoutInfo/CheckoutInfo';
-
-import product from '../../assets/img/Products/img_3_003.png';
-import product2 from '../../assets/img/Products/pic_product_1_2.png';
-
+import { getCartStart } from '../../redux/cart/cart.action';
+import { selectLoginUser } from '../../redux/user/user.selector';
+import { selectCarts } from '../../redux/cart/cart.selector';
 const Payment = () => {
-  const products = [
-    {
-      id: 'bear',
-      color: 'red',
-      title: '小熊紙膠帶',
-      price: 120,
-      imgUrl: product,
-    },
-    {
-      id: 'iphone',
-      color: 'blue',
-      title: 'like it!手機殼',
-      price: 490,
-      imgUrl: product2,
-    },
-  ];
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCarts);
+  const user = useSelector(selectLoginUser);
+  const computeCart = () => {
+    if (!cart) return [];
+    return cart.products.reduce((acc, item) => {
+      acc.push({
+        ...item.product,
+        id: item._id,
+        productId: item.product._id,
+        size: item.size,
+        purchaseQuantity: item.purchaseQuantity,
+        color: item.color,
+      });
+      return acc;
+    }, []);
+  };
 
   const [stage, setStage] = useState('check'); // check、info、done
   const [modal, setModal] = useState('');
@@ -38,7 +38,6 @@ const Payment = () => {
   const closeModal = () => {
     setModal('');
   }
-
   const nextStage = () => {
     switch (stage) {
       case 'check':
@@ -66,13 +65,19 @@ const Payment = () => {
     }
   }
 
+  useEffect(() => {
+    dispatch(getCartStart());
+  }, [dispatch]);
+
   return (
     <Wrapper>
       <Step step={stage} />
       <Flexer>
         <Left>
           {
-            stage === 'check' ? products.map(product => <Card key={product.id} product={product} />) : null
+            stage === 'check'&&user ? 
+              computeCart().map(product => <Card key={product.id} product={product} user={user} />) : 
+              null
           }
           {
             stage === 'info' ? <OrderInfo /> : null

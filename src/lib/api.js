@@ -35,3 +35,4 @@ export const getCollection = () => baseRequest.post('/product/getCollectProducts
 
 //cart
 export const addToCart = data => baseRequest.post('/cart', data);
+export const getCart = () => baseRequest.get('/cart');

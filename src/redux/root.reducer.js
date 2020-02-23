@@ -7,7 +7,7 @@ import cartReducer from './cart/cart.reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['user'], // no persisted
+  blacklist: ['user', 'cart'], // no persisted
   whiteList: [], // persisted
 }
 

@@ -3,8 +3,8 @@ import { getProducts, getProduct, collectProduct, getCollection } from '../../li
 import {
   GET_PRODUCTS_START,
   GET_PRODUCT_START,
-  COLLECT_START,
   GET_COLLECTION_START,
+  COLLECT_START,
 } from './product.const';
 import {
   getProductsSuccess,
@@ -44,7 +44,7 @@ function* collectOneProduct(payload) {
   }
 }
 
-function* getAllCollection(payload) {
+function* getAllCollection() {
   try {
     const product = yield call(() => getCollection());
     yield put(getCollectionSuccess(product.data));

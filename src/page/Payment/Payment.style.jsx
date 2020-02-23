@@ -3,7 +3,7 @@ import { Flex, Text } from '../../assets/css/global.style';
 
 export const Wrapper = styled.div`
   position: relative;
-  margin-top: 66px;
+  margin-top: 69px;
   margin-bottom: 84px;
 `;
 

@@ -26,14 +26,7 @@ export const FlexBetween = styled(Flex)`
 export const Circle = styled.div`
   ${size('20px', '20px')};
   border-radius: 50%;
-  background: ${props => {
-    switch (props.color) {
-      case 'red':
-        return '#CC6F6F';
-      default:
-        return '#FFFFFF';
-    }
-  }};
+  background: ${props => props.color};
   margin-bottom: 30px;
 `;
 
