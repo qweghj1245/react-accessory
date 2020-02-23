@@ -75,8 +75,8 @@ const Payment = () => {
       <Flexer>
         <Left>
           {
-            stage === 'check'&&user ? 
-              computeCart().map(product => <Card key={product.id} product={product} user={user} />) : 
+            stage === 'check' && user ?
+              computeCart().map(product => <Card key={product.id} product={product} user={user} />) :
               null
           }
           {

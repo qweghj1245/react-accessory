@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import BaseSelect from '../../BaseSelect/BaseSelect';
 import { Wrapper, Flexer, Circle, Texture, FlexBetween } from './Card.style';
@@ -34,6 +34,12 @@ const Payment = ({ product, user }) => {
     }));
     setCollected(!product.collector.includes(user._id));
   }
+
+  const sameSetCollected = useCallback(() => setCollected(product.collector.includes(user._id)), [product, user]);
+
+  useEffect(() => {
+    sameSetCollected();
+  }, [sameSetCollected])
 
   return (
     <Wrapper>
