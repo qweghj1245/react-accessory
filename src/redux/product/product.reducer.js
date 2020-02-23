@@ -6,19 +6,23 @@ import {
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_FAILURE,
   FILTER_PRODUCTS_START,
-  COLLECT_START,
   COLLECT_SUCCESS,
   COLLECT_FAILURE,
+  GET_COLLECTION_START,
+  GET_COLLECTION_SUCCESS,
+  GET_COLLECTION_FAILURE,
 } from './product.const';
 
 const INITAIL_STATE = {
   products: [],
   filterType: '',
   product: null,
+  collection: [],
   breadcrumb: '',
   getProductsError: null,
   getProductError: null,
   collectError: null,
+  collectionError: null,
   isLoading: false,
 }
 
@@ -62,10 +66,6 @@ const productReducer = (state = INITAIL_STATE, action) => {
         ...state,
         filterType: action.payload,
       }
-    case COLLECT_START:
-      return {
-        ...state,
-      }
     case COLLECT_SUCCESS:
       return {
         ...state,
@@ -75,6 +75,20 @@ const productReducer = (state = INITAIL_STATE, action) => {
       return {
         ...state,
         collectError: action.payload,
+      }
+    case GET_COLLECTION_START:
+      return {
+        ...state,
+      }
+    case GET_COLLECTION_SUCCESS:
+      return {
+        ...state,
+        collection: action.payload,
+      }
+    case GET_COLLECTION_FAILURE:
+      return {
+        ...state,
+        collectionError: action.payload,
       }
     default:
       return state;

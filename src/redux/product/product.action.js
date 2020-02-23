@@ -9,6 +9,9 @@ import {
   COLLECT_START,
   COLLECT_SUCCESS,
   COLLECT_FAILURE,
+  GET_COLLECTION_START,
+  GET_COLLECTION_SUCCESS,
+  GET_COLLECTION_FAILURE,
 } from './product.const';
 
 export const getProductsStart = () => ({
@@ -57,5 +60,19 @@ export const collectSuccess = (response) => ({
 
 export const collectFailure = (error) => ({
   type: COLLECT_FAILURE,
+  payload: error,
+});
+
+export const getCollectionStart = () => ({
+  type: GET_COLLECTION_START,
+});
+
+export const getCollectionSuccess = (response) => ({
+  type: GET_COLLECTION_SUCCESS,
+  payload: response,
+});
+
+export const getCollectionFailure = (error) => ({
+  type: GET_COLLECTION_FAILURE,
   payload: error,
 });

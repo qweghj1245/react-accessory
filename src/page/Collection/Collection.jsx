@@ -1,35 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../components/Collection/Card/Card';
-
 import BaseWrapper from '../../components/BaseWrapper/BaseWrapper';
 import { Wrapper, Image } from './Collection.style';
 import { Flex } from '../../assets/css/global.style';
-
 import noCollection from '../../assets/img/Collection/pic_heart_non.svg';
-import product from '../../assets/img/Products/pic_product_1_2.png';
-import product2 from '../../assets/img/Products/pic_product_1_3.png';
+import { getCollectionStart, collectStart } from '../../redux/product/product.action';
+import { selectCollection, selectAProduct } from '../../redux/product/product.selector';
 
-const products = [
-  {
-    imgUrl: product,
-    name: '小熊紙膠帶',
-    price: 120,
-  },
-  {
-    imgUrl: product2,
-    name: 'like it!手機殼',
-    price: 490,
+const Collection = ({ history }) => {
+  const dispatch = useDispatch();
+  const collection = useSelector(selectCollection);
+  const product = useSelector(selectAProduct);
+
+  const goToProduct = (id) => {
+    history.push(`/product/${id}`);
   }
-];
 
-const Collection = () => {
+  const cancelCollect = (id) => {
+    dispatch(collectStart({
+      id: id,
+      isCollected: false,
+    }));
+  }
+
+  useEffect(() => {
+    dispatch(getCollectionStart());
+  }, [dispatch, product]);
+
   return (
     <Wrapper>
-
       {
-        products.length ? 
-        products.map(item => <Card item={item} />) :
-          <Flex>
+        collection.length ?
+          collection.map(item => 
+            <Card key={item._id} item={item} click={() => goToProduct(item._id)} cancel={() => cancelCollect(item._id)}/>) :
+          <Flex align='center'>
             <Image src={noCollection} width='356' />
           </Flex>
       }

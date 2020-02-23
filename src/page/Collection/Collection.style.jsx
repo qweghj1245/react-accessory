@@ -3,7 +3,7 @@ import { ImageWrapper } from '../../assets/css/global.style';
 
 export const Wrapper = styled.div`
   border-top: solid 1px #EAEAEA;
-  height: calc(100vh - 429px);
+  min-height: calc(100vh - 315px);
 `;
 
 export const Image = styled(ImageWrapper)`

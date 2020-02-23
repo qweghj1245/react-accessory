@@ -16,3 +16,8 @@ export const selectAProduct = createSelector(
   [selectProduct],
   product => product.product,
 );
+
+export const selectCollection = createSelector(
+  [selectProduct],
+  product => product.collection,
+);

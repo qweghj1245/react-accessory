@@ -6,6 +6,7 @@ export const Wrapper = styled(Grid)`
   padding: 30px 0;
   grid-template-columns: 170px 231px 258px 164px 1fr;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const Texture = styled.div`
