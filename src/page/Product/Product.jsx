@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 import { Wrapper, ImageGroup, FlexWrapper, Title, Price, Msg, Group, NormalText, Image } from './Product.style';
 import { Flex, ImageWrapper } from '../../assets/css/global.style';
 import ColorCircle from '../../components/ColorCircle/ColorCircle';
@@ -10,14 +11,17 @@ import CollectButton from '../../components/CollectButton/CollectButton.jsx';
 import BaseWrapper from '../../components/BaseWrapper/BaseWrapper.jsx';
 import Skeleton from '../../components/Product/Skeleton/Skeleton';
 import { getProductStart, collectStart } from '../../redux/product/product.action';
+import { addCartStart } from '../../redux/cart/cart.action';
 import { selectAProduct } from '../../redux/product/product.selector';
 
 const Product = ({ history }) => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   const product = useSelector(selectAProduct);
   const isLoading = useSelector(state => state.product.isLoading);
   const user = useSelector(state => state.user.loginUser);
   const optionModel = useRef(null);
+  const totalCount = useRef(1);
 
   const sizeString = (sizeArr) => {
     if (!sizeArr.length) return '';
@@ -40,6 +44,19 @@ const Product = ({ history }) => {
       id: product._id,
       isCollected: status,
     }));
+  }
+
+  const addToCart = (product) => {
+    dispatch(addCartStart({
+      product: product._id,
+      size: product.options.length ? optionModel.current : null,
+      purchaseQuantity: totalCount.current,
+    }));
+    alert.success('加入購物車成功！');
+  }
+
+  const getCount = (count) => {
+    totalCount.current = count;
   }
 
   useEffect(() => {
@@ -98,10 +115,10 @@ const Product = ({ history }) => {
               }
               <Group mb={50}>
                 <NormalText>數量</NormalText>
-                <AddCount total={product.quantity} />
+                <AddCount total={product.quantity} getCount={getCount}/>
               </Group>
               <Group>
-                <BaseButton color='light-brown' padding='8px 53px' mr='30'>加入購物車</BaseButton>
+                <BaseButton color='light-brown' padding='8px 53px' mr='30' onClick={() => addToCart(product)}>加入購物車</BaseButton>
                 <CollectButton product={product} user={user} collect={setCollect} />
               </Group>
             </Wrapper>

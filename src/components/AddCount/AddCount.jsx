@@ -3,13 +3,19 @@ import React, { useState } from 'react';
 import { Flex } from '../../assets/css/global.style';
 import { Side, Center } from './AddCount.style';
 
-const AddCount = ({ total }) => {
+const AddCount = ({ total, getCount }) => {
   const [count, setCount] = useState(1);
 
   const handleCount = (type) => {
     if (total === count && type === 'add') return; 
     if (count === 1 && type === 'minus') return;
-    type === 'minus' ? setCount(count - 1) : setCount(count + 1);
+    if (type === 'minus') {
+      setCount(count - 1);
+      getCount(count - 1);
+    } else {
+      setCount(count + 1);
+      getCount(count + 1);
+    }
   };
 
   return (

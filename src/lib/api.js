@@ -32,3 +32,6 @@ export const getProducts = () => baseRequest.get('/product');
 export const getProduct = id => baseRequest.get(`/product/getProductById/${id}`);
 export const collectProduct = data => baseRequest.post('/product/collectProduct', data);
 export const getCollection = () => baseRequest.post('/product/getCollectProducts');
+
+//cart
+export const addToCart = data => baseRequest.post('/cart', data);
