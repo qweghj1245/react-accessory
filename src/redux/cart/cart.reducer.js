@@ -4,12 +4,15 @@ import {
   GET_CART_FAILURE,
   COLLECT_CART_SUCCESS,
   COLLECT_CART_FAILURE,
+  DELETE_CART_SUCCESS,
+  DELETE_CART_FAILURE,
 } from './cart.const';
 
 const INITAIL_STATE = {
   cartError: null,
   cart: null,
   getCartError: null,
+  deleteCartError: null,
 }
 
 const cartReducer = (state = INITAIL_STATE, action) => {
@@ -38,6 +41,16 @@ const cartReducer = (state = INITAIL_STATE, action) => {
       return {
         ...state,
         getCartError: action.payload,
+      }
+    case DELETE_CART_SUCCESS:
+      return {
+        ...state,
+        cart: action.payload,
+      }
+    case DELETE_CART_FAILURE:
+      return {
+        ...state,
+        deleteCartError: action.payload,
       }
     default:
       return state;

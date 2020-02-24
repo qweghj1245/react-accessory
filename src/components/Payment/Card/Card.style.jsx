@@ -28,6 +28,7 @@ export const Circle = styled.div`
   border-radius: 50%;
   background: ${props => props.color};
   margin-bottom: 30px;
+  margin-right: ${props => props.mr}px;
 `;
 
 export const Texture = styled.div`

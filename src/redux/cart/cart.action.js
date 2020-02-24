@@ -7,6 +7,9 @@ import {
   COLLECT_CART_START,
   COLLECT_CART_SUCCESS,
   COLLECT_CART_FAILURE,
+  DELETE_CART_START,
+  DELETE_CART_SUCCESS,
+  DELETE_CART_FAILURE,
 } from './cart.const';
 
 export const addCartStart = (config) => ({
@@ -45,5 +48,20 @@ export const collectCartSuccess = (response) => ({
 
 export const collectCartFailure = (error) => ({
   type: COLLECT_CART_FAILURE,
+  payload: error,
+});
+
+export const deleteCartStart = (id) => ({
+  type: DELETE_CART_START,
+  payload: id,
+});
+
+export const deleteCartSuccess = (response) => ({
+  type: DELETE_CART_SUCCESS,
+  payload: response,
+});
+
+export const deleteCartFailure = (error) => ({
+  type: DELETE_CART_FAILURE,
   payload: error,
 });

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Wrapper, Left, Right, Flexer, LastStep } from './Payment.style';
+import { Flex, BaseWrapper } from '../../assets/css/global.style';
 import Step from '../../components/Payment/Step/Step';
 import Card from '../../components/Payment/Card/Card';
 import PayWay from '../../components/Payment/PayWay/PayWay';
@@ -13,6 +14,7 @@ import CheckoutInfo from '../../components/Payment/CheckoutInfo/CheckoutInfo';
 import { getCartStart } from '../../redux/cart/cart.action';
 import { selectLoginUser } from '../../redux/user/user.selector';
 import { selectCarts } from '../../redux/cart/cart.selector';
+import { Skeleton } from '@material-ui/lab';
 const Payment = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCarts);
@@ -75,9 +77,26 @@ const Payment = () => {
       <Flexer>
         <Left>
           {
-            stage === 'check' && user ?
+            stage === 'check' && user && cart ?
               computeCart().map(product => <Card key={product.id} product={product} user={user} />) :
-              null
+              <BaseWrapper>
+                <Flex align='center' justify='start' style={{ width: '545px' }} >
+                  <Skeleton variant="rect" width={150} height={150} style={{ marginRight: '16px', marginTop: '16px' }} />
+                  <div>
+                    <Skeleton width={200} height={40} />
+                    <Skeleton width={150} height={40} />
+                    <Skeleton width={100} height={40} />
+                  </div>
+                </Flex>
+                <Flex align='center' justify='start'>
+                  <Skeleton variant="rect" width={150} height={150} style={{ marginRight: '16px', marginTop: '16px' }} />
+                  <div>
+                    <Skeleton width={200} height={40} />
+                    <Skeleton width={150} height={40} />
+                    <Skeleton width={100} height={40} />
+                  </div>
+                </Flex>
+              </BaseWrapper>
           }
           {
             stage === 'info' ? <OrderInfo /> : null

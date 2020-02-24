@@ -1,9 +1,10 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
-import { addToCart, getCart, collectProduct } from '../../lib/api';
+import { addToCart, getCart, collectProduct, deleteCart } from '../../lib/api';
 import {
   ADD_CART_START,
   GET_CART_START,
   COLLECT_CART_START,
+  DELETE_CART_START,
 } from './cart.const';
 import {
   addCartFailure,
@@ -11,6 +12,7 @@ import {
   getCartFailure,
   collectCartSuccess,
   collectCartFailure,
+  deleteCartFailure,
 } from './cart.action';
 
 function* addProductToCart(payload) {
@@ -40,6 +42,16 @@ function* collectOneProductAndUpdateCart(payload) {
   }
 }
 
+function* deleteCartProduct(payload) {
+  try {
+    yield call(() => deleteCart({id: payload.payload}));
+    const cart = yield call(() => getCart());
+    yield put(getCartSuccess(cart.data));
+  } catch (error) {
+    yield put(deleteCartFailure(error));
+  }
+}
+
 function* addToCartStart() {
   yield takeLatest(ADD_CART_START, addProductToCart);
 }
@@ -52,10 +64,16 @@ function* collectProductAndUpdateCartStart() {
   yield takeLatest(COLLECT_CART_START, collectOneProductAndUpdateCart);
 }
 
+function* deleteCartStart() {
+  yield takeLatest(DELETE_CART_START, deleteCartProduct);
+}
+
+
 export function* cartSagas() {
   yield all([
     call(addToCartStart),
     call(getCartStart),
     call(collectProductAndUpdateCartStart),
+    call(deleteCartStart),
   ]);
 };

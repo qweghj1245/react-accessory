@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 import Card from '../../components/Collection/Card/Card';
 import BaseWrapper from '../../components/BaseWrapper/BaseWrapper';
 import { Wrapper, Image } from './Collection.style';
@@ -12,6 +13,7 @@ const Collection = ({ history }) => {
   const dispatch = useDispatch();
   const collection = useSelector(selectCollection);
   const product = useSelector(selectAProduct);
+  const alert = useAlert();
 
   const goToProduct = (id) => {
     history.push(`/product/${id}`);
@@ -22,6 +24,7 @@ const Collection = ({ history }) => {
       id: id,
       isCollected: false,
     }));
+    alert.success('刪除成功！');
   }
 
   useEffect(() => {
