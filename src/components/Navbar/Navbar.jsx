@@ -74,6 +74,14 @@ const Navbar = ({ history }) => {
     history.push('/products');
   }
 
+  const notLoginRedirect = (route) => {
+    if (!loginUser) {
+      history.push('/login');
+    } else {
+      history.push(route);
+    }
+  }
+
   useEffect(() => {
     if (loginUser || createUser) {
       setPersonDropdownList([
@@ -106,8 +114,8 @@ const Navbar = ({ history }) => {
       </ListWrapper>
       <FeatureIcons>
         <Icon src={search} mr={25} />
-        <Icon src={cart} mr={25} onClick={() => history.push('/payment')} />
-        <Icon src={favorite} mr={25} onClick={() => history.push('/collection')} />
+        <Icon src={cart} mr={25} onClick={() => notLoginRedirect('/payment')} />
+        <Icon src={favorite} mr={25} onClick={() => notLoginRedirect('/collection')} />
         <IconWrap>
           <Icon src={profile} onClick={() => setShowDropdown(!showDropdown)} />
           <PersonDropdown list={personDropdownList} showDropdown={showDropdown} goRouter={goRouter} />

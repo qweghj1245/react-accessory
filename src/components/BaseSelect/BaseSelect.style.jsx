@@ -23,7 +23,7 @@ export const Inputs = styled.div`
 `;
 
 export const Dropdown = styled.div`
-  height: 200px;
+  max-height: ${props => props.dropHeight||200}px;
   overflow-y: auto;
   ${absolute('100%', 0)};
   width: calc(100% + 1px);

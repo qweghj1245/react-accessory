@@ -10,6 +10,9 @@ import {
   DELETE_CART_START,
   DELETE_CART_SUCCESS,
   DELETE_CART_FAILURE,
+  REDUCE_CART,
+  UPDATE_CART,
+  SET_ORDER_INFO,
 } from './cart.const';
 
 export const addCartStart = (config) => ({
@@ -64,4 +67,19 @@ export const deleteCartSuccess = (response) => ({
 export const deleteCartFailure = (error) => ({
   type: DELETE_CART_FAILURE,
   payload: error,
+});
+
+export const reduceCart = (cart) => ({
+  type: REDUCE_CART,
+  payload: cart,
+});
+
+export const updateCart = (updateCart) => ({
+  type: UPDATE_CART,
+  payload: updateCart,
+});
+
+export const setOrderInfo = (state) => ({
+  type: SET_ORDER_INFO,
+  payload: state,
 });

@@ -4,7 +4,7 @@ import { Icon } from '../../assets/css/global.style';
 
 import Arrowdown from '../../assets/img/Icon/Icon_arrowdown.svg';
 
-const BaseSelect = ({ change, triangle, defaultV, options, placeholder = '請選擇選項...', ...otherStyle }) => {
+const BaseSelect = ({ change, changeVal, triangle, defaultV, options, placeholder = '請選擇選項...', dropHeight, ...otherStyle }) => {
   const [isShow, setIsShow] = useState(false);
   const [realValue, setRealValue] = useState('');
 
@@ -12,7 +12,12 @@ const BaseSelect = ({ change, triangle, defaultV, options, placeholder = '請選
     const label = options.find(item => item.value === value).label;
     setRealValue(label);
     setIsShow(false);
-    change(label);
+    if (change) {
+      change(label);
+    }
+    if (changeVal) {
+      changeVal(value);
+    }
   }
 
   return (
@@ -23,7 +28,7 @@ const BaseSelect = ({ change, triangle, defaultV, options, placeholder = '請選
           triangle ? <Triangle isShow={isShow} /> : <Icon src={Arrowdown} width={10} />
         }
       </Inputs>
-      <Dropdown isShow={isShow}>
+      <Dropdown isShow={isShow} dropHeight={dropHeight}>
         {
           options.map(item => <DropdownItem key={item.value} onClick={() => handleSelect(item.value)}>{item.label}</DropdownItem>)
         }

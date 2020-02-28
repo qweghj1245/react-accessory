@@ -22,7 +22,7 @@ const Product = ({ history }) => {
   const user = useSelector(state => state.user.loginUser);
   const optionModel = useRef(null);
   const totalCount = useRef(1);
-  const [colorModel, setColorModel] = useState(product.colors[0]);
+  const [colorModel, setColorModel] = useState(null);
 
   const sizeString = (sizeArr) => {
     if (!sizeArr.length) return '';

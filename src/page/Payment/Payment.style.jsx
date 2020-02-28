@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex, Text } from '../../assets/css/global.style';
+import { Flex } from '../../assets/css/global.style';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -20,11 +20,4 @@ export const Right = styled(Flex)`
   position: relative;
   margin-left: 101px;
   flex-direction: column;
-`;
-
-export const LastStep = styled.div`
-  ${Text(12, 'normal', 0)};
-  color: #999999;
-  text-decoration: underline;
-  cursor: pointer;
 `;

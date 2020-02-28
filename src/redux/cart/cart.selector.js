@@ -6,3 +6,8 @@ export const selectCarts= createSelector(
   [selectCart],
   cart => cart.cart,
 );
+
+export const selectComputeCart= createSelector(
+  [selectCart],
+  cart => cart.reduceCart,
+);

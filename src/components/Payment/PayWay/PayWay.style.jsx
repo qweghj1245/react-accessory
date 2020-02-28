@@ -44,3 +44,10 @@ export const TextGroup = styled.div`
   border-top: solid 1px #999999;
   padding-top: 20px;
 `;
+
+export const LastStep = styled.div`
+  ${Text(12, 'normal', 0)};
+  color: #999999;
+  text-decoration: underline;
+  cursor: pointer;
+`;

@@ -1,71 +1,94 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Wrapper, Left, Right, Flexer, LastStep } from './Payment.style';
+import { Wrapper, Left, Right, Flexer } from './Payment.style';
 import { Flex, BaseWrapper } from '../../assets/css/global.style';
 import Step from '../../components/Payment/Step/Step';
 import Card from '../../components/Payment/Card/Card';
 import PayWay from '../../components/Payment/PayWay/PayWay';
-import BaseButton from '../../components/BaseButton/BaseButton.jsx';
 import ModalCoupon from '../../components/Payment/ModalCoupon/ModalCoupon';
 import OrderInfo from '../../components/Payment/OrderInfo/OrderInfo';
 import OrderDone from '../../components/Payment/OrderDone/OrderDone';
 import CheckoutInfo from '../../components/Payment/CheckoutInfo/CheckoutInfo';
-import { getCartStart } from '../../redux/cart/cart.action';
+import { getCartStart, updateCart } from '../../redux/cart/cart.action';
 import { selectLoginUser } from '../../redux/user/user.selector';
-import { selectCarts } from '../../redux/cart/cart.selector';
+import { selectComputeCart } from '../../redux/cart/cart.selector';
 import { Skeleton } from '@material-ui/lab';
 const Payment = () => {
   const dispatch = useDispatch();
-  const cart = useSelector(selectCarts);
+  const computeCart = useSelector(selectComputeCart);
   const user = useSelector(selectLoginUser);
-  const computeCart = () => {
-    if (!cart) return [];
-    return cart.products.reduce((acc, item) => {
-      acc.push({
-        ...item.product,
-        id: item._id,
-        productId: item.product._id,
-        size: item.size,
-        purchaseQuantity: item.purchaseQuantity,
-        color: item.color,
-      });
-      return acc;
-    }, []);
-  };
-
-  const [stage, setStage] = useState('check'); // check、info、done
+  const orderInfoState = useSelector(state => state.cart.orderInfoState);
+  const [stage, setStage] = useState({
+    status: 'check', // check、info、done
+    country: null,
+    pay: null,
+    transport: null,
+    contactPerson: '',
+    contactPhoneNumber: '',
+    recipientPerson: '',
+    recipientPhoneNumber: '',
+    recipientPostalCode: '',
+    recipientCounty: '',
+    recipientArea: '',
+    recipientAddress: '',
+  });
   const [modal, setModal] = useState('');
+
+  const computeTotalAmount = () => {
+    if (!computeCart) return 0;
+    return computeCart.reduce((acc, item) => {
+      acc = acc + (item.price * item.purchaseQuantity);
+      return acc;
+    }, 0);
+  };
+  const updateCartProduct = (update) => {
+    const newCart = computeCart.map(product => {
+      if (product.productId === update.id) {
+        product.purchaseQuantity = update.quantity;
+      }
+      return product;
+    });
+    dispatch(updateCart(newCart));
+  }
 
   const closeModal = () => {
     setModal('');
-  }
-  const nextStage = () => {
-    switch (stage) {
-      case 'check':
-        setStage('info');
-        break;
-      case 'info':
-        setStage('done');
-        break;
-      default:
-        break;
+  };
+  const nextStage = (payConfig) => {
+    if (stage.status === 'check') {
+      setStage({
+        ...payConfig,
+        status: 'info',
+      });
+    } else if (stage.status === 'info') {
+      setStage({
+        ...stage,
+        ...orderInfoState,
+      })
+      // setStage('done');
     }
-  }
+  };
   const lastStage = () => {
-    switch (stage) {
+    switch (stage.status) {
       case 'done':
-        setStage('info');
+        setStage({
+          ...stage,
+          status: 'info',
+        });
         break;
       case 'info':
-        setStage('check');
+        setStage({
+          ...stage,
+          status: 'check',
+        });
         break;
       case 'check':
         return;
       default:
         break;
     }
-  }
+  };
 
   useEffect(() => {
     dispatch(getCartStart());
@@ -73,46 +96,49 @@ const Payment = () => {
 
   return (
     <Wrapper>
-      <Step step={stage} />
+      <Step step={stage.status} />
       <Flexer>
         <Left>
           {
-            stage === 'check' && user && cart ?
-              computeCart().map(product => <Card key={product.id} product={product} user={user} />) :
-              <BaseWrapper>
-                <Flex align='center' justify='start' style={{ width: '545px' }} >
-                  <Skeleton variant="rect" width={150} height={150} style={{ marginRight: '16px', marginTop: '16px' }} />
-                  <div>
-                    <Skeleton width={200} height={40} />
-                    <Skeleton width={150} height={40} />
-                    <Skeleton width={100} height={40} />
-                  </div>
-                </Flex>
-                <Flex align='center' justify='start'>
-                  <Skeleton variant="rect" width={150} height={150} style={{ marginRight: '16px', marginTop: '16px' }} />
-                  <div>
-                    <Skeleton width={200} height={40} />
-                    <Skeleton width={150} height={40} />
-                    <Skeleton width={100} height={40} />
-                  </div>
-                </Flex>
-              </BaseWrapper>
+            stage.status === 'check' && user && computeCart ?
+              computeCart.map(product =>
+                <Card key={product.id} product={product} user={user} resetList={updateCartProduct} />) :
+              stage.status  === 'check' ?
+                <BaseWrapper>
+                  <Flex align='center' justify='start' style={{ width: '545px' }} >
+                    <Skeleton variant="rect" width={150} height={150} style={{ marginRight: '16px', marginTop: '16px' }} />
+                    <div>
+                      <Skeleton width={200} height={40} />
+                      <Skeleton width={150} height={40} />
+                      <Skeleton width={100} height={40} />
+                    </div>
+                  </Flex>
+                  <Flex align='center' justify='start'>
+                    <Skeleton variant="rect" width={150} height={150} style={{ marginRight: '16px', marginTop: '16px' }} />
+                    <div>
+                      <Skeleton width={200} height={40} />
+                      <Skeleton width={150} height={40} />
+                      <Skeleton width={100} height={40} />
+                    </div>
+                  </Flex>
+                </BaseWrapper> : null
           }
           {
-            stage === 'info' ? <OrderInfo /> : null
+            stage.status  === 'info' ? <OrderInfo /> : null
           }
           {
-            stage === 'done' ? <OrderDone /> : null
+            stage.status  === 'done' ? <OrderDone /> : null
           }
         </Left>
         <Right>
           {
             stage !== 'done' ?
-              <React.Fragment>
-                <PayWay coupon={() => setModal('coupon')} />
-                <BaseButton color='brown-yellow' padding='12px 60px' mb='20' onClick={nextStage}>下一步</BaseButton>
-                <LastStep onClick={lastStage}>{stage === 'info' ? '回上一步驟' : ''}</LastStep>
-              </React.Fragment>
+              <PayWay
+                coupon={() => setModal('coupon')}
+                nextStage={nextStage}
+                lastStage={lastStage}
+                stage={stage.status}
+                amount={computeTotalAmount()} />
               :
               <CheckoutInfo />
           }

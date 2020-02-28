@@ -9,9 +9,7 @@ import heart from '../../../assets/img/Icon/Icon_cart_heartempty_small.svg';
 import trash from '../../../assets/img/Icon/Icon_heart_trash.svg';
 import { collectCartStart, deleteCartStart } from '../../../redux/cart/cart.action';
 
-const Payment = ({ product, user }) => {
-  console.log(product);
-
+const Payment = ({ product, user, resetList }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const [collected, setCollected] = useState(product.collector.includes(user._id));
@@ -26,8 +24,11 @@ const Payment = ({ product, user }) => {
     }
     return store;
   };
-  const getQuatity = (e) => {
-    console.log(e); // todo last stage compute again
+  const getQuatity = (quantity) => {
+    resetList({
+      quantity,
+      id: product.productId,
+    });
   }
   const setCollect = () => {
     dispatch(collectCartStart({

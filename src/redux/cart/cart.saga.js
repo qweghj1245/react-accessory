@@ -13,6 +13,7 @@ import {
   collectCartSuccess,
   collectCartFailure,
   deleteCartFailure,
+  reduceCart,
 } from './cart.action';
 
 function* addProductToCart(payload) {
@@ -27,6 +28,7 @@ function* getAllCart() {
   try {
     const cart = yield call(() => getCart());
     yield put(getCartSuccess(cart.data));
+    yield put(reduceCart(cart.data));
   } catch (error) {
     yield put(getCartFailure(error));
   }
