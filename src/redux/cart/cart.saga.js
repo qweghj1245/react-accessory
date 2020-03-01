@@ -49,6 +49,7 @@ function* deleteCartProduct(payload) {
     yield call(() => deleteCart({id: payload.payload}));
     const cart = yield call(() => getCart());
     yield put(getCartSuccess(cart.data));
+    yield put(reduceCart(cart.data));
   } catch (error) {
     yield put(deleteCartFailure(error));
   }

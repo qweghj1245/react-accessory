@@ -61,6 +61,7 @@ export const ImageWrapper = styled.img`
   width: ${props => props.width}px;
   margin-bottom: ${props => props.mb}px;
   margin-right: ${props => props.mr}px;
+  display: ${props => props.display};
 `;
 
 export const Icon = styled.img`

@@ -10,6 +10,7 @@ import { SlideTitle, Content, FormGroup, Address, FlexStart } from './OrderInfo.
 import { setOrderInfo } from '../../../redux/cart/cart.action';
 import { selectLoginUser } from '../../../redux/user/user.selector';
 import { cityList } from '../../../lib/taiwan';
+import { selectComputeCart } from '../../../redux/cart/cart.selector';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -22,6 +23,8 @@ const OrderInfo = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const orderInfoState = useSelector(state => state.cart.orderInfoState);
+  const computeCart = useSelector(selectComputeCart);
+
   const user = useSelector(selectLoginUser);
   const [checked, setChecked] = useState(false);
 
@@ -77,7 +80,7 @@ const OrderInfo = () => {
 
   return (
     <React.Fragment>
-      <OrderSlider />
+      <OrderSlider products={computeCart}/>
       <Content>
         <SlideTitle mb='5'>聯絡資訊</SlideTitle>
         <FormGroup>

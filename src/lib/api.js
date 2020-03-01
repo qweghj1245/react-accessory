@@ -37,3 +37,7 @@ export const getCollection = () => baseRequest.post('/product/getCollectProducts
 export const addToCart = data => baseRequest.post('/cart', data);
 export const getCart = () => baseRequest.get('/cart');
 export const deleteCart = data => baseRequest.post('/cart/deleteCart', data);
+
+//order
+export const createOrder = data => baseRequest.post('/order', data);
+export const getOrder = data => baseRequest.post('/order/getOrder', data);

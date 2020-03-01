@@ -44,6 +44,7 @@ export const Circle = styled.div`
         return '#FFFFFF';
     }
   }};
+  display: ${props => props.color ? 'block' : 'none'};
   margin-bottom: 10px;
 `;
 
@@ -53,7 +54,10 @@ export const Texture = styled.div`
   margin-bottom: ${props => props.mb ? props.mb : 10}px;
 `;
 
-export const Wrapper = styled(BaseWrapper)`
+export const Wrapper = styled(Flex)`
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
   margin-left: 70px;
   margin-right: auto;
 `;

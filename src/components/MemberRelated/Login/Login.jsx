@@ -29,8 +29,8 @@ const MemberRelated = ({ history }) => {
 
   const login = () => {
     dispatch(loginStart({
-      email: emailModel.current.value,
-      password: passwordModel.current.value,
+      email: emailModel.current,
+      password: passwordModel.current,
     }));
     alert.info('等待登入中...');
   }
@@ -44,8 +44,8 @@ const MemberRelated = ({ history }) => {
   return (
     <Wrapper>
       <Title mb={30} width={60}>登入</Title>
-      <FormInput label='EMAIL' placeholder='請輸入會員EMAIL' model={emailModel} />
-      <FormInput type='password' label='密碼' placeholder='請輸入會員密碼' mb='20' model={passwordModel} />
+      <FormInput label='EMAIL' placeholder='請輸入會員EMAIL' inputVal={val => emailModel.current = val} />
+      <FormInput type='password' label='密碼' placeholder='請輸入會員密碼' mb='20' inputVal={val => passwordModel.current = val} />
       <Texture>忘記密碼？</Texture>
       <BaseButton mb='30' padding='8px 48px' color='light-brown' onClick={login}>登入</BaseButton>
       <TextureBlack>———　or　———</TextureBlack>

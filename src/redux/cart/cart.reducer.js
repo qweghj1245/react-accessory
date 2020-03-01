@@ -1,5 +1,6 @@
 import {
   ADD_CART_FAILURE,
+  GET_CART_START,
   GET_CART_SUCCESS,
   GET_CART_FAILURE,
   COLLECT_CART_SUCCESS,
@@ -15,7 +16,7 @@ import { computeCart } from './cart.utils';
 const INITAIL_STATE = {
   cartError: null,
   cart: null,
-  reduceCart: null,
+  reduceCart: [],
   getCartError: null,
   deleteCartError: null,
   orderInfoState: {
@@ -28,6 +29,7 @@ const INITAIL_STATE = {
     recipientArea: '',
     recipientAddress: '',
   },
+  isLoading: false,
 }
 
 const cartReducer = (state = INITAIL_STATE, action) => {
@@ -37,15 +39,22 @@ const cartReducer = (state = INITAIL_STATE, action) => {
         ...state,
         cartError: action.payload,
       }
+    case GET_CART_START:
+      return {
+        ...state,
+        isLoading: true,
+      }
     case GET_CART_SUCCESS:
       return {
         ...state,
         cart: action.payload,
+        isLoading: false,
       }
     case GET_CART_FAILURE:
       return {
         ...state,
         getCartError: action.payload,
+        isLoading: false,
       }
     case COLLECT_CART_SUCCESS:
       return {

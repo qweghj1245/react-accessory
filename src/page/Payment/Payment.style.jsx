@@ -13,11 +13,20 @@ export const Flexer = styled(Flex)`
 
 export const Left = styled.div`
   position: relative;
-  border-top: solid 1px #EAEAEA;
+  border-top: ${props => props.noData ? '0' : 'solid 1px #EAEAEA'};
+  width: ${props => props.noData ? '50%' : 'auto'};
+  min-height: 44.3vh;
+  ${props => 
+    props.noData ? `
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    ` : null
+  };
 `;
 
 export const Right = styled(Flex)`
   position: relative;
-  margin-left: 101px;
+  margin-left: ${props => props.noData ? '0px' : '101px'};
   flex-direction: column;
 `;

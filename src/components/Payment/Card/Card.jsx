@@ -46,7 +46,7 @@ const Payment = ({ product, user, resetList }) => {
 
   useEffect(() => {
     sameSetCollected();
-  }, [sameSetCollected])
+  }, [sameSetCollected]);
 
   return (
     <Wrapper>
