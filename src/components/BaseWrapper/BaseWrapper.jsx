@@ -11,6 +11,7 @@ const BaseWrapper = (WrapComponent, types) => {
     const breadcrumbs = useSelector(state => state.product.breadcrumb);
     const isLoading = useSelector(state => state.product.isLoading);
     const filterType = useSelector(state => state.product.filterType);
+    const order = useSelector(state => state.order.singleOrder);
 
     const { config: { breadcrumb, name, path, newPath, enName } } = props;
     return (
@@ -32,17 +33,20 @@ const BaseWrapper = (WrapComponent, types) => {
               }
               {
                 isLoading && enName === 'product' ? <Skeleton width={50} height={20} /> :
-                  types ?
+                  types === 'product' ?
                     <LinkHandle>
                       {productType[product.classification].name}
                     </LinkHandle> : null
               }
               {
                 isLoading && enName === 'product' ? <Skeleton width={50} height={20} /> :
-                  types ?
+                  types === 'product' ?
                     <LinkHandle>
                       {breadcrumbs}
-                    </LinkHandle> : null
+                    </LinkHandle> : types === 'order' && order ?
+                      <LinkHandle>
+                        {order.orderNumber}
+                      </LinkHandle> : null
               }
             </Breadcrumbs> : null
         }

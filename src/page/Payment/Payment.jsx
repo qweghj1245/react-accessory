@@ -11,7 +11,7 @@ import OrderInfo from '../../components/Payment/OrderInfo/OrderInfo';
 import OrderDone from '../../components/Payment/OrderDone/OrderDone';
 import CheckoutInfo from '../../components/Payment/CheckoutInfo/CheckoutInfo';
 import { getCartStart, updateCart } from '../../redux/cart/cart.action';
-import { createOrderStart } from '../../redux/order/order.action';
+import { createOrderStart, patchOrderStart } from '../../redux/order/order.action';
 import { selectLoginUser } from '../../redux/user/user.selector';
 import { selectComputeCart, selectCarts } from '../../redux/cart/cart.selector';
 import { Skeleton } from '@material-ui/lab';
@@ -138,6 +138,13 @@ const Payment = ({ history }) => {
         ...s,
         status: 'done',
       }));
+      dispatch(patchOrderStart({
+        payStatus: 'isPay',
+        orderStatus: 'handling',
+        delivery: 'inStock',
+        id: history.location.pathname.split('/')[2],
+      }));
+      // todo
     } else {
       dispatch(getCartStart());
     }
@@ -152,25 +159,6 @@ const Payment = ({ history }) => {
             stage.status === 'check' && user && computeCart && computeCart.length && !isLoading ?
               computeCart.map(product =>
                 <Card key={product.id} product={product} user={user} resetList={updateCartProduct} />) :
-              stage.status === 'check' && isLoading ?
-                <BaseWrapper>
-                  <Flex align='center' justify='start' style={{ width: '545px' }} >
-                    <Skeleton variant="rect" width={150} height={150} style={{ marginRight: '16px', marginTop: '16px' }} />
-                    <div>
-                      <Skeleton width={200} height={40} />
-                      <Skeleton width={150} height={40} />
-                      <Skeleton width={100} height={40} />
-                    </div>
-                  </Flex>
-                  <Flex align='center' justify='start'>
-                    <Skeleton variant="rect" width={150} height={150} style={{ marginRight: '16px', marginTop: '16px' }} />
-                    <div>
-                      <Skeleton width={200} height={40} />
-                      <Skeleton width={150} height={40} />
-                      <Skeleton width={100} height={40} />
-                    </div>
-                  </Flex>
-                </BaseWrapper> :
                 <ImageWrapper
                   src={noData}
                   style={{ cursor: 'pointer' }}
@@ -184,7 +172,7 @@ const Payment = ({ history }) => {
             stage.status === 'done' ? <OrderDone /> : null
           }
         </Left>
-        <Right noData={cart && cart.products.length === 0}>
+        <Right noData={(cart && cart.products.length === 0)||!cart}>
           {
             stage.status !== 'done' && cart && cart.products.length ?
               <PayWay

@@ -25,7 +25,7 @@ const Profile = ({ edit, user }) => {
               </GroupItem>
               <GroupItem mb='50'>
                 <TextTitle>地址</TextTitle>
-                <TextContent>{user.address || '未填'}</TextContent>
+                <TextContent>{user.address ? `${user.postalCode}${user.county}${user.area}${user.address}` : '未填'}</TextContent>
               </GroupItem>
             </Group>
             <BaseButton padding='8px 48px' color='light-brown' onClick={edit}>修改資料或密碼</BaseButton>

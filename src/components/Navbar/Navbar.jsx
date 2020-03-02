@@ -36,7 +36,7 @@ const Navbar = ({ history }) => {
       value: 'others',
     },
   ]);
-  const [personDropdownList, setPersonDropdownList] = useState(['我的訂單', '修改資料', '會員登入', '進入後台']);
+  const [personDropdownList, setPersonDropdownList] = useState(['會員登入']);
   const [showDropdown, setShowDropdown] = useState(false);
   const loginUser = useSelector(selectLoginUser);
   const createUser = useSelector(selectCreateUser);
@@ -83,18 +83,15 @@ const Navbar = ({ history }) => {
   }
 
   useEffect(() => {
-    if (loginUser || createUser) {
+    if (loginUser||createUser) {
       setPersonDropdownList([
         '我的訂單',
         '修改資料',
         '會員登出',
-        '進入後台'
       ]);
     } else {
       setPersonDropdownList([
-        '我的訂單',
         '會員登入',
-        '進入後台'
       ]);
     }
   }, [loginUser, createUser]);

@@ -79,6 +79,7 @@ const productReducer = (state = INITAIL_STATE, action) => {
     case GET_COLLECTION_START:
       return {
         ...state,
+        collection: [],
       }
     case GET_COLLECTION_SUCCESS:
       return {

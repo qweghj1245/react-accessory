@@ -8,6 +8,8 @@ import {
   GET_ORDERS_START,
   GET_ORDERS_SUCCESS,
   GET_ORDERS_FAILURE,
+  PATCH_ORDER_SUCCESS,
+  PATCH_ORDER_FAILURE,
 } from './order.const';
 
 const INITAIL_STATE = {
@@ -16,6 +18,7 @@ const INITAIL_STATE = {
   orders: [],
   createError: null,
   getError: null,
+  udpateError: null,
   isLoading: false,
 }
 
@@ -40,6 +43,7 @@ const orderReducer = (state = INITAIL_STATE, action) => {
     case GET_ORDER_START:
       return {
         ...state,
+        singleOrder: null,
         isLoading: true,
       }
     case GET_ORDER_SUCCESS:
@@ -68,6 +72,16 @@ const orderReducer = (state = INITAIL_STATE, action) => {
       return {
         ...state,
         getError: action.payload,
+      }
+    case PATCH_ORDER_SUCCESS:
+      return {
+        ...state,
+        singleOrder: action.payload,
+      }
+    case PATCH_ORDER_FAILURE:
+      return {
+        ...state,
+        udpateError: action.payload,
       }
     default:
       return state;

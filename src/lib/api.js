@@ -42,3 +42,4 @@ export const deleteCart = data => baseRequest.post('/cart/deleteCart', data);
 export const createOrder = data => baseRequest.post('/order', data);
 export const getOrder = data => baseRequest.post('/order/getOrder', data);
 export const getOrders = () => baseRequest.get('/order');
+export const patchOrder = data => baseRequest.patch('/order/updateOrderStatus', data);

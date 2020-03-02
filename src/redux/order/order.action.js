@@ -8,6 +8,9 @@ import {
   GET_ORDERS_START,
   GET_ORDERS_SUCCESS,
   GET_ORDERS_FAILURE,
+  PATCH_ORDER_START,
+  PATCH_ORDER_SUCCESS,
+  PATCH_ORDER_FAILURE,
 } from './order.const';
 
 export const createOrderStart = (config) => ({
@@ -51,5 +54,20 @@ export const getOrdersSuccess = (response) => ({
 
 export const getOrdersFailure = (error) => ({
   type: GET_ORDERS_FAILURE,
+  payload: error,
+});
+
+export const patchOrderStart = (config) => ({
+  type: PATCH_ORDER_START,
+  payload: config,
+});
+
+export const patchOrderSuccess = (response) => ({
+  type: PATCH_ORDER_SUCCESS,
+  payload: response,
+});
+
+export const patchOrderFailure = (error) => ({
+  type: PATCH_ORDER_FAILURE,
   payload: error,
 });

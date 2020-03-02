@@ -14,7 +14,7 @@ const OrderTotal = ({ mode, order }) => {
       </Between>
       <Between>
         <Texture color={mode === 'order' ? '#333333' : '#72665A'} mode={mode}>總金額</Texture>
-        <Texture fz='20' color={mode === 'order' ? '#333333' : '#72665A'} mode={mode}>NT$${order.amount}</Texture>
+        <Texture fz='20' color={mode === 'order' ? '#333333' : '#72665A'} mode={mode}>NT${order.amount}</Texture>
       </Between>
     </PriceWrapper>
   )

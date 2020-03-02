@@ -34,16 +34,7 @@ export const Card = styled.div`
 export const Circle = styled.div`
   ${size('20px', '20px')};
   border-radius: 50%;
-  background: ${props => {
-    switch (props.color) {
-      case 'red':
-        return '#CC6F6F';
-      case 'blue':
-        return '#143F82';
-      default:
-        return '#FFFFFF';
-    }
-  }};
+  background: ${props => props.color};
   display: ${props => props.color ? 'block' : 'none'};
   margin-bottom: 10px;
 `;
@@ -52,6 +43,7 @@ export const Texture = styled.div`
   ${Text(14, 'normal', 0)};
   color: #666666;
   margin-bottom: ${props => props.mb ? props.mb : 10}px;
+  margin-left: ${props => props.ml}px;
 `;
 
 export const Wrapper = styled(Flex)`

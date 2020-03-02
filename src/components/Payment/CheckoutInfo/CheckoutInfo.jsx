@@ -2,11 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Wrapper, Top, Title, Texture, Divide, Bottom, BottomTitle, BottomTexture, BottomGroup } from './CheckoutInfo.style';
 import RecommendList from '../RecommendList/RecommendList';
-import { selectLoginUser } from '../../../redux/user/user.selector';
 
 const CheckoutInfo = () => {
   const order = useSelector(state => state.order.singleOrder);
-  const user = useSelector(selectLoginUser);
   if (!order) return null;
   return (
     <React.Fragment>
@@ -15,7 +13,7 @@ const CheckoutInfo = () => {
           <Title>訂單已完成！</Title>
           <Texture>訂單編號 {order.orderNumber}</Texture>
           <Texture>將透過EMAIL取得訂單狀態的更新資訊：</Texture>
-          <Texture bold>{user.email}</Texture>
+          <Texture bold>{order.email}</Texture>
         </Top>
         <Divide />
         <Bottom>
