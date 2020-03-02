@@ -12,7 +12,7 @@ const MemberRelated = () => {
     <React.Fragment>
       {
         loginUser ?
-          <Redirect to='/' /> :
+          <Redirect to={{ pathname: '/', state: { reload: true } }} /> :
           <Wrapper>
             <Login />
             <Register />

@@ -1,46 +1,49 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Card from '../../Card/Card';
-
 import { Title, Wrapper, CardWrap } from './RecommendList.style';
-import product from '../../../assets/img/Products/pic_product_8.png';
-import product2 from '../../../assets/img/Products/pic_product_10.png';
-import product3 from '../../../assets/img/Products/pic_product_13.png';
-import product4 from '../../../assets/img/Products/pic_product_15.png';
+import { selectProducts } from '../../../redux/product/product.selector';
+import { getProductsStart } from '../../../redux/product/product.action';
+const RecommendList = ({ history }) => {
+  const dispatch = useDispatch();
+  const products =  useSelector(selectProducts);
 
-const cardList = [
-  {
-    image: product,
-    title: '黑白動物2020月曆',
-    price: 450,
-  },
-  {
-    image: product2,
-    title: '黑色小熊透明手機殼',
-    price: 490,    
-  },
-  {
-    image: product3,
-    title: '好朋友的陪伴掛報',
-    price: 150,
-  },
-  {
-    image: product4,
-    title: '美好時光玻璃杯',
-    price: 350,
-  }
-]
+  const randomProducts = () => {
+    if (!products.length) return [];
+    let randomStore = [];
+    let json = [];
+    let productsStore = [];
 
-const RecommendList = () => {
+    while (randomStore.length < 4) {
+      const random = Math.floor(Math.random() * products.length);
+      if (!json[random]) {
+        json[random] = true;
+        randomStore.push(random);
+      }
+    }
+
+    randomStore.forEach(item => {
+      productsStore.push(products[item]);
+    });
+
+    return productsStore;
+  };
+
+  useEffect(() => {    
+    dispatch(getProductsStart());
+  }, [dispatch]);
+
   return (
     <Wrapper>
       <Title>推薦商品</Title>
       <CardWrap>
         {
-          cardList.map(item => <Card key={item.price} item={item} height='142'/>)
+          randomProducts().map(item => <Card key={item._id} item={item} height='142' goProduct={() => history.push(`/product/${item._id}`)}/>)
         }
       </CardWrap>
     </Wrapper>
   )
 }
 
-export default RecommendList;
+export default withRouter(RecommendList);

@@ -41,6 +41,7 @@ function* login(payload) {
     const user = yield call(() => loginUser(payload.payload));
     yield put(loginSuccess(user.data));
     yield saveLocal('Authorization', user.data.token);
+    yield window.location.reload();
   } catch (error) {
     yield put(loginFailure(error.response.data.message));
   }
@@ -51,6 +52,7 @@ function* googleLogin(payload) {
     const user = yield call(() => googleSign({ token: payload.payload }));
     yield put(googleSuccess(user.data));
     yield saveLocal('Authorization', user.data.token);
+    yield window.location.reload();
   } catch (error) {
     yield put(googleFailure(error.response.data.message));
   }

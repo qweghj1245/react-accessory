@@ -99,6 +99,10 @@ const Navbar = ({ history }) => {
     }
   }, [loginUser, createUser]);
 
+  useEffect(() => {
+    setShowDropdown(() => false);
+  }, [history.location.pathname]);
+
   return (
     <Wrapper>
       <Link to='/'>

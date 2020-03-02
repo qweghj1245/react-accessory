@@ -5,11 +5,15 @@ import {
   GET_ORDER_START,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILURE,
+  GET_ORDERS_START,
+  GET_ORDERS_SUCCESS,
+  GET_ORDERS_FAILURE,
 } from './order.const';
 
 const INITAIL_STATE = {
   order: null,
   singleOrder: null,
+  orders: [],
   createError: null,
   getError: null,
   isLoading: false,
@@ -45,6 +49,22 @@ const orderReducer = (state = INITAIL_STATE, action) => {
         isLoading: false,
       }
     case GET_ORDER_FAILURE:
+      return {
+        ...state,
+        getError: action.payload,
+      }
+    case GET_ORDERS_START:
+      return {
+        ...state,
+        isLoading: true,
+      }
+    case GET_ORDERS_SUCCESS:
+      return {
+        ...state,
+        orders: action.payload,
+        isLoading: false,
+      }
+    case GET_ORDERS_FAILURE:
       return {
         ...state,
         getError: action.payload,

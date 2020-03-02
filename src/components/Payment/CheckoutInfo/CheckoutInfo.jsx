@@ -41,7 +41,7 @@ const CheckoutInfo = () => {
           </BottomGroup>
         </Bottom>
       </Wrapper>
-      {/* <RecommendList /> */}
+      <RecommendList />
     </React.Fragment>
   )
 }

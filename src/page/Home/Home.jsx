@@ -26,8 +26,8 @@ import { getProductsStart } from '../../redux/product/product.action';
 import { selectHomeProducts } from '../../redux/product/product.selector';
 const Home = () => {
   const dispatch = useDispatch();
-  const products =  useSelector(selectHomeProducts);
-  const isLoading =  useSelector(state => state.product.isLoading);
+  const products = useSelector(selectHomeProducts);
+  const isLoading = useSelector(state => state.product.isLoading);
   const settings = {
     dots: true,
     infinite: true,
@@ -76,7 +76,7 @@ const Home = () => {
             {
               [carsouel1, carsouel1, carsouel1].map(image => (
                 <div key={image}>
-                  <BannerImage src={image}/>
+                  <BannerImage src={image} />
                 </div>
               ))
             }
@@ -114,7 +114,7 @@ const Home = () => {
             <ShareMsg>上傳照片並標記<Opi>@OPI</Opi>的Instagram，與大家分享你的購物心得或創意風格，即可參加 當月抽獎活動並獲得單筆折扣或小禮物！</ShareMsg>
             <BaseButton>參加活動</BaseButton>
           </ShareContent>
-          <GoTopButton right={10}/>
+          <GoTopButton right={10} />
         </ShareWrapper>
       </AbsoluteWrap>
     </HomeWrapper>

@@ -12,7 +12,7 @@ import { Title } from '../../../assets/css/global.style';
 
 import { loginStart, googleStart } from '../../../redux/user/user.action';
 
-const MemberRelated = ({ history }) => {
+const MemberRelated = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const loginError = useSelector(selectLoginError);

@@ -5,6 +5,9 @@ import {
   GET_ORDER_START,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILURE,
+  GET_ORDERS_START,
+  GET_ORDERS_SUCCESS,
+  GET_ORDERS_FAILURE,
 } from './order.const';
 
 export const createOrderStart = (config) => ({
@@ -34,5 +37,19 @@ export const getOrderSuccess = (response) => ({
 
 export const getOrderFailure = (error) => ({
   type: GET_ORDER_FAILURE,
+  payload: error,
+});
+
+export const getOrdersStart = () => ({
+  type: GET_ORDERS_START,
+});
+
+export const getOrdersSuccess = (response) => ({
+  type: GET_ORDERS_SUCCESS,
+  payload: response,
+});
+
+export const getOrdersFailure = (error) => ({
+  type: GET_ORDERS_FAILURE,
   payload: error,
 });
