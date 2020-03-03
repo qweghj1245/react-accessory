@@ -43,3 +43,6 @@ export const createOrder = data => baseRequest.post('/order', data);
 export const getOrder = data => baseRequest.post('/order/getOrder', data);
 export const getOrders = () => baseRequest.get('/order');
 export const patchOrder = data => baseRequest.patch('/order/updateOrderStatus', data);
+
+//coupon
+export const addCoupon = data => baseRequest.post('/coupon/getCouponAndUpdate', data);

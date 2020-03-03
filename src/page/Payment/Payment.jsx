@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { Wrapper, Left, Right, Flexer } from './Payment.style';
@@ -26,6 +26,7 @@ const Payment = ({ history }) => {
   const order = useSelector(state => state.order.order);
   const user = useSelector(selectLoginUser);
   const orderInfoState = useSelector(state => state.cart.orderInfoState);
+  const coupon = useSelector(state => state.cart.coupon);
   const [stage, setStage] = useState({
     status: 'check', // check、info、wait、done
     country: null,
@@ -46,13 +47,18 @@ const Payment = ({ history }) => {
   const [modal, setModal] = useState('');
 
   /* 商品相關 */
-  const computeTotalAmount = () => {
+  const computeTotalAmount = useMemo(() => {
     if (!computeCart) return 0;
-    return computeCart.reduce((acc, item) => {
+    let total = computeCart.reduce((acc, item) => {
       acc = acc + (item.price * item.purchaseQuantity);
       return acc;
     }, 0);
-  };
+
+    if (coupon) {
+      return Math.round(total * (coupon.discount / 100));
+    }
+    return total;
+  }, [computeCart, coupon]);
   const updateCartProduct = (update) => {
     const newCart = computeCart.map(product => {
       if (product.productId === update.id) {
@@ -81,7 +87,7 @@ const Payment = ({ history }) => {
         contactPerson: user.name,
         contactPhoneNumber: user.phoneNumber,
         products: computeCart,
-        amount: computeTotalAmount() + 60,
+        amount: computeTotalAmount + 60,
         cart: cart._id,
       });
       alert.info('產生訂單中...');
@@ -151,7 +157,7 @@ const Payment = ({ history }) => {
   return (
     <Wrapper>
       <Step step={stage.status} />
-      <Flexer>
+      <Flexer noData={cart && cart.products.length === 0}>
         <Left noData={cart && cart.products.length === 0}>
           {
             stage.status === 'check' && user && computeCart && computeCart.length && !isLoading ?
@@ -178,7 +184,7 @@ const Payment = ({ history }) => {
                 nextStage={nextStage}
                 lastStage={lastStage}
                 stage={stage.status}
-                amount={computeTotalAmount()} />
+                amount={computeTotalAmount} />
               :
               stage.status === 'done' ?
                 <CheckoutInfo /> : null

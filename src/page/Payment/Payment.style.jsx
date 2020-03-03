@@ -9,6 +9,9 @@ export const Wrapper = styled.div`
 
 export const Flexer = styled(Flex)`
   align-items: flex-start;
+  width: 953px;
+  justify-content: ${props => props.noData ? 'space-between' : 'center'};
+  margin: 0 auto;
 `;
 
 export const Left = styled.div`

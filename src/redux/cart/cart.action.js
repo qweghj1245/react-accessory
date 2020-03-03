@@ -13,6 +13,9 @@ import {
   REDUCE_CART,
   UPDATE_CART,
   SET_ORDER_INFO,
+  COUPON_START,
+  COUPON_SUCCESS,
+  COUPON_FAILURE,
 } from './cart.const';
 
 export const addCartStart = (config) => ({
@@ -82,4 +85,19 @@ export const updateCart = (updateCart) => ({
 export const setOrderInfo = (state) => ({
   type: SET_ORDER_INFO,
   payload: state,
+});
+
+export const couponStart = (config) => ({
+  type: COUPON_START,
+  payload: config,
+});
+
+export const couponSuccess = (response) => ({
+  type: COUPON_SUCCESS,
+  payload: response,
+});
+
+export const couponFailure = (error) => ({
+  type: COUPON_FAILURE,
+  payload: error,
 });

@@ -10,6 +10,9 @@ import {
   REDUCE_CART,
   UPDATE_CART,
   SET_ORDER_INFO,
+  COUPON_START,
+  COUPON_SUCCESS,
+  COUPON_FAILURE,
 } from './cart.const';
 import { computeCart } from './cart.utils';
 
@@ -30,6 +33,8 @@ const INITAIL_STATE = {
     recipientAddress: '',
   },
   isLoading: false,
+  coupon: null,
+  couponError: null,
 }
 
 const cartReducer = (state = INITAIL_STATE, action) => {
@@ -75,6 +80,21 @@ const cartReducer = (state = INITAIL_STATE, action) => {
       return {
         ...state,
         deleteCartError: action.payload,
+      }
+    case COUPON_START:
+      return {
+        ...state,
+        coupon: null,
+      }
+    case COUPON_SUCCESS:
+      return {
+        ...state,
+        coupon: action.payload,
+      }
+    case COUPON_FAILURE:
+      return {
+        ...state,
+        couponError: action.payload,
       }
     case REDUCE_CART:
       return {
