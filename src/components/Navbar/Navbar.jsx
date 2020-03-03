@@ -10,7 +10,7 @@ import PersonDropdown from '../PersonDropdown/PersonDropdown';
 import logo from '../../assets/img/Base/logo_navbar.svg';
 import cart from '../../assets/img/Icon/Icon_navbar_cart.svg';
 import favorite from '../../assets/img/Icon/Icon_navbar_favorite.svg';
-import search from '../../assets/img/Icon/Icon_navbar_search.svg';
+// import search from '../../assets/img/Icon/Icon_navbar_search.svg';
 import profile from '../../assets/img/Icon/Icon_navbar_profile.svg';
 
 import { logoutStart } from '../../redux/user/user.action';
@@ -114,7 +114,7 @@ const Navbar = ({ history }) => {
         <ListContent onClick={() => history.push('/shopping_notes')}>購物須知</ListContent>
       </ListWrapper>
       <FeatureIcons>
-        <Icon src={search} mr={25} />
+        {/* <Icon src={search} mr={25} /> */}
         <Icon src={cart} mr={25} onClick={() => notLoginRedirect('/payment')} />
         <Icon src={favorite} mr={25} onClick={() => notLoginRedirect('/collection')} />
         <IconWrap>

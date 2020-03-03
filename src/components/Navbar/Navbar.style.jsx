@@ -20,7 +20,9 @@ export const Logo = styled.img`
 
 export const ListWrapper = styled.div`
   display: flex;
-  margin-left: 150px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export const ListContent = styled.div`
@@ -32,6 +34,7 @@ export const ListContent = styled.div`
   height: 40px;
   line-height: 40px;
   display: block;
+  width: 64px;
   &:hover {
     & > div > div {
       opacity: 1;
