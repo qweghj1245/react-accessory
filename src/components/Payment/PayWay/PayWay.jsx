@@ -99,4 +99,4 @@ const Payment = ({ coupon, nextStage, lastStage, stage, amount }) => {
   )
 }
 
-export default Payment;
+export default React.memo(Payment);

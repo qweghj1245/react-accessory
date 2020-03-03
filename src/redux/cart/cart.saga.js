@@ -39,6 +39,7 @@ function* collectOneProductAndUpdateCart(payload) {
     yield call(() => collectProduct(payload.payload));
     const cart = yield call(() => getCart());
     yield put(collectCartSuccess(cart.data));
+    yield put(reduceCart(cart.data));
   } catch (error) {
     yield put(collectCartFailure(error));
   }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAlert } from 'react-alert';
 import BaseSelect from '../../BaseSelect/BaseSelect';
@@ -9,7 +9,7 @@ import heart from '../../../assets/img/Icon/Icon_cart_heartempty_small.svg';
 import trash from '../../../assets/img/Icon/Icon_heart_trash.svg';
 import { collectCartStart, deleteCartStart } from '../../../redux/cart/cart.action';
 
-const Payment = ({ product, user, resetList }) => {
+const Card = ({ product, user, resetList }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const [collected, setCollected] = useState(product.collector.includes(user._id));
@@ -31,22 +31,16 @@ const Payment = ({ product, user, resetList }) => {
     });
   }
   const setCollect = () => {
+    setCollected(!product.collector.includes(user._id));
     dispatch(collectCartStart({
       id: product.productId,
       isCollected: !product.collector.includes(user._id),
     }));
-    setCollected(!product.collector.includes(user._id));
   }
   const deleteCart = () => {
     dispatch(deleteCartStart(product.id));
     alert.success('刪除成功！');
   }
-
-  const sameSetCollected = useCallback(() => setCollected(product.collector.includes(user._id)), [product, user]);
-
-  useEffect(() => {
-    sameSetCollected();
-  }, [sameSetCollected]);
 
   return (
     <Wrapper>
@@ -85,4 +79,4 @@ const Payment = ({ product, user, resetList }) => {
   )
 }
 
-export default Payment;
+export default React.memo(Card);

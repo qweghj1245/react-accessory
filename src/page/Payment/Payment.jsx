@@ -143,7 +143,6 @@ const Payment = ({ history }) => {
         delivery: 'inStock',
         id: history.location.pathname.split('/')[2],
       }));
-      // todo
     } else {
       dispatch(getCartStart());
     }
