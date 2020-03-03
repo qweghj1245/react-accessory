@@ -43,7 +43,7 @@ const OrderInfo = ({ order }) => {
         <Title>訂單資訊</Title>
         <Texture>訂單編號 {order.orderNumber}</Texture>
         <Texture>{moment(order.createdAt).format('YYYY-MM-DD hh:mm A')}</Texture>
-        <Texture>abc123@gmail.com</Texture>
+        <Texture>{order.email}</Texture>
         <Texture>訂單狀態：{convertOrderStatus(order.orderStatus)}</Texture>
       </Group>
       <Group>
