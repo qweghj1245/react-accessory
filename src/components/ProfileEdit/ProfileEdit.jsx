@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { updateStart, changePasswordStart } from '../../redux/user/user.action';
@@ -40,23 +40,23 @@ const Profile = ({ user }) => {
       });
     }
   }
-  const hashCity = () => { // city hash table
+  const hashCity = useMemo(() => { // city hash table
     return cityList.reduce((acc, item) => {
       acc[item.CityName] = item.AreaList;
       return acc;
     }, {});
-  };
-  const city = () => { // all city
+  }, []);
+  const city = useMemo(() => { // all city
     return cityList.map(item => {
       return {
         label: item.CityName,
         value: item.CityEngName,
       };
     });
-  };
-  const area = () => { // set after choose city
+  }, []);
+  const area = useMemo(() => { // set after choose city
     if (place.county) {
-      let current = hashCity()[place.county];
+      let current = hashCity[place.county];
       return current.map(item => {
         return {
           ZipCode: item.ZipCode,
@@ -66,9 +66,9 @@ const Profile = ({ user }) => {
       });
     }
     return [];
-  };
+  }, [hashCity, place.county]);
   const setArea = (label) => {
-    postalCode.current = area().find(item => item.label === label).ZipCode;
+    postalCode.current = area.find(item => item.label === label).ZipCode;
     setPlace(s => ({
       ...s,
       area: label,
@@ -126,9 +126,9 @@ const Profile = ({ user }) => {
         <BaseSelect change={p => setPlace(s => ({
           ...s,
           county: p,
-        }))} triangle placeholder='台北市' options={city()} defaultV={place.county} width='83px' height='40px' border='#999999' mt='23' mr='10' mb='9' />
+        }))} triangle placeholder='台北市' options={city} defaultV={place.county} width='83px' height='40px' border='#999999' mt='23' mr='10' mb='9' />
         <BaseSelect change={setArea} triangle placeholder='中正區' options={place.areaList.length ? place.areaList
-          : area()} defaultV={place.area} width='83px' height='40px' border='#999999' mt='23' mb='9' />
+          : area} defaultV={place.area} width='83px' height='40px' border='#999999' mt='23' mb='9' />
       </Address>
       <FormInput placeholder='詳細地址(選填)' mb='10' setValue={address.current} inputVal={(val) => address.current = val} />
       <BaseButton padding='8px 48px' mt='16' color='light-brown' onClick={callUpdate}>儲存</BaseButton>

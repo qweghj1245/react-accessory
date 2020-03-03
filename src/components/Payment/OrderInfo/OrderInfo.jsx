@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,23 +28,23 @@ const OrderInfo = () => {
   const user = useSelector(selectLoginUser);
   const [checked, setChecked] = useState(false);
 
-  const hashCity = () => { // city hash table
+  const hashCity = useMemo(() => { // city hash table
     return cityList.reduce((acc, item) => {
       acc[item.CityName] = item.AreaList;
       return acc;
     }, {});
-  };
-  const city = () => { // all city
+  }, []);
+  const city = useMemo(() => { // all city
     return cityList.map(item => {
       return {
         label: item.CityName,
         value: item.CityEngName,
       };
     });
-  };
-  const area = () => { // set after choose city
+  }, []);
+  const area = useMemo(() => { // set after choose city
     if (orderInfoState.recipientCounty) {
-      let current = hashCity()[orderInfoState.recipientCounty];
+      let current = hashCity[orderInfoState.recipientCounty];
       return current.map(item => {
         return {
           ZipCode: item.ZipCode,
@@ -54,11 +54,11 @@ const OrderInfo = () => {
       });
     }
     return [];
-  };
+  }, [hashCity, orderInfoState.recipientCounty]);
   const setArea = (label) => {
     setValue({
       recipientArea: label,
-      recipientPostalCode: area().find(item => item.label === label).ZipCode,
+      recipientPostalCode: area.find(item => item.label === label).ZipCode,
     });
   };
 
@@ -140,7 +140,7 @@ const OrderInfo = () => {
             <BaseSelect
               triangle
               placeholder='台北市'
-              options={city()}
+              options={city}
               change={label => setValue({ recipientCounty: label })}
               width='83px'
               height='40px'
@@ -150,7 +150,7 @@ const OrderInfo = () => {
             <BaseSelect
               triangle
               placeholder='中正區'
-              options={area()}
+              options={area}
               change={setArea}
               width='83px'
               height='40px'
