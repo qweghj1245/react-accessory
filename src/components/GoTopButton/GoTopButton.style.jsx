@@ -8,8 +8,12 @@ export const TopButton = styled.div`
   font-size: 16px;
   text-align: center;
   line-height: 40px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  position: ${props => props.direct === 'fixed' ? 'fixed' : 'absolute'};
+  right: ${props => props.right ? props.right : null};
+  left: ${props => props.left ? props.left : null};
+  bottom: ${props => props.bottom ? props.bottom : null};
   cursor: pointer;
+  background: #EAE8E6;
+  border: solid 2px #CCCCCC;
+  z-index: 10;
 `;

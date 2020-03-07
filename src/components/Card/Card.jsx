@@ -3,13 +3,13 @@ import { Skeleton } from '@material-ui/lab';
 
 import { CardWrapper, CardImage, CardTitle, CardPrice } from './Card.style';
 
-const Card = (props) => {
+const Card = React.forwardRef((props, ref) => {
   const { item, isLoading, ...styles } = props;
   return (
     <div>
       {
         !isLoading ? (
-          <CardWrapper onClick={props.goProduct}>
+          <CardWrapper ref={ref} onClick={props.goProduct}>
             <CardImage url={item.photos[0]} {...styles}></CardImage>
             <CardTitle>{item.name}</CardTitle>
             <CardPrice>NT${item.price}</CardPrice>
@@ -23,6 +23,6 @@ const Card = (props) => {
     </div>
 
   )
-}
+});
 
 export default Card;

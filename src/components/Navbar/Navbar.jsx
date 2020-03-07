@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { selectLoginUser, selectCreateUser } from '../../redux/user/user.selector';
-import { Wrapper, Logo, ListWrapper, ListContent, FeatureIcons, IconWrap } from './Navbar.style';
+import { Wrapper, Logo, ListWrapper, ListContent, FeatureIcons, IconWrap, Hamburger } from './Navbar.style';
 import { Icon } from '../../assets/css/global.style';
 import HeaderDropdown from '../HeaderDropdown/HeaderDropdown';
 import PersonDropdown from '../PersonDropdown/PersonDropdown';
@@ -102,6 +102,7 @@ const Navbar = ({ history }) => {
 
   return (
     <Wrapper>
+      <Hamburger />
       <Link to='/'>
         <Logo src={logo} />
       </Link>
