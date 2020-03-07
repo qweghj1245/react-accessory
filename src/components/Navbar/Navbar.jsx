@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { selectLoginUser, selectCreateUser } from '../../redux/user/user.selector';
-import { Wrapper, Logo, ListWrapper, ListContent, FeatureIcons, IconWrap, Hamburger } from './Navbar.style';
+import { Wrapper, Logo, ListWrapper, ListContent, FeatureIcons, IconWrap, Hamburger, Head } from './Navbar.style';
 import { Icon } from '../../assets/css/global.style';
 import HeaderDropdown from '../HeaderDropdown/HeaderDropdown';
 import PersonDropdown from '../PersonDropdown/PersonDropdown';
@@ -15,6 +15,8 @@ import profile from '../../assets/img/Icon/Icon_navbar_profile.svg';
 
 import { logoutStart } from '../../redux/user/user.action';
 import { filterProductsStart } from '../../redux/product/product.action';
+import PhoneAside from '../../components/PhoneAside/PhoneAside';
+import gsap from 'gsap';
 
 const Navbar = ({ history }) => {
   const dispatch = useDispatch();
@@ -82,8 +84,18 @@ const Navbar = ({ history }) => {
     }
   }
 
+  /* 手機Slide 操作 */
+  const wrapper = React.createRef();
+  const toggleSlide = (type) => {
+    wrapper.current.style.transitionDuration = '0s';
+    gsap.to(wrapper.current, {
+      left: type === 'on' ? 0 : -400,
+      duration: .2,
+    });
+  }
+
   useEffect(() => {
-    if (loginUser||createUser) {
+    if (loginUser || createUser) {
       setPersonDropdownList([
         '我的訂單',
         '修改資料',
@@ -102,7 +114,7 @@ const Navbar = ({ history }) => {
 
   return (
     <Wrapper>
-      <Hamburger />
+      <Hamburger onClick={() => toggleSlide('on')}/>
       <Link to='/'>
         <Logo src={logo} />
       </Link>
@@ -119,10 +131,11 @@ const Navbar = ({ history }) => {
         <Icon src={cart} mr={25} onClick={() => notLoginRedirect('/payment')} />
         <Icon src={favorite} mr={25} onClick={() => notLoginRedirect('/collection')} />
         <IconWrap>
-          <Icon src={profile} onClick={() => setShowDropdown(!showDropdown)} />
+          <Head src={loginUser ? loginUser.photo : profile} onClick={() => setShowDropdown(!showDropdown)} />
           <PersonDropdown list={personDropdownList} showDropdown={showDropdown} goRouter={goRouter} />
         </IconWrap>
       </FeatureIcons>
+      <PhoneAside ref={wrapper} history={history} close={() => toggleSlide('off')}/>
     </Wrapper>
   );
 }

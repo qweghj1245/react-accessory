@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex } from '../../assets/css/global.style';
+import { Flex, Icon } from '../../assets/css/global.style';
 import { device } from '../../assets/css/device';
 
 export const Wrapper = styled(Flex)`
@@ -107,4 +107,8 @@ export const Hamburger = styled.div`
       background: #333333;
     }
   }
+`;
+
+export const Head = styled(Icon)`
+  border-radius: 50%;
 `;
