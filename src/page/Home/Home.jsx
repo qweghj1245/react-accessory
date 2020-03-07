@@ -22,9 +22,9 @@ import blueBall from '../../assets/img/Base/pic_home_blueball.svg';
 import greyBall from '../../assets/img/Base/home_pic_grayball.svg';
 import pinkBall from '../../assets/img/Base/pic_home_pinkball.svg';
 import shareImage from '../../assets/img/Base/pic_home_event.jpg';
-import { getProductsStart } from '../../redux/product/product.action';
+import { getProductsStart, filterProductsStart } from '../../redux/product/product.action';
 import { selectHomeProducts } from '../../redux/product/product.selector';
-const Home = () => {
+const Home = ({ history }) => {
   const dispatch = useDispatch();
   const products = useSelector(selectHomeProducts);
   const isLoading = useSelector(state => state.product.isLoading);
@@ -43,6 +43,7 @@ const Home = () => {
       ballSize: 64,
       top: -40,
       left: 0,
+      type: 'paper',
     },
     {
       image: productType2,
@@ -51,6 +52,7 @@ const Home = () => {
       ballSize: 54,
       top: -45,
       left: 152,
+      type: 'phoneAcc',
     },
     {
       image: productType3,
@@ -59,8 +61,14 @@ const Home = () => {
       ballSize: 32,
       top: -13,
       left: 184,
+      type: 'bag',
     },
-  ])
+  ]);
+
+  const setFilterType = type => {
+    history.push('/products');
+    dispatch(filterProductsStart(type));
+  }
 
   useEffect(() => {
     if (!products.length) {
@@ -86,7 +94,7 @@ const Home = () => {
         <PopularProductWrap>
           {
             products.map(item => (
-              <Card key={item._id} item={item} isLoading={isLoading} />
+              <Card key={item._id} item={item} isLoading={isLoading} goProduct={() => history.push(`/product/${item._id}`)}/>
             ))
           }
         </PopularProductWrap>
@@ -98,7 +106,7 @@ const Home = () => {
           <TypeCardWrapper>
             {
               productTypes.map(item => (
-                <TypeCard key={item.title}>
+                <TypeCard key={item.type} onClick={() => setFilterType(item.type)}>
                   <CardImage url={item.image} height={268} />
                   <TypeCardTitle>{item.title}</TypeCardTitle>
                   <TypeCardBall src={item.ball} width={item.ballSize} top={item.top} left={item.left} />

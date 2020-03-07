@@ -20,6 +20,7 @@ const Products = ({ history }) => {
   const sameFilterType = useCallback(() => filterType, [filterType]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!sameFilterType()) {
       dispatch(getProductsStart());
     }

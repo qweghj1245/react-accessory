@@ -74,6 +74,7 @@ export const TypeCard = styled.div`
   background: #FFFFFF;
   padding: 18px 18px 38px 18px;
   position: relative;
+  cursor: pointer;
 `;
 
 export const TypeCardTitle = styled.div`
