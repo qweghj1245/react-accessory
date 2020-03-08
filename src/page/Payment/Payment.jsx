@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
-import { Wrapper, Left, Right, Flexer } from './Payment.style';
-import { ImageWrapper } from '../../assets/css/global.style';
+import { Wrapper, Left, Right, Flexer, ImageFlexer } from './Payment.style';
+import { ImageWrapper, Title, Flex } from '../../assets/css/global.style';
 import Step from '../../components/Payment/Step/Step';
 import Card from '../../components/Payment/Card/Card';
 import PayWay from '../../components/Payment/PayWay/PayWay';
@@ -17,6 +17,9 @@ import { selectComputeCart, selectCarts } from '../../redux/cart/cart.selector';
 import { loadStripe } from '@stripe/stripe-js';
 import queryString from 'query-string';
 import noData from '../../assets/img/Cart/img_cart.png';
+
+let isPass = false;
+let count = 0;
 const Payment = ({ history }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -80,17 +83,16 @@ const Payment = ({ history }) => {
         status: 'info',
       });
     } else if (stage.status === 'info') {
+      count++;
       setStage({
         ...stage,
         ...orderInfoState,
-        status: 'wait',
         contactPerson: user.name,
         contactPhoneNumber: user.phoneNumber,
         products: computeCart,
         amount: computeTotalAmount + 60,
         cart: cart._id,
       });
-      alert.info('產生訂單中...');
     }
   };
   const lastStage = () => {
@@ -128,14 +130,33 @@ const Payment = ({ history }) => {
     redirectPage();
   }, [redirectPage]);
   useEffect(() => {
-    if (stage.status === 'wait') {
-      dispatch(createOrderStart({
-        ...stage,
-        successUrl: `${window.location.protocol}//${window.location.host}/payment`,
-        cancelUrl: `${window.location.protocol}//${window.location.host}/payment`,
-      }));
+    if (stage.status === 'info') {
+      const validateIsEmpty = [
+        'contactPerson',
+        'contactPhoneNumber',
+        'recipientPerson',
+        'recipientPhoneNumber',
+        'recipientPostalCode',
+        'recipientCounty',
+        'recipientArea',
+        'recipientAddress',
+      ];
+      isPass = validateIsEmpty.every(item => stage[item]);
+      if (count>0) {
+        if (isPass) {
+          alert.info('產生訂單中...');
+          dispatch(createOrderStart({
+            ...stage,
+            successUrl: `${window.location.protocol}//${window.location.host}/payment`,
+            cancelUrl: `${window.location.protocol}//${window.location.host}/payment`,
+          }));
+        } else {
+          alert.error('請勿有空欄位');
+        }
+        count = 0;
+      }
     }
-  }, [stage, dispatch]);
+  }, [stage, dispatch, alert]);
   useEffect(() => {
     let params = queryString.parse(history.location.search);
     if (params && params.status === 'done') {
@@ -156,41 +177,51 @@ const Payment = ({ history }) => {
 
   return (
     <Wrapper>
-      <Step step={stage.status} />
-      <Flexer noData={cart && cart.products.length === 0}>
-        <Left noData={cart && cart.products.length === 0}>
-          {
-            stage.status === 'check' && user && computeCart && computeCart.length && !isLoading ?
-              computeCart.map(product =>
-                <Card key={product.id} product={product} user={user} resetList={updateCartProduct} />) :
-                <ImageWrapper
-                  src={noData}
-                  style={{ cursor: 'pointer' }}
-                  display={stage.status === 'check' ? 'block' : 'none'}
-                  onClick={() => history.push('/products')} />
-          }
-          {
-            stage.status === 'info' || stage.status === 'wait' ? <OrderInfo /> : null
-          }
-          {
-            stage.status === 'done' ? <OrderDone /> : null
-          }
-        </Left>
-        <Right noData={(cart && cart.products.length === 0)||!cart}>
-          {
-            stage.status !== 'done' && cart && cart.products.length ?
-              <PayWay
-                coupon={() => setModal('coupon')}
-                nextStage={nextStage}
-                lastStage={lastStage}
-                stage={stage.status}
-                amount={computeTotalAmount} />
-              :
-              stage.status === 'done' ?
-                <CheckoutInfo /> : null
-          }
-        </Right>
-      </Flexer>
+      {
+        window.innerWidth > 960 ? <Step step={stage.status} /> :
+          <Flex>
+            <Title>確認商品並選擇付款方式</Title>
+          </Flex>
+      }
+      {
+        user && computeCart && computeCart.length && !isLoading ?
+          <Flexer noData={cart && cart.products.length === 0}>
+            <Left noData={cart && cart.products.length === 0}>
+              {
+                stage.status === 'check' ?
+                  computeCart.map(product =>
+                    <Card key={product.id} product={product} user={user} resetList={updateCartProduct} />) : null
+              }
+              {
+                stage.status === 'info' ? <OrderInfo /> : null
+              }
+              {
+                stage.status === 'done' ? <OrderDone /> : null
+              }
+            </Left>
+            <Right noData={(cart && cart.products.length === 0) || !cart}>
+              {
+                stage.status !== 'done' && cart && cart.products.length ?
+                  <PayWay
+                    coupon={() => setModal('coupon')}
+                    nextStage={nextStage}
+                    lastStage={lastStage}
+                    stage={stage.status}
+                    amount={computeTotalAmount} />
+                  :
+                  stage.status === 'done' ?
+                    <CheckoutInfo /> : null
+              }
+            </Right>
+          </Flexer> :
+          <ImageFlexer>
+            <ImageWrapper
+              src={noData}
+              style={{ cursor: 'pointer' }}
+              display={stage.status === 'check' ? 'block' : 'none'}
+              onClick={() => history.push('/products')} />
+          </ImageFlexer>
+      }
       <ModalCoupon show={modal === 'coupon'} use={() => closeModal()} close={() => closeModal()} />
     </Wrapper>
   )

@@ -24,6 +24,7 @@ const transport = [
 ]
 
 const Payment = ({ coupon, nextStage, lastStage, stage, amount }) => {
+  let width = window.innerWidth > 960;
   const alert = useAlert();
   const countryModel = useRef(null);
   const payModel = useRef(null);
@@ -53,7 +54,7 @@ const Payment = ({ coupon, nextStage, lastStage, stage, amount }) => {
           placeholder='配送國家'
           options={country}
           changeVal={cty => countryModel.current = cty}
-          width='206px'
+          width={width ? '206px' : '100%'}
           height='40px'
           dropHeight='auto'
           border='#999999'
@@ -63,7 +64,7 @@ const Payment = ({ coupon, nextStage, lastStage, stage, amount }) => {
           placeholder='付款方式'
           options={pay}
           changeVal={cty => payModel.current = cty}
-          width='206px'
+          width={width ? '206px' : '100%'}
           height='40px'
           dropHeight='auto'
           border='#999999'
@@ -73,7 +74,7 @@ const Payment = ({ coupon, nextStage, lastStage, stage, amount }) => {
           placeholder='運送方式'
           options={transport}
           changeVal={cty => transportModel.current = cty}
-          width='206px'
+          width={width ? '206px' : '100%'}
           height='40px'
           dropHeight='auto'
           border='#999999'

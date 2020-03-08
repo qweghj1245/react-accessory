@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { Wrapper, ImageGroup, FlexWrapper, Title, Price, Msg, Group, NormalText, Image, ProductImage } from './Product.style';
@@ -57,9 +57,9 @@ const Product = ({ history }) => {
     }));
     alert.success('加入購物車成功！');
   }
-  const getCount = useMemo((count) => {
+  const getCount = (count) => {
     totalCount.current = count;
-  }, []);
+  };
 
   /* 手機Card dom 操作 */
   const cardRef = React.createRef();

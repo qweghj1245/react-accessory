@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 import { Text, Flex } from '../../../assets/css/global.style';
+import { device } from '../../../assets/css/device';
 
 export const Wrapper = styled.div`
   position: relative;
   background: #EAE8E6;
   padding: 20px 50px 30px 50px;
   margin-bottom: 30px;
+
+  @media ${device.mobile} {
+    width: 100%;
+    padding: 20px 37px;
+  }
 `;
 
 export const Texture = styled.div`
@@ -19,6 +25,11 @@ export const SubText = styled.div`
   color: ${props => props.color === 'greyLight' ? '#999999' : '#666666'};
   margin-right: ${props => props.mr ? 72 : 0}px;
   font-size: ${props => props.fz}px;
+
+  @media ${device.mobile} {
+    width: 102px;
+    margin-right: 0;
+  }
 `;
 
 export const Between = styled(Flex)`
@@ -38,6 +49,10 @@ export const UseCoupon = styled.div`
   background: #FFFFFF;
   color: #999999;
   cursor: pointer;
+
+  @media ${device.mobile} {
+    width: 96px;
+  }
 `;
 
 export const TextGroup = styled.div`

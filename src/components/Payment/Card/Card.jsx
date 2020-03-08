@@ -45,7 +45,7 @@ const Card = ({ product, user, resetList }) => {
   return (
     <Wrapper>
       <Flex>
-        <ImageWrapper src={product.photos[0]} width='120' />
+        <ImageWrapper src={product.photos[0]} width={window.innerWidth > 960 ? '120' : '80'} />
         <Flexer>
           <Flex justify='start'>
             {
