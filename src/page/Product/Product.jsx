@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
-import { Wrapper, ImageGroup, FlexWrapper, Title, Price, Msg, Group, NormalText, Image } from './Product.style';
-import { Flex, ImageWrapper } from '../../assets/css/global.style';
+import { Wrapper, ImageGroup, FlexWrapper, Title, Price, Msg, Group, NormalText, Image, ProductImage } from './Product.style';
+import { Flex } from '../../assets/css/global.style';
 import ColorCircle from '../../components/ColorCircle/ColorCircle';
 import BaseSelect from '../../components/BaseSelect/BaseSelect';
 import AddCount from '../../components/AddCount/AddCount';
@@ -24,6 +24,7 @@ const Product = ({ history }) => {
   const totalCount = useRef(1);
   const [colorModel, setColorModel] = useState(null);
 
+  /* layout */
   const sizeString = (sizeArr) => {
     if (!sizeArr.length) return '';
     let str = '';
@@ -40,13 +41,13 @@ const Product = ({ history }) => {
     return str;
   }
 
+  /* 收藏、購物車*/
   const setCollect = (status) => {
     dispatch(collectStart({
       id: product._id,
       isCollected: status,
     }));
   }
-
   const addToCart = (product) => {
     dispatch(addCartStart({
       product: product._id,
@@ -56,10 +57,21 @@ const Product = ({ history }) => {
     }));
     alert.success('加入購物車成功！');
   }
-
-  const getCount = (count) => {
+  const getCount = useMemo((count) => {
     totalCount.current = count;
-  }
+  }, []);
+
+  /* 手機Card dom 操作 */
+  const cardRef = React.createRef();
+  const [cardHeight, setCardHeight] = useState(0);
+  const setCardCb = useCallback(() => {
+    setCardHeight(cardRef.current.offsetWidth);
+  }, [cardRef]);
+  useEffect(() => {
+    if (window.innerWidth < 960 && cardRef && cardRef.current) {
+      setCardCb();
+    }
+  }, [setCardCb, cardRef]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -73,12 +85,17 @@ const Product = ({ history }) => {
         isLoading ? <Skeleton /> :
           <FlexWrapper>
             <Wrapper>
-              <ImageWrapper src={product.photos[0]} width={385} />
+              <ProductImage src={product.photos[0]} />
               <ImageGroup>
                 {
                   product.photos.length > 1 ?
                     product.photos.map((image, idx) => idx !== 0 ?
-                      <Image key={image} src={image} width='100' /> : null) : null
+                      <Image
+                        ref={cardRef}
+                        key={image}
+                        src={image}
+                        width='100'
+                        height={window.innerWidth > 960 ? 110 : cardHeight} /> : null) : null
                 }
               </ImageGroup>
             </Wrapper>
@@ -88,42 +105,42 @@ const Product = ({ history }) => {
               <Msg>{product.description}</Msg>
               {
                 product.size.length ?
-                  <Group mb={33}>
+                  <Group mb={33}  justify='start'>
                     <NormalText>尺寸</NormalText>
                     <NormalText ml={0}>{sizeString(product.size)}</NormalText>
                   </Group> : null
               }
               {
                 product.colors.length ?
-                  <Group mb={30}>
+                  <Group mb={30} justify='start'>
                     <NormalText>顏色</NormalText>
                     <Flex>
                       {
                         product.colors.map((color, idx) =>
-                          <ColorCircle 
-                            key={color} 
-                            bg={color} 
-                            mr={idx === product.colors.length - 1 ? null : 20} 
-                            isActive={colorModel === color} 
-                            onClick={() => setColorModel(color)}/>)
+                          <ColorCircle
+                            key={color}
+                            bg={color}
+                            mr={idx === product.colors.length - 1 ? null : 20}
+                            isActive={colorModel === color}
+                            onClick={() => setColorModel(color)} />)
                       }
                     </Flex>
                   </Group> : null
               }
               {
                 product.options.length ?
-                  <Group mb={35}>
+                  <Group mb={35} justify='start'>
                     <NormalText>選項</NormalText>
                     <BaseSelect options={product.options.map(item => {
                       return { label: item, value: item }
                     })} change={e => optionModel.current = e} />
                   </Group> : null
               }
-              <Group mb={50}>
+              <Group mb={50} justify='start'>
                 <NormalText>數量</NormalText>
-                <AddCount total={product.quantity} getCount={getCount}/>
+                <AddCount total={product.quantity} getCount={getCount} />
               </Group>
-              <Group>
+              <Group justify={window.innerWidth > 960 ? 'start' : 'center'}>
                 <BaseButton color='light-brown' padding='8px 53px' mr='30' onClick={() => addToCart(product)}>加入購物車</BaseButton>
                 <CollectButton product={product} user={user} collect={setCollect} />
               </Group>

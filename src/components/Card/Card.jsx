@@ -5,6 +5,7 @@ import { CardWrapper, CardImage, CardTitle, CardPrice } from './Card.style';
 
 const Card = React.forwardRef((props, ref) => {
   const { item, isLoading, ...styles } = props;
+  let width = window.innerWidth > 960;
   return (
     <div>
       {
@@ -15,7 +16,10 @@ const Card = React.forwardRef((props, ref) => {
             <CardPrice>NT${item.price}</CardPrice>
           </CardWrapper>) : (
             <CardWrapper>
-              <Skeleton variant="rect" width={304} height={304} />
+              <Skeleton
+                variant="rect"
+                width={width ? 304 : '100%'}
+                height={width ? 304 : window.innerWidth / 2 - 26} />
               <Skeleton width="60%" style={{ 'margin': '0 auto' }} height={20} />
               <Skeleton width="60%" style={{ 'margin': '0 auto' }} height={20} />
             </CardWrapper>)

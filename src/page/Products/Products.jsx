@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import BaseWrapper from '../../components/BaseWrapper/BaseWrapper.jsx';
 import { Wrapper, ProductsWrapper } from './Products.style';
@@ -7,15 +7,16 @@ import GoTopButton from '../../components/GoTopButton/GoTopButton';
 
 import { getProductsStart } from '../../redux/product/product.action';
 import { selectProducts } from '../../redux/product/product.selector';
+
 const Products = ({ history }) => {
   const dispatch = useDispatch();
   const products = useSelector(selectProducts);
   const isLoading = useSelector(state => state.product.isLoading);
   const filterType = useSelector(state => state.product.filterType);
 
-  const filterProducts = () => {
+  const filterProducts = useMemo(() => {
     return filterType ? products.filter(item => item.classification === filterType) : products;
-  };
+  }, [filterType, products]);
   const sameFilterType = useCallback(() => filterType, [filterType]);
 
   /* 手機Card dom 操作 */
@@ -42,7 +43,7 @@ const Products = ({ history }) => {
     <Wrapper>
       <ProductsWrapper>
         {
-          filterProducts()
+          filterProducts
             .filter(product => product.classification !== 'home')
             .map(product =>
               <Card
