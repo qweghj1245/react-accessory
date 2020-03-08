@@ -5,10 +5,6 @@ export const Wrapper = styled.div`
   position: relative;
   margin-bottom: 16px;
   min-height: calc(100vh - 331px);
-  
-  @media ${device.mobile} {
-    padding: 0 21px;
-  }
 `;
 
 export const ProductsWrapper = styled.div`

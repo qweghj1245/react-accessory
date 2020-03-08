@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Text } from '../../assets/css/global.style';
+import { device } from '../../assets/css/device';
 
 export const Wrapper = styled.div`
   border-top: solid 1px #EAEAEA;
@@ -33,4 +34,8 @@ export const SubTitle = styled.div`
 
 export const Content = styled.div`
   margin-left: 162px;
+
+  @media ${device.mobile} {
+    margin-left: 0;
+  }
 `;

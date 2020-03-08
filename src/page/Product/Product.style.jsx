@@ -10,8 +10,6 @@ export const FlexWrapper = styled(Flex)`
     display: block;
     padding-top: 20px;
     padding-bottom: 0;
-    padding-left: 21px;
-    padding-right: 21px;
   }
 `;
 

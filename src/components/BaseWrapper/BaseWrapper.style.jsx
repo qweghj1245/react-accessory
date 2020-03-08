@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 
   @media ${device.mobile} {
     width: 100%;
+    padding: 0 21px;
   }
 `;
 
