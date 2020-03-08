@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-
+import { device } from '../../assets/css/device';
 // css
 
 export const absoluteCss = css`
@@ -89,6 +89,14 @@ export const Title = styled.div`
     height: ${props => props.height ? props.height : 18}px;
     background: #EAE8E6;
     z-index: -1;
+  }
+
+  @media ${device.mobile} {
+    font-size: 20px;
+    margin-bottom: 30px;
+    &:before {
+      width: 100%;
+    }
   }
 `;
 

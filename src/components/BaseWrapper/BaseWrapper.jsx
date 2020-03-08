@@ -3,7 +3,7 @@ import { Skeleton } from '@material-ui/lab';
 import { useSelector } from 'react-redux';
 import { Breadcrumbs } from '@material-ui/core';
 import { Wrapper, LinkHandle } from './BaseWrapper.style';
-import { Title } from '../../assets/css/global.style';
+import { Title, Flex } from '../../assets/css/global.style';
 import { productType } from '../../lib/productType';
 const BaseWrapper = (WrapComponent, types) => {
   const BaseComponent = (props) => {
@@ -16,7 +16,7 @@ const BaseWrapper = (WrapComponent, types) => {
     return (
       <Wrapper>
         {
-          product || enName !== 'product' ?
+          (product || enName !== 'product') && window.innerWidth > 960 ?
             <Breadcrumbs aria-label="breadcrumb">
               <LinkHandle href="/">
                 首頁
@@ -49,10 +49,12 @@ const BaseWrapper = (WrapComponent, types) => {
               }
             </Breadcrumbs> : null
         }
-        {
-          !product && enName === 'product' ? null : filterType && enName === 'products' ? <Title mb={50} width={120}>{productType[filterType].name}</Title> :
-            name ? <Title mb={50} width={120}>{breadcrumb}</Title> : null
-        }
+        <Flex>
+          {
+            !product && enName === 'product' && window.innerWidth > 960 ? null : filterType && enName === 'products' ? <Title mb={50} width={120}>{productType[filterType].name}</Title> :
+              name ? <Title mb={50} width={120}>{breadcrumb}</Title> : null
+          }
+        </Flex>
         <WrapComponent {...props} />
       </Wrapper>
     );

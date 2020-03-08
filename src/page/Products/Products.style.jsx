@@ -1,15 +1,25 @@
 import styled from 'styled-components';
+import { device } from '../../assets/css/device';
 
 export const Wrapper = styled.div`
   position: relative;
   margin-bottom: 16px;
   min-height: calc(100vh - 331px);
+  
+  @media ${device.mobile} {
+    padding: 0 21px;
+  }
 `;
 
 export const ProductsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
+
+  @media ${device.mobile} {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
 `;
 
 export const Pagination = styled.div`
