@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../assets/css/device';
 
 export const Wrapper = styled.div`
   color: ${props => {
@@ -29,6 +30,11 @@ export const Wrapper = styled.div`
   border-radius: 4px;
   text-align: center;
   position: relative;
+  margin-top: 24px;
+
+  @media ${device.mobile} {
+    padding: 8px 16px;
+  }
 `;
 
 export const Close = styled.div`

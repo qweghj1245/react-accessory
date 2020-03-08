@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 import { Text, size, BaseWrapper } from '../../assets/css/global.style';
+import { device } from '../../assets/css/device';
 
 export const Wrapper = styled(BaseWrapper)`
   margin-bottom: ${props => props.mb ? props.mb : 16}px;
   margin-right: ${props => props.mr}px;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
 `;
 
 export const LabelText = styled.div`
@@ -27,5 +32,9 @@ export const ReInput = styled.input`
   }
   &:focus {
     outline: 0;
+  }
+
+  @media ${device.mobile} {
+    width: 100%;
   }
 `;

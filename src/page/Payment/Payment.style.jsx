@@ -29,11 +29,15 @@ export const Left = styled.div`
   border-top: ${props => props.noData ? '0' : 'solid 1px #EAEAEA'};
   width: ${props => props.noData ? '50%' : 'auto'};
   min-height: 44.3vh;
+
+  @media ${device.mobile} {
+    min-height: 100%;
+  }
 `;
 
 export const Right = styled(Flex)`
   position: relative;
-  margin-left: ${props => props.noData ? '0px' : '101px'};
+  margin-left: ${props => props.noData && !props.isDone ? '0px' : '101px'};
   flex-direction: column;
 
   @media ${device.mobile} {
@@ -45,7 +49,7 @@ export const Right = styled(Flex)`
 export const ImageFlexer = styled(Flexer)`
   align-items: center;
   justify-content: center;
-  min-height: 44.3vh;
+  min-height: 45.6vh;
 
   @media ${device.mobile} {
     min-height: 47.8vh;
@@ -53,5 +57,11 @@ export const ImageFlexer = styled(Flexer)`
     & > img {
       width: 100%;
     }
+  }
+  @media ${device.wierdMobile} {
+    min-height: 53.7vh;
+  }
+  @media ${device.pad} {
+    min-height: 62.7vh;
   }
 `; 

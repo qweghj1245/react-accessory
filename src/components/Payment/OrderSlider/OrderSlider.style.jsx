@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 import { Flex, Text, size, BaseWrapper } from '../../../assets/css/global.style';
+import { device } from '../../../assets/css/device';
 
 export const Slider = styled(Flex)`
   width: 547px;
   padding: 9px 11px 10px 5px;
   justify-content: space-between;
   background: #EAE8E6;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
 `;
 
 export const SlideTitle = styled.div`
@@ -29,6 +34,10 @@ export const Card = styled.div`
   padding: 30px 0;
   border-bottom: solid 1px rgba(51, 51, 51, .1);
   padding-right: 31px;
+
+  @media ${device.mobile} {
+    padding-right: 0;
+  }
 `;
 
 export const Circle = styled.div`
@@ -52,6 +61,10 @@ export const Wrapper = styled(Flex)`
   justify-content: space-between;
   margin-left: 70px;
   margin-right: auto;
+
+  @media ${device.mobile} {
+    margin-left: 12px;
+  }
 `;
 
 export const WrapperDivide = styled(BaseWrapper)`

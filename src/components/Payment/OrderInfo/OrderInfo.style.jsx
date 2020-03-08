@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { Flex, Text } from '../../../assets/css/global.style';
-
+import { device } from '../../../assets/css/device';
 
 export const SlideTitle = styled.div`
   ${Text(18, 'bold', 0)};
   color: #72665A;
   margin-bottom: ${props => props.mb}px;
+  position: relative;
 `;
 
 export const Content = styled.div`
@@ -15,6 +16,10 @@ export const Content = styled.div`
 
 export const FormGroup = styled.div`
   padding-left: 76px;
+
+  @media ${device.mobile} {
+    padding-left: 0;
+  }
 `;
 
 export const Address = styled(Flex)`

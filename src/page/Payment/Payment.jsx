@@ -77,6 +77,7 @@ const Payment = ({ history }) => {
     setModal('');
   };
   const nextStage = (payConfig) => {
+    window.scrollTo(0, 0);
     if (stage.status === 'check') {
       setStage({
         ...payConfig,
@@ -96,6 +97,7 @@ const Payment = ({ history }) => {
     }
   };
   const lastStage = () => {
+    window.scrollTo(0, 0);
     switch (stage.status) {
       case 'done':
         setStage({
@@ -142,7 +144,7 @@ const Payment = ({ history }) => {
         'recipientAddress',
       ];
       isPass = validateIsEmpty.every(item => stage[item]);
-      if (count>0) {
+      if (count > 0) {
         if (isPass) {
           alert.info('產生訂單中...');
           dispatch(createOrderStart({
@@ -184,7 +186,7 @@ const Payment = ({ history }) => {
           </Flex>
       }
       {
-        user && computeCart && computeCart.length && !isLoading ?
+        (!user && computeCart && computeCart.length && !isLoading) || stage.status === 'done' ?
           <Flexer noData={cart && cart.products.length === 0}>
             <Left noData={cart && cart.products.length === 0}>
               {
@@ -199,7 +201,7 @@ const Payment = ({ history }) => {
                 stage.status === 'done' ? <OrderDone /> : null
               }
             </Left>
-            <Right noData={(cart && cart.products.length === 0) || !cart}>
+            <Right noData={(cart && cart.products.length === 0) || !cart} isDone={stage.status === 'done'}>
               {
                 stage.status !== 'done' && cart && cart.products.length ?
                   <PayWay

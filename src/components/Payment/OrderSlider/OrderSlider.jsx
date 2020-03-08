@@ -38,7 +38,7 @@ const OrderSlider = ({ products, children }) => {
                   item.color || item.size ?
                     <Flex>
                       <Circle color={item.color} />
-                      <Texture ml='16'>{item.size}</Texture>
+                      <Texture ml={item.color ? '16' : 0}>{item.size}</Texture>
                     </Flex> : null
                 }
                 <Texture>{item.name}</Texture>

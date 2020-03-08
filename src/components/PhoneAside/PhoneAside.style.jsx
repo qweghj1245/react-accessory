@@ -4,7 +4,7 @@ import { device } from '../../assets/css/device';
 
 export const Wrapper = styled.div`
   position: fixed;
-  left: -400px;
+  left: -100%;
   top: 0;
   z-index: 11;
   display: none;

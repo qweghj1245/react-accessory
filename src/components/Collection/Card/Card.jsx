@@ -15,7 +15,7 @@ const Card = ({ item, click, cancel }) => {
 
   return (
     <Wrapper onClick={click}>
-      <ImageWrapper src={item.photos[0]} width='120' />
+      <ImageWrapper src={item.photos[0]} width={window.innerWidth > 960 ? '120' : '80'} />
       <Texture>{item.name}</Texture>
       <Texture>NT${item.price}</Texture>
       <Icon src={cart} width='25' />

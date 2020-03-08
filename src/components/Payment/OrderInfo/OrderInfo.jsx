@@ -17,6 +17,13 @@ const useStyles = makeStyles(() => ({
     marginLeft: 0,
     marginTop: '14px',
   },
+  phoneRoot: {
+    position: 'absolute',
+    top: '50%',
+    right: '0',
+    transform: 'translateY(-50%)',
+    'margin-right': 0,
+  },
 }));
 
 const OrderInfo = () => {
@@ -80,7 +87,7 @@ const OrderInfo = () => {
 
   return (
     <React.Fragment>
-      <OrderSlider products={computeCart}/>
+      <OrderSlider products={computeCart} />
       <Content>
         <SlideTitle mb='5'>聯絡資訊</SlideTitle>
         <FormGroup>
@@ -97,7 +104,24 @@ const OrderInfo = () => {
             setValue={user.phoneNumber}
             inputVal={val => setValue({ contactPhoneNumber: val })} />
         </FormGroup>
-        <SlideTitle mb='5'>寄送資訊</SlideTitle>
+        <SlideTitle mb='5'>
+          寄送資訊
+          {
+            window.innerWidth < 960 ?
+              <FormControlLabel
+                className={classes.phoneRoot}
+                control={
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    color="default"
+                    value="default"
+                  />
+                }
+                label="與聯絡人相同"
+              /> : null
+          }
+        </SlideTitle>
         <FormGroup>
           <FlexStart>
             <FormInput
@@ -107,18 +131,21 @@ const OrderInfo = () => {
               setValue={orderInfoState.recipientPerson}
               defaultValue={orderInfoState.recipientPerson}
               inputVal={val => setValue({ recipientPerson: val })} />
-            <FormControlLabel
-              className={classes.root}
-              control={
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChange}
-                  color="default"
-                  value="default"
-                />
-              }
-              label="與聯絡人相同"
-            />
+            {
+              window.innerWidth > 960 ?
+                <FormControlLabel
+                  className={classes.root}
+                  control={
+                    <Checkbox
+                      checked={checked}
+                      onChange={handleChange}
+                      color="default"
+                      value="default"
+                    />
+                  }
+                  label="與聯絡人相同"
+                /> : null
+            }
           </FlexStart>
           <FormInput
             mb='10'

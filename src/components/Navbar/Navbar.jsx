@@ -89,7 +89,7 @@ const Navbar = ({ history }) => {
   const toggleSlide = (type) => {
     wrapper.current.style.transitionDuration = '0s';
     gsap.to(wrapper.current, {
-      left: type === 'on' ? 0 : -400,
+      left: type === 'on' ? 0 : '-100%',
       duration: .2,
     });
   }

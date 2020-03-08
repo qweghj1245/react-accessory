@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   HomeWrapper, BannerImage, Recommend, PopularProductWrap, IntroWrapper, Image, TypeCardWrapper, TypeCard, TypeCardTitle, TypeCardBall,
-  AbsoluteWrap, ShareWrapper, ShareTitle, ShareMsg, ShareContent, FlexWrap, SlideWrapper, Opi, PhoneShareWrapper
+  AbsoluteWrap, ShareWrapper, ShareTitle, ShareMsg, ShareContent, FlexWrap, SlideWrapper, Opi, PhoneShareWrapper, CardImage
 } from './Home.style';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -10,7 +10,6 @@ import "slick-carousel/slick/slick-theme.css";
 import GoTopButton from '../../components/GoTopButton/GoTopButton.jsx';
 import BaseButton from '../../components/BaseButton/BaseButton.jsx';
 import Card from '../../components/Card/Card';
-import { CardImage } from '../../components/Card/Card.style';
 import carsouel1 from '../../assets/img/Base/home_banner_1.png';
 import phoneCarousel from '../../assets/img/Base/p-home_banner_1.png';
 import introBackground from '../../assets/img/Base/background_home_gray.svg';
@@ -97,6 +96,12 @@ const Home = ({ history }) => {
     setCardHeight(cardRef.current.offsetWidth);
   }, [cardRef]);
 
+  const typeRef = React.createRef();
+  const [typeHeight, setTypeHeight] = useState(0);
+  const setTypeCb = useCallback(() => {
+    setTypeHeight(typeRef.current.offsetWidth);
+  }, [typeRef]);
+
   /* 商品相關 */
   const setFilterType = type => {
     history.push('/products');
@@ -105,12 +110,12 @@ const Home = ({ history }) => {
 
   useEffect(() => {
     if (window.innerWidth < 960) {
-      setCardCb();
+      Promise.all([setCardCb(), setTypeCb()]);
     }
     if (!products.length) {
       dispatch(getProductsStart());
     }
-  }, [dispatch, products, setCardCb]);
+  }, [dispatch, products, setCardCb, setTypeCb]);
 
   return (
     <HomeWrapper>
@@ -164,7 +169,10 @@ const Home = ({ history }) => {
             {
               productTypes.map(item => (
                 <TypeCard key={item.type} onClick={() => setFilterType(item.type)}>
-                  <CardImage url={item.image} height={268} />
+                  <CardImage
+                    ref={typeRef}
+                    url={item.image}
+                    height={window.innerWidth < 960 ? typeHeight : 268} />
                   <TypeCardTitle>{item.title}</TypeCardTitle>
                   <TypeCardBall src={item.ball} width={item.ballSize} top={item.top} left={item.left} />
                 </TypeCard>
@@ -180,7 +188,7 @@ const Home = ({ history }) => {
               <ShareMsg>上傳照片並標記<Opi>@OPI</Opi>的Instagram，與大家分享你的購物心得或創意風格，即可參加 當月抽獎活動並獲得單筆折扣或小禮物！</ShareMsg>
               <BaseButton>參加活動</BaseButton>
             </ShareContent>
-            <GoTopButton right='0' bottom='30%' direct='fixed'/>
+            <GoTopButton right='0' bottom='30%' direct='fixed' />
           </ShareWrapper>
         </PhoneShareWrapper>
       </AbsoluteWrap>

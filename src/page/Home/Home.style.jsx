@@ -194,3 +194,8 @@ export const Opi = styled.span`
   text-decoration: underline;
   cursor: pointer;
 `;
+
+export const CardImage = styled.div`
+  ${(props) => backgroundImage(props.url)}
+  height: ${props => props.height ? props.height : 304}px;
+`;
