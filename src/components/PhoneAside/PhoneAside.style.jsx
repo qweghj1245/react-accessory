@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { size, Text, Flex } from '../../assets/css/global.style';
+import { size, Text, Flex, Icon } from '../../assets/css/global.style';
 import { device } from '../../assets/css/device';
 
 export const Wrapper = styled.div`
@@ -49,4 +49,31 @@ export const Type = styled.div`
   ${Text(14, 'normal', 24)};
   color: #72665A;
   text-indent: 1em;
+`;
+
+export const LoginBoxWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  border: solid 1px white;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 24px;
+`;
+
+export const Sperator = styled.div`
+  width: 100%;
+  height: 48px;
+  background: white;
+`;
+
+export const LoginBox = styled(Flex)`
+  width: 100%;
+  height: 48px;
+  color: #72665A;
+`;
+
+export const BoxIcon = styled(Icon)`
+  width: 15px;
+  margin-right: 10px;
 `;
