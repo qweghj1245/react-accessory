@@ -50,7 +50,7 @@ export const Right = styled(Flex)`
 export const ImageFlexer = styled(Flexer)`
   align-items: center;
   justify-content: center;
-  min-height: 45.6vh;
+  min-height: calc(100vh - 480px);
 
   @media ${device.mobile} {
     min-height: 47.8vh;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import Card from '../../components/Collection/Card/Card';
 import BaseWrapper from '../../components/BaseWrapper/BaseWrapper';
-import { Wrapper, Image } from './Collection.style';
+import { Wrapper, Image, ImageFlex } from './Collection.style';
 import { Flex } from '../../assets/css/global.style';
 import noCollection from '../../assets/img/Collection/pic_heart_non.svg';
 import { getCollectionStart, collectStart } from '../../redux/product/product.action';
@@ -35,11 +35,15 @@ const Collection = ({ history }) => {
     <Wrapper>
       {
         collection.length ?
-          collection.map(item => 
-            <Card key={item._id} item={item} click={() => goToProduct(item._id)} cancel={() => cancelCollect(item._id)}/>) :
-          <Flex align='center'>
+          <Flex align='start'>
+            {
+              collection.map(item =>
+                <Card key={item._id} item={item} click={() => goToProduct(item._id)} cancel={() => cancelCollect(item._id)} />)
+            }
+          </Flex> :
+          <ImageFlex>
             <Image src={noCollection} width='356' />
-          </Flex>
+          </ImageFlex>
       }
     </Wrapper>
   )

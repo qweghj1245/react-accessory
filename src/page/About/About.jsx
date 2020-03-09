@@ -1,8 +1,8 @@
 import React from 'react';
 
 import BaseWrapper from '../../components/BaseWrapper/BaseWrapper';
-import { Flex} from '../../assets/css/global.style';
-import { Wrapper, SmallBlock, LongBlock, Group, FlexRow, Image, FlexGrid } from './About.style';
+import { Flex } from '../../assets/css/global.style';
+import { Wrapper, SmallBlock, LongBlock, Group, FlexRow, Image, FlexGrid, Container } from './About.style';
 
 import logo from '../../assets/img/About/logo_about_biglogo.svg';
 import opi from '../../assets/img/About/pic_about_OPI.svg';
@@ -17,14 +17,14 @@ import phoneOpi from '../../assets/img/About/pic_about_OPI_ios.svg';
 const About = () => {
   let isWeb = window.innerWidth > 960;
   return (
-    <React.Fragment>
+    <Container dir='column'>
       <Wrapper>
         <FlexRow align='start'>
           <Group mb='20'>
             <Image src={logo} />
           </Group>
           <Flex dir='column' align='start'>
-            <Image src={isWeb ? opi : phoneOpi} mb='18' mr='20'/>
+            <Image src={isWeb ? opi : phoneOpi} mb='18' mr='20' />
             <SmallBlock />
           </Flex>
           <Group>
@@ -33,7 +33,7 @@ const About = () => {
           </Group>
         </FlexRow>
       </Wrapper>
-      <FlexRow align='start' mb={isWeb ? '156' : '30'}>
+      <FlexRow align='start' mb='30'>
         <FlexGrid dir='column' justify='start' align='start' mr='20'>
           <Image src={step} mb='20' />
           <Image src={step2} mb='20' />
@@ -43,7 +43,7 @@ const About = () => {
         <Image src={b_step2} mr='20' />
         <Image src={b_step3} mr='20' />
       </FlexRow>
-    </React.Fragment>
+    </Container>
   )
 }
 

@@ -3,6 +3,7 @@ import { Grid, Text } from '../../../assets/css/global.style';
 import { device } from '../../../assets/css/device';
 
 export const Wrapper = styled(Grid)`
+  width: 100%;
   border-bottom: solid 1px #EAEAEA;
   padding: 30px 0;
   grid-template-columns: 170px 231px 258px 164px 1fr;
