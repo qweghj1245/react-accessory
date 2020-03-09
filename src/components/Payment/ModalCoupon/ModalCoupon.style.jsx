@@ -24,6 +24,7 @@ export const Inputs = styled.input`
   padding-left: 12px;
   font-size: 12px;
   margin-bottom: 10px;
+  -webkit-appearance: none;
   &:focus {
     outline: 0;
   }

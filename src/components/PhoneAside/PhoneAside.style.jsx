@@ -43,6 +43,7 @@ export const Section = styled.div`
   color: #72665A;
   width: 67px;
   text-align: left;
+  white-space: nowrap;
 `;
 
 export const Type = styled.div`

@@ -37,6 +37,7 @@ export const Card = styled.div`
 
   @media ${device.mobile} {
     padding-right: 0;
+    align-items: center;
   }
 `;
 

@@ -68,7 +68,7 @@ const MemberRelated = ({ history, login }) => {
       <FormInput type='password' error={error.passwordConfirm} label='確認密碼' placeholder='請再次輸入密碼' mb='20' inputVal={val => checkPasswordModel.current = val} />
       <BaseButton padding='8px 48px' color='light-brown' onClick={register}>註冊</BaseButton>
       {
-        window.innerWidth < 960 ? <Login onClick={login}>還沒有帳號？前往註冊</Login> : null
+        window.innerWidth < 960 ? <Login onClick={login}>已經有帳號？前往登入</Login> : null
       }
     </Wrapper>
   )

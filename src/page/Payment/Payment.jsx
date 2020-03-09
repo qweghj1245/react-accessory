@@ -88,8 +88,8 @@ const Payment = ({ history }) => {
       setStage({
         ...stage,
         ...orderInfoState,
-        contactPerson: user.name,
-        contactPhoneNumber: user.phoneNumber,
+        contactPerson: user.name||orderInfoState.contactPerson,
+        contactPhoneNumber: user.phoneNumber||orderInfoState.contactPhoneNumber,
         products: computeCart,
         amount: computeTotalAmount + 60,
         cart: cart._id,
@@ -145,6 +145,7 @@ const Payment = ({ history }) => {
       ];
       isPass = validateIsEmpty.every(item => stage[item]);
       if (count > 0) {
+        console.log(stage);
         if (isPass) {
           alert.info('產生訂單中...');
           dispatch(createOrderStart({
@@ -186,7 +187,7 @@ const Payment = ({ history }) => {
           </Flex>
       }
       {
-        (!user && computeCart && computeCart.length && !isLoading) || stage.status === 'done' ?
+        (user && computeCart && computeCart.length && !isLoading) || stage.status === 'done' ?
           <Flexer noData={cart && cart.products.length === 0}>
             <Left noData={cart && cart.products.length === 0}>
               {

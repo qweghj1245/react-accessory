@@ -7,7 +7,7 @@ import GoogleLogin from 'react-google-login';
 import FormInput from '../../FormInput/FormInput';
 import BaseButton from '../../BaseButton/BaseButton';
 
-import { Wrapper, Texture, TextureBlack, Register } from './Login.style';
+import { Wrapper, TextureBlack, Register, Form } from './Login.style';
 import { Title } from '../../../assets/css/global.style';
 
 import { loginStart, googleStart } from '../../../redux/user/user.action';
@@ -23,11 +23,9 @@ const Login = ({ register }) => {
     const id_token = googleUser.getAuthResponse().id_token;
     dispatch(googleStart(id_token));
   }
-  const responseFailure = () => {
-    alert.error('登入失敗');
-  }
 
-  const login = () => {
+  const login = (event) => {
+    event.preventDefault();
     dispatch(loginStart({
       email: emailModel.current,
       password: passwordModel.current,
@@ -44,16 +42,18 @@ const Login = ({ register }) => {
   return (
     <Wrapper>
       <Title mb={30} width={60}>登入</Title>
-      <FormInput label='EMAIL' placeholder='請輸入會員EMAIL' inputVal={val => emailModel.current = val} />
-      <FormInput type='password' label='密碼' placeholder='請輸入會員密碼' mb='20' inputVal={val => passwordModel.current = val} />
-      <Texture>忘記密碼？</Texture>
-      <BaseButton mb='30' padding='8px 48px' color='light-brown' onClick={login}>登入</BaseButton>
+      <Form onSubmit={login}>
+        <FormInput label='EMAIL' placeholder='請輸入會員EMAIL' inputVal={val => emailModel.current = val} />
+        <FormInput type='password' label='密碼' placeholder='請輸入會員密碼' mb='20' inputVal={val => passwordModel.current = val} />
+        <input type="submit" value="Submit" style={{ opacity: 0, visibility: 'hidden'}}/>
+        <BaseButton mb='30' padding='8px 48px' color='light-brown' onClick={login}>登入</BaseButton>
+      </Form>
+      {/* <Texture>忘記密碼？</Texture> */}
       <TextureBlack>———　or　———</TextureBlack>
       <GoogleLogin
         clientId={process.env.REACT_APP_GOOGLE_SIGN_IN_KEY}
         buttonText="Sign in with Google"
         onSuccess={responseSuccess}
-        onFailure={responseFailure}
         cookiePolicy={'single_host_origin'}
       />
       {

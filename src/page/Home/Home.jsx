@@ -95,13 +95,17 @@ const Home = ({ history }) => {
   const cardRef = React.createRef();
   const [cardHeight, setCardHeight] = useState(0);
   const setCardCb = useCallback(() => {
-    setCardHeight(cardRef.current.offsetWidth);
+    if (cardRef&&cardRef.current) {
+      setCardHeight(cardRef.current.offsetWidth);
+    }
   }, [cardRef]);
 
   const typeRef = React.createRef();
   const [typeHeight, setTypeHeight] = useState(0);
   const setTypeCb = useCallback(() => {
-    setTypeHeight(typeRef.current.offsetWidth);
+    if (typeRef&&typeRef.current) {
+      setTypeHeight(typeRef.current.offsetWidth);
+    }
   }, [typeRef]);
 
   /* 商品相關 */

@@ -32,6 +32,7 @@ export const Left = styled.div`
 
   @media ${device.mobile} {
     min-height: 100%;
+    width: 100%;
   }
 `;
 

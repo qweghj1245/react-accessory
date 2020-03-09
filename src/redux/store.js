@@ -6,7 +6,7 @@ import rootReducer from './root.reducer';
 import rootSaga from './root.saga';
 const sagaMiddleware = createSagaMiddleware();
 
-let middleware = [sagaMiddleware, logger];
+let middleware = process.env.REACT_APP_STAGE === 'PROD' ? [sagaMiddleware] : [sagaMiddleware, logger];
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 const persist = persistStore(store)
 

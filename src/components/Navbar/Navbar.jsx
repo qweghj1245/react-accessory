@@ -131,7 +131,7 @@ const Navbar = ({ history }) => {
         <Icon src={cart} mr={25} onClick={() => notLoginRedirect('/payment')} />
         <Icon src={favorite} mr={25} onClick={() => notLoginRedirect('/collection')} />
         <IconWrap>
-          <Head src={loginUser ? loginUser.photo : profile} onClick={() => setShowDropdown(!showDropdown)} />
+          <Head src={loginUser&&loginUser.photo ? loginUser.photo : profile} onClick={() => setShowDropdown(!showDropdown)} />
           <PersonDropdown list={personDropdownList} showDropdown={showDropdown} goRouter={goRouter} />
         </IconWrap>
       </FeatureIcons>

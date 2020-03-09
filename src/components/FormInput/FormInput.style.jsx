@@ -27,6 +27,7 @@ export const ReInput = styled.input`
   border: solid 1px #999999;
   padding: 10px;
   font-size: 14px;
+  -webkit-appearance: none;
   &::-webkit-input-placeholder {
     color: #999999;
   }

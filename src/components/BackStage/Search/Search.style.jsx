@@ -14,6 +14,7 @@ export const Input = styled.input`
   border: 0;
   width: ${props => props.width}px;
   margin-right: ${props => props.mr}px;
+  -webkit-appearance: none;
   &:focus {
     outline: 0;
   }
