@@ -152,10 +152,10 @@ const Home = ({ history }) => {
                 ))
               }
             </PopularProductWrap> :
-            <Swiper {...params}>
+            <Swiper {...params} activeSlideKey='1'>
               {
-                products.map(item => (
-                  <div key={item._id}>
+                products.map((item, idx) => (
+                  <div key={idx}>
                     <Card
                       ref={cardRef}
                       height={window.innerWidth < 960 ? cardHeight : 304}

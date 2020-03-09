@@ -33,6 +33,11 @@ const Login = ({ register }) => {
     alert.info('等待登入中...');
   }
 
+  const failure = () => {
+    console.log(process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_DEV, process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_PROD);
+    console.log('fail');
+  }
+
   useEffect(() => {
     if (loginError) {
       alert.error(loginError);
@@ -51,9 +56,11 @@ const Login = ({ register }) => {
       {/* <Texture>忘記密碼？</Texture> */}
       <TextureBlack>———　or　———</TextureBlack>
       <GoogleLogin
-        clientId={process.env.REACT_APP_GOOGLE_SIGN_IN_KEY}
+        clientId={process.env.REACT_APP_STAGE === 'DEV' ? 
+        process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_DEV : process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_PROD}
         buttonText="Sign in with Google"
         onSuccess={responseSuccess}
+        onFailure={failure}
         cookiePolicy={'single_host_origin'}
       />
       {
