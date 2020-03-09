@@ -1,5 +1,5 @@
 # React 電商
-- 前端 Demo 連結 <https://www.chrispy-chicken.com/>
+- 前端 Demo 連結 <https://www.chrispy-chicken.com>
 - 後端 GitHub 連結 <https://github.com/qweghj1245/sls-accessory>
 - 前端使用 React 來開發，搭配 Redux 做資料管理，加上一點 Redux Persist 和 Reselect 提升效能。
 - **金流採用 Stripe，請使用下方的信用卡測試，用 Google 登入的人可能會見到 Google Pay，請不要對他輸入你的信用卡號，經測試會真的扣款但我也收不到錢，不小心調皮的話請聯絡我，我會幫你退款。**
