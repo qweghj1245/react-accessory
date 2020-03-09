@@ -4,11 +4,11 @@ import { withRouter } from 'react-router-dom';
 import { selectCreateUser, selectCreateError } from '../../../redux/user/user.selector';
 import FormInput from '../../FormInput/FormInput';
 import BaseButton from '../../BaseButton/BaseButton';
-import { Wrapper } from './Register.style';
+import { Wrapper, Login } from './Register.style';
 import { Title } from '../../../assets/css/global.style';
 import { useAlert } from "react-alert";
 import { createUserStart } from '../../../redux/user/user.action';
-const MemberRelated = ({ history }) => {
+const MemberRelated = ({ history, login }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const createUser = useSelector(selectCreateUser);
@@ -67,6 +67,9 @@ const MemberRelated = ({ history }) => {
       <FormInput type='password' error={error.password} label='密碼' placeholder='請輸入6碼-12碼英數字' mb='20' inputVal={val => passwordModel.current = val} />
       <FormInput type='password' error={error.passwordConfirm} label='確認密碼' placeholder='請再次輸入密碼' mb='20' inputVal={val => checkPasswordModel.current = val} />
       <BaseButton padding='8px 48px' color='light-brown' onClick={register}>註冊</BaseButton>
+      {
+        window.innerWidth < 960 ? <Login onClick={login}>還沒有帳號？前往註冊</Login> : null
+      }
     </Wrapper>
   )
 }

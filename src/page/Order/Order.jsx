@@ -8,8 +8,10 @@ import noOrder from '../../assets/img/Order/pic_order_non.svg';
 import { getOrdersStart } from '../../redux/order/order.action';
 import { selectOrders } from '../../redux/order/order.selector';
 const tHead = ['訂單編號', '訂單日期', '訂單金額', '訂單狀態'];
+const phoneTHead = ['訂單編號', '訂單日期', '訂單金額'];
 
 const Order = () => {
+  let isWeb = window.innerWidth > 960;
   const dispatch = useDispatch();
   const order = useSelector(selectOrders);
   useEffect(() => {
@@ -23,7 +25,7 @@ const Order = () => {
           <NoOrder>
             <ImageWrapper src={noOrder} width='356' />
           </NoOrder> :
-          <BaseTable tHead={tHead} tBody={order} />
+          <BaseTable tHead={isWeb ? tHead : phoneTHead} tBody={order} />
       }
     </React.Fragment>
   )

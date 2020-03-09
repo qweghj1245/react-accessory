@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Flex, size, Icon, Text } from '../../assets/css/global.style';
+import { device } from '../../assets/css/device';
 
 export const Wrapper = styled(Flex)`
   flex-direction: column;
@@ -9,6 +10,11 @@ export const Wrapper = styled(Flex)`
 
 export const Wrap = styled(Flex)`
   position: relative;
+
+  @media ${device.mobile} {
+    display: block;
+    width: 100%;
+  }
 `;
 
 export const Head = styled.div`
@@ -35,6 +41,10 @@ export const HeadSetting = styled(Icon)`
 export const Address = styled(Flex)`
   justify-content: flex-start;
   width: 304px;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
 `;
 
 export const Divide = styled(Flex)`
@@ -52,4 +62,11 @@ export const Texture = styled.div`
   width: 100%;
   text-align: right;
   padding-right: 30px;
+
+  @media ${device.mobile} {
+    position: static;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 8px;
+  }
 `;

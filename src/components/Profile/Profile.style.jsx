@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import { Flex, size, Text } from '../../assets/css/global.style';
+import { device } from '../../assets/css/device';
 
 export const Wrapper = styled(Flex)`
   flex-direction: column;
   margin-bottom: 134px;
   height: calc(100vh - 450px);
+
+  @media ${device.mobile} {
+    margin-bottom: 50px;
+    height: calc(100vh - 146px);
+  }
 `;
 
 export const Head = styled.div`

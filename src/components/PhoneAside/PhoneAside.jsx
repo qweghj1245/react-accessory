@@ -68,6 +68,9 @@ const PhoneAside = React.forwardRef((props, ref) => {
     props.history.push(route);
     resetStyle();
   }
+  const headInfoRedirect = () => {
+    goRouter(user ? '/profile' : '/login');
+  }
 
   /* reset */
   const resetStyle = () => {
@@ -83,8 +86,8 @@ const PhoneAside = React.forwardRef((props, ref) => {
   return (
     <Wrapper ref={ref} onTouchStart={touchStart} onTouchMove={touchMove} onTouchEnd={touchEnd}>
       <Left>
-        <Head src={user ? user.photo : BaseHead} />
-        <Info onClick={() => goRouter('/login')}>{user ? user.name : '登入/註冊'}</Info>
+        <Head src={user&&user.photo ? user.photo : BaseHead} onClick={headInfoRedirect} />
+        <Info onClick={headInfoRedirect}>{user ? user.name : '登入/註冊'}</Info>
         {
           user ?
             <LoginBoxWrapper>

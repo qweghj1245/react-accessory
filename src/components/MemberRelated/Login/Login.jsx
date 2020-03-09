@@ -7,12 +7,12 @@ import GoogleLogin from 'react-google-login';
 import FormInput from '../../FormInput/FormInput';
 import BaseButton from '../../BaseButton/BaseButton';
 
-import { Wrapper, Texture, TextureBlack } from './Login.style';
+import { Wrapper, Texture, TextureBlack, Register } from './Login.style';
 import { Title } from '../../../assets/css/global.style';
 
 import { loginStart, googleStart } from '../../../redux/user/user.action';
 
-const MemberRelated = () => {
+const Login = ({ register }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const loginError = useSelector(selectLoginError);
@@ -56,8 +56,11 @@ const MemberRelated = () => {
         onFailure={responseFailure}
         cookiePolicy={'single_host_origin'}
       />
+      {
+        window.innerWidth < 960 ? <Register onClick={register}>還沒有帳號？前往註冊</Register> : null
+      }
     </Wrapper>
   )
 }
 
-export default withRouter(MemberRelated);
+export default withRouter(Login);

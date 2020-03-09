@@ -3,18 +3,16 @@ import { useSelector } from 'react-redux';
 import OrderDone from '../../components/Payment/OrderDone/OrderDone';
 import BaseWrappered from '../../components/BaseWrapper/BaseWrapper';
 import OrderInfo from '../../components/OrderId/OrderInfo/OrderInfo';
-import { Flexs, Texture } from './OrderId.style';
-
-import { BaseWrapper } from '../../assets/css/global.style';
+import { Flexs, Texture, Wrapper } from './OrderId.style';
 
 const OrderId = ({ history }) => {
   const order = useSelector(state => state.order.singleOrder);
   return (
     <Flexs>
-      <BaseWrapper>
+      <Wrapper mb='16'>
         <OrderDone mode='orderId' />
-      </BaseWrapper>
-      <BaseWrapper>
+      </Wrapper>
+      <Wrapper>
         {
           order ?
             <React.Fragment>
@@ -23,7 +21,7 @@ const OrderId = ({ history }) => {
             </React.Fragment>
             : null
         }
-      </BaseWrapper>
+      </Wrapper>
     </Flexs>
   )
 }

@@ -4,6 +4,7 @@ import {
   HomeWrapper, BannerImage, Recommend, PopularProductWrap, IntroWrapper, Image, TypeCardWrapper, TypeCard, TypeCardTitle, TypeCardBall,
   AbsoluteWrap, ShareWrapper, ShareTitle, ShareMsg, ShareContent, FlexWrap, SlideWrapper, Opi, PhoneShareWrapper, CardImage
 } from './Home.style';
+import { useAlert } from 'react-alert';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -31,6 +32,7 @@ import 'swiper/css/swiper.css';
 
 const Home = ({ history }) => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   /* redux 取值*/
   const products = useSelector(selectHomeProducts);
   const isLoading = useSelector(state => state.product.isLoading);
@@ -109,6 +111,7 @@ const Home = ({ history }) => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (window.innerWidth < 960) {
       Promise.all([setCardCb(), setTypeCb()]);
     }
@@ -186,7 +189,7 @@ const Home = ({ history }) => {
             <ShareContent>
               <ShareTitle>分享購物體驗</ShareTitle>
               <ShareMsg>上傳照片並標記<Opi>@OPI</Opi>的Instagram，與大家分享你的購物心得或創意風格，即可參加 當月抽獎活動並獲得單筆折扣或小禮物！</ShareMsg>
-              <BaseButton>參加活動</BaseButton>
+              <BaseButton onClick={() => alert.error('目前暫無活動哦！')}>參加活動</BaseButton>
             </ShareContent>
             <GoTopButton right='0' bottom='30%' direct='fixed' />
           </ShareWrapper>

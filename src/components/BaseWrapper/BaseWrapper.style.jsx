@@ -4,7 +4,7 @@ import { device } from '../../assets/css/device';
 
 export const Wrapper = styled.div`
   width: 953px;
-  min-height: calc(100vh - 266px);
+  min-height: calc(100vh - 265px);
   margin: 0 auto;
   margin-top: 69px;
 
