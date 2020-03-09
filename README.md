@@ -1,68 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React 電商
+- 前端 Demo 連結 <https://www.chrispy-chicken.com>
+- 後端 GitHub 連結 <https://github.com/qweghj1245/sls-accessory>
+- 前端使用 React 來開發，搭配 Redux 做資料管理，加上一點 Redux Persist 和 Reselect 提升效能。
+- **金流採用 Stripe，請使用下方的信用卡測試，用 Google 登入的人可能會見到 Google Pay，請不要對他輸入你的信用卡號，經測試會真的扣款但我也收不到錢，不小心調皮的話請聯絡我，我會幫你退款。**
+- **測試信用卡號為 4242 4242 4242 4242 ，日期 02/22，三碼 222，姓名隨便。**
+- 部署在 S3 上，有掛 cdn 和 https
+- 後端部分在另一個專案 [sls-accessory](https://github.com/qweghj1245/sls-accessory)，前後端都是我獨自完成，不過這邊主要說明前端部分，參考後端的話可以點連結前往，感謝 :pray:
 
-## Available Scripts
+## Skills
+- React
+- Redux
+- Redux Persist
+- Reselect
+- styled-components
+- GSAP
+- Google Sign-In
+- AWS S3
+- RWD
 
-In the project directory, you can run:
+## Layout
+### 首頁
+![首頁](https://i.imgur.com/j6W3s7s.png)
 
-### `npm start`
+### 所有商品
+![所有商品](https://i.imgur.com/SOKNHsS.png)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 商品
+![商品](https://i.imgur.com/E6RZFoy.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## 聲明
+本作品內的圖片與內容，僅為展示所用，不做任何商業用途。
