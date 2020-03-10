@@ -1,9 +1,19 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Wrapper, Head, Group, GroupItem, TextTitle, TextContent } from './Profile.style';
 import { Skeleton } from '@material-ui/lab';
 import BaseButton from '../BaseButton/BaseButton';
+import { GoogleLogout } from 'react-google-login';
+import { logoutStart } from '../../redux/user/user.action';
 
-const Profile = ({ edit, user }) => {
+const Profile = ({ edit, user, history }) => {
+  const dispatch = useDispatch();
+  const responseSuccess = () => {
+    dispatch(logoutStart());
+    history.push('/');
+  }
+
   return (
     <Wrapper>
       {
@@ -28,7 +38,16 @@ const Profile = ({ edit, user }) => {
                 <TextContent>{user.address ? `${user.postalCode}${user.county}${user.area}${user.address}` : '未填'}</TextContent>
               </GroupItem>
             </Group>
-            <BaseButton padding='8px 48px' color='light-brown' onClick={edit}>修改資料或密碼</BaseButton>
+            <BaseButton padding='8px 48px' mb='16' color='light-brown' onClick={edit}>修改資料或密碼</BaseButton>
+            {
+              user && user.userSource === 'google' ?
+                <GoogleLogout
+                  clientId={process.env.REACT_APP_STAGE === 'DEV' ?
+                    process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_DEV : process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_PROD}
+                  buttonText="Google Logout"
+                  onLogoutSuccess={responseSuccess}
+                /> : null
+            }
           </React.Fragment>
           :
           <Wrapper>
@@ -44,4 +63,4 @@ const Profile = ({ edit, user }) => {
   )
 }
 
-export default Profile;
+export default withRouter(Profile);

@@ -86,7 +86,7 @@ const PhoneAside = React.forwardRef((props, ref) => {
   return (
     <Wrapper ref={ref} onTouchStart={touchStart} onTouchMove={touchMove} onTouchEnd={touchEnd}>
       <Left>
-        <Head src={user&&user.photo ? user.photo : BaseHead} onClick={headInfoRedirect} />
+        <Head src={user && user.photo ? user.photo : BaseHead} onClick={headInfoRedirect} />
         <Info onClick={headInfoRedirect}>{user ? user.name : '登入/註冊'}</Info>
         {
           user ?
@@ -113,7 +113,7 @@ const PhoneAside = React.forwardRef((props, ref) => {
         <Section onClick={() => goRouter('/about')}>關於我們</Section>
         <Section onClick={() => goRouter('/shopping_notes')}>購物須知</Section>
         {
-          user ? <Type onClick={logout}>登出</Type> : null
+          user && user.userSource !== 'google' ? <Type onClick={logout}>登出</Type> : null
         }
       </Left>
       <Right onClick={props.close}>

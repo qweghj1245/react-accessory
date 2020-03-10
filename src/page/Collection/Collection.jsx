@@ -35,7 +35,7 @@ const Collection = ({ history }) => {
     <Wrapper>
       {
         collection.length ?
-          <Flex align='start'>
+          <Flex align='start' dir='column' mb='50'>
             {
               collection.map(item =>
                 <Card key={item._id} item={item} click={() => goToProduct(item._id)} cancel={() => cancelCollect(item._id)} />)

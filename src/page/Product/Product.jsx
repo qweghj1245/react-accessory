@@ -49,6 +49,7 @@ const Product = ({ history }) => {
     }));
   }
   const addToCart = (product) => {
+    if (!user) return alert.error('請先登入');
     dispatch(addCartStart({
       product: product._id,
       size: product.options.length ? optionModel.current : null,

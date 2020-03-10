@@ -52,7 +52,7 @@ const Navbar = ({ history }) => {
         return logout();
       case '我的訂單':
         return history.push('/order');
-      case '修改資料':
+      case '個人資料':
         return history.push('/profile');
       case '進入後台':
         return history.push('/backstage/total_view');
@@ -95,10 +95,15 @@ const Navbar = ({ history }) => {
   }
 
   useEffect(() => {
-    if (loginUser || createUser) {
+    if ((loginUser||createUser)&&loginUser.userSource ==='google') {
       setPersonDropdownList([
         '我的訂單',
-        '修改資料',
+        '個人資料',
+      ]);
+    } else if (loginUser || createUser) {
+      setPersonDropdownList([
+        '我的訂單',
+        '個人資料',
         '會員登出',
       ]);
     } else {
@@ -132,7 +137,7 @@ const Navbar = ({ history }) => {
         <Icon src={favorite} mr={25} onClick={() => notLoginRedirect('/collection')} />
         <IconWrap>
           <Head src={loginUser&&loginUser.photo ? loginUser.photo : profile} onClick={() => setShowDropdown(!showDropdown)} />
-          <PersonDropdown list={personDropdownList} showDropdown={showDropdown} goRouter={goRouter} />
+          <PersonDropdown list={personDropdownList} showDropdown={showDropdown} goRouter={goRouter} user={loginUser}/>
         </IconWrap>
       </FeatureIcons>
       <PhoneAside ref={wrapper} history={history} close={() => toggleSlide('off')}/>

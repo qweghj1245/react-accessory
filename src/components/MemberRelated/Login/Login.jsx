@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { useAlert } from "react-alert";
 import { selectLoginError } from '../../../redux/user/user.selector';
-import GoogleLogin from 'react-google-login';
+import { GoogleLogin } from 'react-google-login';
 import FormInput from '../../FormInput/FormInput';
 import BaseButton from '../../BaseButton/BaseButton';
 
@@ -34,7 +34,6 @@ const Login = ({ register }) => {
   }
 
   const failure = () => {
-    console.log(process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_DEV, process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_PROD);
     console.log('fail');
   }
 
@@ -50,14 +49,14 @@ const Login = ({ register }) => {
       <Form onSubmit={login}>
         <FormInput label='EMAIL' placeholder='請輸入會員EMAIL' inputVal={val => emailModel.current = val} />
         <FormInput type='password' label='密碼' placeholder='請輸入會員密碼' mb='20' inputVal={val => passwordModel.current = val} />
-        <input type="submit" value="Submit" style={{ opacity: 0, visibility: 'hidden'}}/>
+        <input type="submit" value="Submit" style={{ opacity: 0, visibility: 'hidden' }} />
         <BaseButton mb='30' padding='8px 48px' color='light-brown' onClick={login}>登入</BaseButton>
       </Form>
       {/* <Texture>忘記密碼？</Texture> */}
       <TextureBlack>———　or　———</TextureBlack>
       <GoogleLogin
-        clientId={process.env.REACT_APP_STAGE === 'DEV' ? 
-        process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_DEV : process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_PROD}
+        clientId={process.env.REACT_APP_STAGE === 'DEV' ?
+          process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_DEV : process.env.REACT_APP_GOOGLE_SIGN_IN_KEY_PROD}
         buttonText="Sign in with Google"
         onSuccess={responseSuccess}
         onFailure={failure}

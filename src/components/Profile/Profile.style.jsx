@@ -4,8 +4,7 @@ import { device } from '../../assets/css/device';
 
 export const Wrapper = styled(Flex)`
   flex-direction: column;
-  margin-bottom: 134px;
-  height: calc(100vh - 450px);
+  height: calc(100vh - 405px);
 
   @media ${device.mobile} {
     margin-bottom: 50px;
